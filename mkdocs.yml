@@ -85,8 +85,8 @@ theme:
 
 site_name: CS2030S Programming Methodology II
 # repo_url: https://github.com/nus-cs1010/1819-s1
-site_url: https://nus-cs2030s.github.io/2021-s2
-copyright: Copyright by Department of Computer Science, National University of Singapore 2021
+site_url: https://nus-cs2030s.github.io/2122-s2
+copyright: Copyright by Department of Computer Science, National University of Singapore 2022
 # remote_branch: gh-pages
 use_directory_urls: false
 markdown_extensions:
