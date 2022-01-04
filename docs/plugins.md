@@ -1,6 +1,6 @@
 ## Vim Plugins/Extensions on PE Hosts
 
-We allow the following plugins on the PE nodes during the practical exams.  
+We allow the following plugins on the PE nodes during the practical exams.
 
 Note that for your labs, you are free to install any plugins you find useful.
 
@@ -34,7 +34,7 @@ The bundle includes some of the popularly requested color schemes, such as `mono
 
 To install this plugin in the exam environment, run
 ```
-ln -s ~cs2030s/.vim/pack/plugins/start/delimitMate ~/.vim/pack/plugins/start
+ln -s ~cs2030s/.vim/vim-plugins/delimitMate ~/.vim/pack/plugins/start
 ```
 
 ### Vim-Rainbow
@@ -43,7 +43,7 @@ ln -s ~cs2030s/.vim/pack/plugins/start/delimitMate ~/.vim/pack/plugins/start
 
 To install this plugin in the exam environment, run
 ```
-ln -s ~cs2030s/.vim/pack/plugins/start/vim-rainbow ~/.vim/pack/plugins/start
+ln -s ~cs2030s/.vim/vim-plugins/vim-rainbow ~/.vim/pack/plugins/start
 ```
 
 The following line will be added on your `~/.vimrc` in the environment:
@@ -58,7 +58,7 @@ NERDTree provides a file browsing pane on the left (activated with `:NERDTree`).
 
 To install this plugin in the exam environment, run
 ```
-ln -s ~cs2030s/.vim/pack/plugins/start/nerdtree ~/.vim/pack/plugins/start
+ln -s ~cs2030s/.vim/vim-plugins/nerdtree ~/.vim/pack/plugins/start
 ```
 
 ### Lightline
@@ -67,7 +67,7 @@ Lightline provides a more useful status line for `vim`.
 
 To install this plugin in the exam environment, run
 ```
-ln -s ~cs2030s/.vim/pack/plugins/start/lightline ~/.vim/pack/plugins/start
+ln -s ~cs2030s/.vim/vim-plugins/lightline ~/.vim/pack/plugins/start
 ```
 
 ## Unavailable Plugins

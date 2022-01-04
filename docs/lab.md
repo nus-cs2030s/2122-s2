@@ -43,7 +43,7 @@ When you are ready to submit, run `~cs2030s/submit-labX` (where X is the lab num
 
 ### 4. Receiving Feedback
 
-The tutors will grade and comment on your submission on Github after the deadline.  You can reply to their comment, etc, on GitHub as well.  Communicate with your grader via Piazza (or directly if they preferred) if you think the grading is unfair.r 
+The tutors will grade and comment on your submission on Github after the deadline.  You should receive both your comments and your preliminary marks on GitHub.  You can reply to their comment, etc, on GitHub as well.  Communicate with your grader via Piazza (or directly if they preferred) if you think the grading is unfair.
 
 !!! warning "WARNING"
     Do not change your code on GitHub after the deadline (by either re-running `submit-labX` or using `git` commands directly).  If you wish to improve upon your code after feedback from the tutors, replicate it in your own personal repo.
