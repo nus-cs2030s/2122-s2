@@ -2,19 +2,23 @@
 
 ## Java version
 
-Java is a language that continues to evolve.  A new version is released every six months, and by the time we are done with CS2030S this semester, we will have Java 16.  For CS2030S, we will _only_ use Java 11, the most recent version with long-term support.
+Java is a language that continues to evolve.  A new version is released every six months.  For CS2030S, we will _only_ use Java 11, the most recent version with long-term support.  Specifically, we use `openlogic-openjdk-11.0.8+10` on Ubuntu 20.04.3 LTS.
 
 ## Programming Servers
 
-The school has provided a list of computing servers for you to use.  You can access them remotely via `ssh`, or secure shell.  The hosts are named `pe111`, `pe112`, ... , `pe120`.  (`pe` stands for "programming environment").  We will refer to these servers generally as the _PE hosts._
+The school has provided a list of computing servers for you to use, with all the required software for CS2030S installed.  You can access them remotely via `ssh`, or secure shell.  The hosts are named `pe111`, `pe112`, ... , `pe120`.  (`pe` stands for "programming environment").  We will refer to these servers generally as the _PE hosts._
 
 For this semester, the two servers `pe115` and `pe116` are not available.
 
-You can choose which of the eight hosts to use.  You share the same home directory across all the hosts (this home directory, however, is different from that of `sunfire`).  If you notice that one host is crowded, you can use another host to spread out the load.
+You can choose which of the eight hosts to use.  You share the same home directory across all the hosts (this home directory, however, is different from that of `stu1`).  If you notice that one host is crowded, you can use another host to spread out the load.
 
 While you can complete the programming assignments on your computers, the practical exams are done in a controlled environment using servers similar to the PE hosts.  It is therefore advisable for you to familiarize yourself with accessing the PE servers via `ssh` and edit your program with either `vim` or `emacs` (`vim` is recommended and supported).
 
-## Basic Requirements
+## Accessing CS2030S Programming Environment
+
+### Basic Requirements
+
+1. You should be familiar with the terms Unix, command-line interface, command prompt, terminal, and shell.  Read this [background article](unix-background.md) if you don't.
 
 1. You need to have an SoC Unix account.  If you do not have one, you can [apply for one online](https://mysoc.nus.edu.sg/~newacct/).
 
@@ -24,108 +28,199 @@ While you can complete the programming assignments on your computers, the practi
 
 For older versions of Windows, such as those used in the SoC's programming labs, you can check out [XShell 6](https://www.netsarang.com/en/free-for-home-school/) (free for home/school use), or [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).  These are GUI-based programs so the command line instructions below do not apply.
 
-## Basic Command to SSH
+4. You need a good [terminal](https://nus-cs2030s.github.io/2122-s2/unix-background.html#what-is-a-terminal) app.  There are many choices, but we recommend [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/) for Microsoft Windows users; the default [Terminal](https://support.apple.com/en-sg/guide/terminal/welcome/mac) or [iTerm2](https://iterm2.com/index.html) for macOS users.  
 
-Run:
+### Step 1: Testing Your SoC Unix Account
+
+You can skip this step if you have been using your SoC Unix account and is familiar with your SoC Unix username and password.
+
+1. Launch the terminal app on your computer.
+
+2. At the command prompt, connect to SoC Unix server `stu.comp.nus.edu.sg` with the secure shell `ssh`.  The basic command to `ssh` is
+
 ```
 ssh <username>@<hostname>
 ```
 
-Replace `<hostname>` with the host you want to log into and `<username>` with your SoC Unix username.  Note that both are case sensitive.
+Replace `<hostname>` with the host you want to log into and `<username>` with your SoC Unix username.  Note that both are case-sensitive.
 
 For instance, I would do:
 ```
-ssh ooiwt@sunfire.comp.nus.edu.sg
+ssh ooiwt@stu.comp.nus.edu.sg
 ```
-to log into `sunfire`.
+to log into `stu.comp.nus.edu.sg`.
 
-After the command above, following the instructions on the screen.  The first time you ever connect to a host, you will be warned that you are connecting to a previously unknown host.  Say `yes`, and you will be prompted with your password for that host.
+After the command above, follow the instructions on the screen.  The first time you ever connect to a host, you will be warned that you are connecting to a previously unknown host.  
 
-## Accessing The PE Hosts from Outside SoC
-
-The PE hosts can only be accessed from within the School of Computing networks.  To complete the lab at home and to complete the two practical assessments from home, you need to access the PE hosts from outside the SoC networks.  
-
-There are several ways to do this, the simplest way is to tunnel through `sunfire`, and this is the recommended method, as no extra software is required.
-
-### Option 1: Tunneling through Sunfire (Recommended for those in Singapore)
-
-SoC's Sunfire (`sunfire.comp.nus.edu.sg`) is configured to allow your connection if it's originating from a local telco (See [more details here](https://dochub.comp.nus.edu.sg/cf/guides/unix/soc_unix_pass_your_direct_access_to_soc_unix_servers)).
-
-Since `sunfire` is within the SoC network, you can log into `sunfire` first, then from `sunfire`, log into one of the PE nodes from `sunfire`.  These two steps can be done with one command:
 ```
-ssh -t <username1>@sunfire.comp.nus.edu.sg ssh <username2>@pe1xx.comp.nus.edu.sg
+The authenticity of host 'stu.comp.nus.edu.sg (137.132.80.61)' can't be established.
+ED25519 key fingerprint is SHA256:sLdNXdswjUgsZjYJ5O+us3nAQIfgO2xWIT1C7JhrI+4.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])?
 ```
 
-Note that in non-exam scenarios, `username1` and `username2` are both your SoC Unix username.  You will be prompted for password twice.  The first prompt will be for your password to `sunfire`, and the second, to `pe1xx`.
+Say `yes`, and you will be prompted with your password for that host.  Type in your SoC Unix password.  Note that passwords are case-sensitive, and nothing will be shown on the screen as you type your password for security reasons.  Press ++enter++ when you are done.  You should see something like this:
 
-For practical exams, you will be issued a special exam account to log into the PE hosts.  In this case, `username1` will be your SoC Unix username and `username2` will be your special exam account.
-
-Students not in Singapore will need to access `sunfire` via SoC VPN.  In which case, Option 2 would be better.
-
-### Option 2: Using SoC VPN (Recommended only for not in Singapore)
-
-To set up the SOC Virtual Private Network (VPN), see [instruction here](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn)).  The staff at `helpdesk@comp.nus.edu.sg` or the IT helpdesk in COM1, Level 1, will be able to help with you setting up if needed.
-
-!!! note "SoC VPN vs NUS VPN"
-
-    Note that SoC VPN is different from NUS VPN.  Connecting to NUS VPN only allows you access to the NUS internal network, but not the SoC internal network.
-
-!!! warning "Windows 10 Users: FortiClient from Windows Store"
-
-    Students have reported that running FortiClient downloaded from the Windows Store does not allow one to `ssh` from WSL to `sunfire` as expected.  Therefore, Windows 10 users should download and install FortiClient VPN directly from [FortiClient's website](https://forticlient.com/downloads).
-
-Once you are connected to SoC VPN, you can run
 ```
-ssh <username>@pe1xx.comp.nus.edu.sg
-```
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
 
-## Setting up SSH Keys
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
 
-Once you are comfortable with Unix, you can set up a pair of public/private keys for authentication.  
+  System information as of Tue 04 Jan 2022 10:42:35 AM +08
 
-You can use
-```
-ssh-keygen -t rsa
-```
+  System load:  0.0               Processes:               217
+  Usage of /:   7.8% of 49.98GB   Users logged in:         2
+  Memory usage: 10%               IPv4 address for enp0s4: 192.168.49.55
+  Swap usage:   0%
 
-to generate a pair of keys on your local computer.  Keep the private key `id_rsa` on your local machine in the hidden `~/.ssh` directory, and copy the public key `id_rsa.pub` to your home directory on the remote host you want to log into.  On this remote host, run
-```
-cat id_rsa.pub >> ~/.ssh/authorized_keys
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Tue Jan  4 10:37:33 2022 from 137.132.80.61
+ooiwt@stu1:~$
 ```
 
-Make sure that the permission for `.ssh` both on the local machine and on the remote host are set to `700` and the files `id_rsa` on the local machine and `authorized_keys` on the remote host are set to `600`.  Once set up, you need not enter your password every time you run `ssh` or `scp`.  
+If you have reached this step, your SoC Unix username and password are working.
 
-## Troubleshooting
+Type ++ctrl++ ++d++ to exit before continuing with the next step. 
+
+### Step 2: Accessing The PE Hosts
+
+This is the step that you need throughout the semester to access the PE hosts.
+
+The PE hosts can only be accessed from within the School of Computing networks.  This is not an issue during your lab sessions, but if you wish to access the PE hosts from outside of SoC, you need to tunnel through `stu.comp.nus.edu.sg`.
+
+The server (`stu.comp.nus.edu.sg`) is configured to allow your connection if it's originating from a local telco (See [more details here](https://dochub.comp.nus.edu.sg/cf/guides/unix/soc_unix_pass_your_direct_access_to_soc_unix_servers)).
+
+Since `stu.comp.nus.edu.sg` is within the SoC network, you can log into `stu.comp.nus.edu.sg` first, then from `stu.comp.nus.edu.sg`, log into one of the PE nodes.  These two steps can be done with one command:
+```
+ssh -t <username1>@stu.comp.nus.edu.sg ssh <username2>@<pe1xx>.comp.nus.edu.sg
+```
+
+- In non-exam scenarios, replace `username1` and `username2` with your SoC Unix username and `pe1xx` with one of `pe111` to `pe120`.  You will be prompted for your password twice.  The first prompt will be for your password to `stu.comp.nus.edu.sg`, and the second, to `pe1xx.comp.nus.edu.sg`.  Again, in a non-exam scenario, they will both be your SoC Unix password.
+- For practical exams, you will be issued a special exam account to log into the PE hosts.  In this case, `username1` will be your SoC Unix username and `username2` will be your special exam account. 
+
+You should see something like this:
+```
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-91-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Tue 04 Jan 2022 10:50:56 AM +08
+
+  System load:  0.0                Processes:             281
+  Usage of /:   13.1% of 46.54GB   Users logged in:       0
+  Memory usage: 2%                 IPv4 address for eno1: 192.168.48.122
+  Swap usage:   0%                 IPv4 address for eno2: 192.168.57.122
+
+ * Super-optimized for small spaces - read how we shrank the memory
+   footprint of MicroK8s to make it the smallest full K8s around.
+
+   https://ubuntu.com/blog/microk8s-memory-optimisation
+
+0 updates can be applied immediately.
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Wed Nov  3 07:51:42 2021 from 192.168.49.36
+ooiwt@pe120:~$
+```
+
+This means you have successfully connected to the CS2030S programming environment.
+
+### Troubleshooting
 
 If you get the following error:
 
 1. `ssh: Could not resolve hostname pe1xx.comp.nus.edu.sg`
 
-	`ssh` cannot recognize the name `pe1xx`, likely, you are not tunneling connected to the SoC VPN.
+    `ssh` cannot recognize the name `pe1xx`. Likely, you tried to connect to the PE hosts directly from outside of the SoC network.
 
 2. `Connection closed by 192.168.48.xxx port 22`
 
     You have connected to the PE host, but you are kicked out because you have no permission to use the host.
 
-	Make sure you have activated your access to "SoC computer clusters" [here](https://mysoc.nus.edu.sg/~myacct/services.cgi)
+    Make sure you have activated your access to "SoC computer clusters" [here](https://mysoc.nus.edu.sg/~myacct/services.cgi)
 
 3. `Permission denied, please try again`
 
     You did not enter the correct password or username.  Please use the username and password
 of your SoC Unix account which you have created here: https://mysoc.nus.edu.sg/~newacct/.  
 
-    Check that you have entered your username correctly.  It is _case sensitive_.
+    Check that you have entered your username correctly.  It is _case-sensitive_.
 
     If you have lost your password, go here: https://mysoc.nus.edu.sg/~myacct/iforgot.cgi
 
-4. `ssh: connect to host sunfire.comp.nus.edu.sg port 22: Operation timed out`
+4. `ssh: connect to host stu.comp.nus.edu.sg port 22: Operation timed out`
 
-	It means that you failed to connect to `sunfire` via `ssh`.  There could be two reasons for this: (i) `sunfire` or its ssh service is down; (ii) you are connecting via a network where `sunfire` is not accessible (such as outside Singapore).  
+    It means that you failed to connect to `stu.comp.nus.edu.sg` via `ssh`.  There could be two reasons for this: (i) `stu.comp.nus.edu.sg` or its ssh service is down; (ii) you are connecting via a network where `stu.comp.nus.edu.sg` is not accessible (such as outside Singapore).  
 
-	The likelihood of (i) is small.  The more likely scenario is (ii), in which case, you should be able to solve it by connecting to SoC VPN.
+    The likelihood of (i) is small.  The more likely scenario is (ii), in which case, connect to [SoC VPN](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn?s[]=vpn) first.
 
 5. `Could not chdir to home directory /home/o/ooiwt: Permission denied`
 
     This error means that you have successfully connected to the PE hosts, but you have no access to your home directory.
 
-	This should not happen.  Please send an email with the above error message to `helpdesk@comp.nus.edu.sg`, include the PE hosts that you connected to with this error and your username.  The system administrator can reset the permission of your home directory for you.
+    This should not happen.  Please send an email with the above error message to `helpdesk@comp.nus.edu.sg`, include the PE hosts that you connected to with this error and your username.  The system administrator can reset the permission of your home directory for you.
+
+### Setting up Password-less Login
+
+To avoid typing in your password repeatedly, you can change the way you authenticate yourself to `stu.comp.nus.edu.sg` and the PE hosts, from using a password to using a private/public key pair.  The following is a one-time setup to enable this.
+
+Let's say you want to log in from Host A to Host B.  On Host A, run:
+```
+ssh-keygen -t rsa
+```
+
+to generate a pair of keys on Host A.  When prompted, you can save the file `id_rsa` in the default location and enter an empty passphrase.  Then, on Host A, run:
+```
+ssh-copy-id <username>@<hostname of B>
+```
+
+You will be prompted to enter your password for Host B.  After this step is completed, your public key will be copied to and configured for password-less login to Host B.  You should now be able to `ssh` into Host B without using being prompted for a password every time.
+
+Recall that to log in to a PE host, you need to two steps, first from your local computer to into `stu.comp.nus.edu.sg`, then from `stu.comp.nus.edu.sg` into `pe1xx.comp.nus.edu.sg`.  So to setup password-less login to `pe1xx.comp.nus.edu.sg`, you need two steps:
+
+First, on your local computer:
+```
+ssh-keygen -t rsa
+ssh-copy-id <username>@stu.comp.nus.edu.sg
+```
+
+Then, on `stu.comp.nus.edu.sg`:
+```
+ssh-keygen -t rsa
+ssh-copy-id <username>@pe1xx.comp.nus.edu.sg
+```
+
+Since all the PE hosts share the same file directory, you only need to do this for one of the PE hosts.  After this one-time step, you can log in without a password to any one of the PE hosts.
+
+## Stability of Network Connections
+
+Note that a stable network connection is required to use the PE hosts for a long period without interruption. If you encounter frequent disconnections while working at home or on campus while connected wirelessly, please make sure that your WiFi signal is strong and there is no interference from other sources. 
+
+If you find yourself facing frequent disconnection, you can consider running [`screen`](https://en.wikipedia.org/wiki/GNU_Screen/).  After logging into a PE host, run:
+```
+screen
+```
+
+You will see some messages, press ++enter++ to go to the command prompt.  You can now use the PE host as usual.  In case you are disconnected (e.g., in the middle of editing), you can log into the same PE host again, and run:
+```
+screen -r
+```
+
+to resume your previous session.
