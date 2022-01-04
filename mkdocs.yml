@@ -2,6 +2,7 @@ nav:
   - Home: 'index.md'
   - Guide:
     - Programming Environments: 'environments.md'
+    - GitHub Setup: 'github.md'
     - Using Unix CLI:
        - Background: 'unix-background.md'
        - Essentials: 'unix-essentials.md'

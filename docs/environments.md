@@ -184,7 +184,11 @@ of your SoC Unix account which you have created here: https://mysoc.nus.edu.sg/~
 
 ### Setting up Password-less Login
 
-To avoid typing in your password repeatedly, you can change the way you authenticate yourself to `stu.comp.nus.edu.sg` and the PE hosts, from using a password to using a private/public key pair.  The following is a one-time setup to enable this.
+To avoid typing in your password repeatedly, you can change the way you authenticate yourself to `stu.comp.nus.edu.sg` and the PE hosts, from using a password to using _public-key cryptography_ for authentication.  The keys come in pairs: a public key and a private key.  The private key must be kept safe and known only to you.  You should keep the private key in your account, and not share it with others.
+
+To authenticate yourself to another host or service, you configure the host/service with your public key.  When it is time for you to log in, your private key is "matched"[^1] with your public key.  Since only you know your private key, the service or the host can be sure that you are you and not someone else.
+
+The following is a one-time setup to enable this.
 
 Let's say you want to log in from Host A to Host B.  On Host A, run:
 ```
@@ -229,3 +233,5 @@ screen -r
 ```
 
 to resume your previous session.
+
+[^1]: I skipped many cool details here.  This topic is part of CS2105 and CS2107.  Interested students can google up various articles and videos online about how public-key cryptography is used for authentication.

@@ -1,5 +1,9 @@
 # CS2030S Lab Guide
 
+### GitHub Setup 
+
+You need a one-time setup at the beginning of semester to link your PE account to your GitHub account.  Following [the instructions here](github.md) to setup your GitHub account for CS2030S.
+
 ## GitHub Classroom
 
 We will use GitHub Classroom for our lab release and submission for CS2030S.
@@ -48,59 +52,19 @@ The tutors will grade and comment on your submission on Github after the deadlin
 
 A file named `feedback.md` summarizing your marks will be placed into your GitHub repo.  Your marks will be posted on Luminus Gradebook.
 
-### One-Time Setup
-
-The first time you use PE hosts to accept your lab, you need to do a one-time setup of your account on PE. You need to create a file called `.gitconfig` in your home directory with the following content:
-
-```
-[user]
-  name = Your Name
-  email = Your Email
-[github]
-  user = Your GitHub Username
-```
-
-Your email should be whatever you used to sign up Github.
-
-For example, a sample `.gitconfig` looks like this:
-
-```
-[user]
-  name = Olaf
-  email = olaf@arendelle.gov
-[github]
-  user = OlafTheSnowman
-```
-
-After saving this file, run:
-
-```
-git config --get github.user
-```
-
-It should return your GitHub username.
-
-It should print your GitHub username as already set. If there is a typo, you need to edit `.gitconfig` again and reload it by repeating the command above.
-
 ### Warning
 
 If it is not clear to you by now, let us repeat: You should only interact with your lab submissions on GitHub using the provided scripts `get-labX` and `submit-labX`.  Failure to do so will break our workflow and will not be appreciated.
 
-If you accidentally break your repo by running `git` commands on it or edit it directly on GitHub, you should save a copy of your code elsewhere, then reset your lab directory, by (i) {--deleting--} {++requesting your tutor to delete++} the repo on GitHub, (ii) deleting the corrupted lab directory on PE nodes, (iii) go through Steps 1 and 2 again, then copy back your edited code into the lab directory.
+If you accidentally break your repo by running `git` commands on it or edit it directly on GitHub, you should save a copy of your code elsewhere, then reset your lab directory, by (i) requesting your tutor to delete the repo on GitHub, (ii) deleting the corrupted lab directory on PE nodes, (iii) go through Steps 1 and 2 again, then copy back your edited code into the lab directory.
 
 ### Grace Period
 
 You have until Lab 2 to get familiarize with the procedure above.  From Lab 3 onwards, we will not entertain requests or appeals for students who failed to follow the procedure (e.g., forgot to run the `submit` command, submitted the wrong lab, wrong password).
 
-### Authenticating to GitHub with SSH
-
-By default, GitHub uses password for authentication.  So, upon running `get-labX` or `submit-labX`, you will be prompted for your GitHub password.  An alternative is to use SSH to connect to GitHub.  You can refer to this [GitHub help page](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh) for setup instructions.  
-
-If your GitHub account has 2FA enabled, SSH is the recommended method for authenticating yourself to GitHub.
-
 ## Lab Timeline
 
-The lab assignment is released before every Thursday at 8 am, with a deadline (usually {--one week--} {++five days++} after released) given.  You must submit each lab assignment before the deadline.
+The lab assignment is released before every Thursday at 8 am, with a deadline (usually Tuesday night in the following week) given.  You must submit each lab assignment before the deadline.
 
 ## General Advice
 
@@ -124,9 +88,11 @@ All lab assignments must be submitted on time.  If you need an extension, please
 
 For late submission, there is a 1% penalty (of the total awarded marks for that particular assignment) for every 5-minute after the deadline, capped at 80%.  For example, if an assignment is awarded 40 marks, and it is submitted 100 minutes after the deadline, the student will get 32 marks instead (20% penalty).  If it is submitted 10 hours after the deadline, the student will get 8 marks (as it has hit the cap of 80% penalty).
 
+Late submission is no longer accepted one week after the deadline.
+
 ## Identifying Yourself
 
-In every Java file that you submit, you need to identify yourself by writing your name and lab group. Marks will be deducted if you fail to do so. You need to edit the line:
+In every Java file that you submit, you need to identify yourself by writing your name and lab group. Marks may be deducted if you fail to do so. You need to edit the line:
 
 ```
 @author XXXX (Group YYYY)
