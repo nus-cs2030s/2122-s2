@@ -26,11 +26,11 @@ While you can complete the programming assignments on your computers, the practi
 
 3. You need a command-line `ssh` client.  Windows 10, macOS, and Linux users should already have it installed by default.
 
-For older versions of Windows, such as those used in the SoC's programming labs, you can check out [XShell 6](https://www.netsarang.com/en/free-for-home-school/) (free for home/school use), or [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).  These are GUI-based programs so the command line instructions below do not apply.
+    For older versions of Windows, such as those used in the SoC's programming labs, you can check out [XShell 6](https://www.netsarang.com/en/free-for-home-school/) (free for home/school use), or [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).  These are GUI-based programs so the command line instructions below do not apply.
 
 4. You need a good [terminal](https://nus-cs2030s.github.io/2122-s2/unix-background.html#what-is-a-terminal) app.  There are many choices, but we recommend [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/) for Microsoft Windows users; the default [Terminal](https://support.apple.com/en-sg/guide/terminal/welcome/mac) or [iTerm2](https://iterm2.com/index.html) for macOS users.  
 
-### Step 1: Testing Your SoC Unix Account
+### Testing Your SoC Unix Account
 
 You can skip this step if you have been using your SoC Unix account and is familiar with your SoC Unix username and password.
 
@@ -94,7 +94,7 @@ If you have reached this step, your SoC Unix username and password are working.
 
 Type ++ctrl++ ++d++ to exit before continuing with the next step. 
 
-### Step 2: Accessing The PE Hosts
+### Accessing The PE Hosts
 
 This is the step that you need throughout the semester to access the PE hosts.
 
@@ -141,6 +141,11 @@ ooiwt@pe120:~$
 ```
 
 This means you have successfully connected to the CS2030S programming environment.
+
+You can now proceed to do three things:
+- learn about the [basic Unix commands](https://nus-cs2030s.github.io/2122-s2/unix-essentials.html) to navigate your home directory and manipulate files.
+- learn about how to edit a file in `vim`, by running the command `vimtutor`.  A [CS2030S vim guide](https://nus-cs2030s.github.io/2122-s2/vim.html) is also available.
+- [set up password-less login to the PE hosts](https://nus-cs2030s.github.io/2122-s2/environments.html#setting-up-password-less-login)
 
 ### Troubleshooting
 
