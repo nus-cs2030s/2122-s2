@@ -1,6 +1,6 @@
 # CS2030S Lab Guide
 
-### GitHub Setup 
+## GitHub Setup 
 
 You need a one-time setup at the beginning of semester to link your PE account to your GitHub account.  Following [the instructions here](github.md) to setup your GitHub account for CS2030S.
 
