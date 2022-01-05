@@ -54,7 +54,7 @@ A file named `feedback.md` summarizing your marks will be placed into your GitHu
 
 ### Warning
 
-If it is not clear to you by now, let us repeat: You should only interact with your lab submissions on GitHub using the provided scripts `get-labX` and `submit-labX`.  Failure to do so will break our workflow and will not be appreciated.
+If it is not clear to you by now, let us repeat: You should only interact with your lab submissions on GitHub using the provided scripts `get-labX` and `submit-labX`.  Failure to do so will break our workflow and will be appreciated.  We may deduct marks for students who do not follow this instruction.
 
 If you accidentally break your repo by running `git` commands on it or edit it directly on GitHub, you should save a copy of your code elsewhere, then reset your lab directory, by (i) requesting your tutor to delete the repo on GitHub, (ii) deleting the corrupted lab directory on PE nodes, (iii) go through Steps 1 and 2 again, then copy back your edited code into the lab directory.
 
@@ -76,11 +76,13 @@ Incremental coding means do NOT type in the whole long program in a single sessi
 
 You should test your program thoroughly with your test data before submission.
 
-Please note that:
+You may assume that all input data are correct unless otherwise stated. Hence you do NOT need to do input data validation. This is to allow you to focus on getting the program right, instead of worrying about making your program fool-proof.
 
-- You may assume that all input data are correct unless otherwise stated. Hence you do NOT need to do input data validation. This is to allow you to focus on getting the program right, instead of worrying about making your program fool-proof.
+## Peer-Learning
 
-- Copying others' programs or relying on others to help you with these assignments will only offer a short-term reprieve. When Practical Exam (PE) time comes, your inadequacy will be exposed and the consequence would be dire.
+We encourage students to discuss and seek help from each others and from the lab tutors if you are stuck.  Piazza is a great forum for that.  However, do note that while students are encouraged to _discuss the approach_ to the solution, students are _expected to write their code independently_.  Copy-pasting of code or coming up with the code together, line-by-line, is considered [plagiarism](lab.md#plagiarism).
+
+All labs are designed to be completed within half a day.  If you get stuck on an issue for longer than that, you should talk to others.
 
 ## Late Submission
 
@@ -89,6 +91,10 @@ All lab assignments must be submitted on time.  If you need an extension, please
 For late submission, there is a 1% penalty (of the total awarded marks for that particular assignment) for every 5-minute after the deadline, capped at 80%.  For example, if an assignment is awarded 40 marks, and it is submitted 100 minutes after the deadline, the student will get 32 marks instead (20% penalty).  If it is submitted 10 hours after the deadline, the student will get 8 marks (as it has hit the cap of 80% penalty).
 
 Late submission is no longer accepted one week after the deadline.
+
+## Submissions with Compilation Errors
+
+Writing code that compiles without any compilation error is the most basic requirement for all our labs and practical assessments.  You will get 0 marks for the corresponding question if your code cannot be compiled.
 
 ## Identifying Yourself
 
@@ -101,7 +107,7 @@ In every Java file that you submit, you need to identify yourself by writing you
 and change it to something like:
 
 ```
-@author Gamora (Group B09A)
+@author Gamora (Group 9A)
 ```
 
 ## Method of Submission
@@ -120,6 +126,12 @@ Some lab assignments may explicitly disallow the use of certain syntax.  If the 
 
 ## Plagiarism
 
-You are NOT to copy from others or allow others to copy your programs.  We take plagiarism seriously.  See the module policy posted on Luminus for details.  We also want to highlight that NUS is applying a heavier than usual penalty this semester -- you get an F straightaway for the module, instead of the usual 0 for the plagiarized lab.
+While we encourage discussions among students for programming assignments, each student should be responsible for writing his/her own code and should give credits to others when appropriate.
+
+NUS and School of Computing have a high standard of academic honesty and take any violation seriously. In the context of computing modules, source code plagiarism -- copying code from another source and attributing it as one's own code -- is a serious violation. Please read the page [Preventing Plagiarism](https://www.comp.nus.edu.sg/cug/plagiarism/) from the school's website to familiarize yourself with the policy.
+
+We adopt a "no mercy" policy when it comes to disciplinary action on plagiarism. Both parties, the student who copied, and the student who allowed others to copy, will be penalized equally.
 
 This means that you should also guard your solution carefully, not posting them to publicly accessible places, or change the permissions of the files on the PE hosts so that it is accessible by others.
+
+Copying others' programs will only offer a short-term reprieve. When Practical Exam (PE) time comes, your inadequacy will be exposed and the consequence would be dire.
