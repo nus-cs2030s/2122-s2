@@ -143,6 +143,7 @@ ooiwt@pe120:~$
 This means you have successfully connected to the CS2030S programming environment.
 
 You can now proceed to do three things:
+
 - learn about the [basic Unix commands](https://nus-cs2030s.github.io/2122-s2/unix-essentials.html) to navigate your home directory and manipulate files.
 - learn about how to edit a file in `vim`, by running the command `vimtutor`.  A [CS2030S vim guide](https://nus-cs2030s.github.io/2122-s2/vim.html) is also available.
 - [set up password-less login to the PE hosts](https://nus-cs2030s.github.io/2122-s2/environments.html#setting-up-password-less-login)
