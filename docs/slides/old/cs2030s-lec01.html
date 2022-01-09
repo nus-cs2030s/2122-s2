@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
 
 <!-- CHANGE TITLE -->
-<title>CS2030S AY21/22 S2 Lecture 1</title>
+<title>CS2030S AY20/21 S2 Lecture 1</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -22,12 +22,13 @@ class: middle, center
 
 ## Lecture 1
 
-### 10 January 2022
+### 11 January 2021
 ---
 class: middle,center
 
-<b>Boyd</b> Anderson<br>
 Ooi <b>Wei Tsang</b><br>
+<b>Boyd</b> Anderson<br>
+<b>Ashish</b> Deepak Dandekar<br>
 
 `cs2030s@comp.nus.edu.sg`
 
@@ -35,13 +36,14 @@ Ooi <b>Wei Tsang</b><br>
 class: middle,center
 
 <b>Enzio</B> Kam (TA)<br>
-<b>Alvin</b> Heng (Grad Tutor)<br>
-Ling <b>Yanhao</b> (Grad Tutor)<br>
+<b>Darius</b> Foo (Grad Tutor)<br>
+Chong <b>Yihui</b> (Grad Tutor)<br>
 
 ---
 class: middle,center
 
-58 UG Tutors<br>
+8 Ph.D. students<br>
+50 UG Tutors<br>
 
 ---
 class: middle,center
@@ -51,13 +53,12 @@ class: middle,center
 ---
 class: middle,center
 
-<img src="figures/cs2030s-lec01/cs2030s-lec01.001.png" width="800">
+![figures](figures/cs2030s-lec01/cs2030s-lec01.001.png)
 
 ---
 class: middle,center
 
-<img src="figures/cs2030s-lec01/cs2030s-lec01.002.png" width="700">
-
+![figures](figures/cs2030s-lec01/cs2030s-lec01.002.png)
 
 ---
 class: middle
@@ -90,49 +91,20 @@ class: middle,center
 ## Assessments, Policies, etc.
 
 ---
-class: middle,center
+class: middle
 
-<img src="figures/cs2030s-lec01/cs2030s-lec01.005.png" width="800">
-
----
-class: middle,center
-
-<img src="figures/cs2030s-lec01/cs2030s-lec01.006.png" width="800">
-
----
-class: middle,center
-
-<img src="figures/cs2030s-lec01/cs2030s-lec01.007.png" width="800">
-
----
-class: middle,center
-
-<img src="figures/cs2030s-lec01/cs2030s-lec01.008.png" width="800">
-
----
-class: middle,center
-
-<img src="figures/cs2030s-lec01/cs2030s-lec01.009.png" width="800">
-
----
-class: middle,center
-
-<img src="figures/cs2030s-lec01/cs2030s-lec01.010.png" width="800">
-
----
-class: middle,center
-
-<img src="figures/cs2030s-lec01/cs2030s-lec01.011.png" width="800">
-
----
-class: middle,center
-
-<img src="figures/cs2030s-lec01/cs2030s-lec01.012.png" width="800">
+![figures](figures/cs2030s-lec01/cs2030s-lec01.003.png)
 
 ---
 class: middle
 
-The compiler is our friend
+![figures](figures/cs2030s-lec01/cs2030s-lec01.004.png)
+
+
+---
+class: middle
+
+Compiler is our friend
 
 - it helps us catch errors early
 - but can only based on the code
@@ -168,9 +140,9 @@ class: middle
 
 ### Dynamically Typed
 
-```javascript
-let x = 4;
-x = "5"; // Ok
+```Python
+x = 4
+x = "5" # Ok
 ```
 
 ---
@@ -181,7 +153,7 @@ class: middle
 ```Java
 int x;
 x = 4;
-x = "5" // Error
+x = "5" // error
 ```
 
 ---
@@ -197,9 +169,13 @@ print("i is " + i)
 ```
 
 ---
+class: middle
+background-image: url(figures/vivian-dynamically-typed.png)
+
+---
 class: middle,center
 
-### Java is a _statically typed_ language.
+### Java is a statically typed language.
 
 ---
 class: middle
@@ -220,6 +196,17 @@ class: middle
 int x;
 x = 4;
 x = (int)"5"; // okay, fine..
+```
+
+---
+class: middle
+
+### in Java (strong typing)
+
+```C
+int x;
+x = 4;
+x = (int)"5"; // error
 ```
 
 ---
@@ -277,7 +264,7 @@ class: middle
 ---
 class: middle
 
-### Subtyping is Reflexive and Transitive
+### Subtyping is Reflective and Transitive
 
 - $T <: T$
 - if $S <: T$ and $T <: U$, then $S <: U$.
@@ -298,18 +285,18 @@ class: middle,center
 class: middle
 
 .small[
-```javascript
-let i = 10;
-let fac10 = 1;
+```C
+int i = 10;
+int fac10 = 1;
 while (i >= 0) {
-  fac10 = fac10 * i;
-  i = i - 1;
+  fac10 *= i;
+  i -= 1;
 }
 i = 5;
-let fac5 = 1;
+int fac5 = 1;
 while (i >= 0) {
-  fac5 = fac5 * i;
-  i = i - 1;
+  fac5 *= i;
+  i -= 1;
 }
 ```
 ]
@@ -318,17 +305,17 @@ while (i >= 0) {
 class: middle
 
 .small[
-```javascript
-function factorial(i) {
-	let fac = 1;
+```C
+int factorial(int i) {
+	int fac = 1;
 	while (i >= 0) {
-        fac = fac * i;
-        i = i - 1;
+	  fac *= i;
+	  i -= 1;
 	}
 	return fac;
 }
-const fac10 = factorial(10);
-const fac5 = factorial(5);
+int fac10 = factorial(10);
+int fac5 = factorial(5);
 ```
 ]
 
@@ -341,46 +328,6 @@ class: top,center
 class: middle,center
 
 ### Abstraction: Composite Data Type
-
----
-class: middle
-
-.small[
-```javascript
-function circle(x, y, r) {
-    function dispatch(q) {
-        if (q === "x") {
-            return x;
-        } else if (q === "y") {
-            return y;
-        } else if (q === "r") {
-            return r;
-        }
-    }
-    return dispatch;
-}
-```
-]
-
----
-class: middle
-
-```javascript
-const c = circle(1, 1, 5);
-c("x"); // returns 1
-c("y"); // returns 1
-c("r"); // returns 5
-const area = circle_get_area(c);
-```
-
----
-class: middle, wide
-
-```javascript
-function circle_get_area(c) {
-    return math_PI * c("r") * c("r");
-}
-```
 
 ---
 class: middle
@@ -496,7 +443,7 @@ Classes: `BankAccount`, `Customer`, `Teller`, ...
 
 Fields: `balance`, `creditRating`, `accountNumber`, ...
 
-Methods: `withdraw`, `deposit`, `takeOutLoan`, ...
+Methods: `withdraw`, `deposit`, `loan`, ...
 
 ---
 class: middle
@@ -520,8 +467,6 @@ class: middle
 
 What about sub/supertype relationships among Java Reference Types?
 
-How do Reference types fit into the Type System?
-
 We will get there don't worry!
 
 ---
@@ -537,22 +482,17 @@ c1.r = 10.0;  // NullPointerException
 All non-initialised variables will have the special reference value `null`.
 
 ---
-class: middle, wide
+class: middle, center
 
-## Reminders:
-
-- Submit your Github username
-- Join the Piazza forum
-- Read the notes and follow the guides
-- Take the end of lecture _Diagnostic Quiz_
+## Demo
 
 ---
 class: bottom
 
 .tiny[
-Version: v1.0
+Version: v1.1
 
-Last Updated: Mon Jan 10 11:00:00 +08 2021
+Last Updated: Mon Jan 11 16:20:11 +08 2021
 ]
 </textarea>
 
@@ -574,7 +514,7 @@ var slideshow = remark.create({
 	},
 	ratio: '16:9',
 	highlightStyle: 'ir-black',
-    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+    slideNumberFormat: 'CS2030S AY20/21 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
 });
  // Setup MathJax
   MathJax.Hub.Config({
