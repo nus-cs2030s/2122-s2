@@ -74,7 +74,7 @@ Beginners tend to confuse between `javac` and `java`, and whether to add the ext
 
 ### Interpreting a Java program
 
-Java (version 8 or later) comes with an interpreter called `jshell` that can read in Java statements, evaluate them, and print the results[^3]. `jshell` is useful for learning and experimenting about Java.   This can be seen in the figure below, where the `Hello.java` program is interpreted from Java directly to the x86-64 machine language. The Java interpreter `jshell` in this diagram is implemented in the x86-64 machine language.
+Java (version 8 or later) comes with an interpreter called `jshell` that can read in Java statements, evaluate them, and print the results[^3]. `jshell` is useful for learning and experimenting about Java.   This can be seen in the figure below, where the `Hello.java` program is interpreted from Java directly to the x86-64 machine language. 
 
 <img src="figures/compiler/compiler.005.png" width="800">
 
