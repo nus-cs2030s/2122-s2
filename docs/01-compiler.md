@@ -2,30 +2,9 @@
 
 After reading this unit, students should:
 
-- recap some fundamental programming concepts, including T-Diagrams, the concept of a program, a programming language, a compiler, and an interpreter
+- recap some fundamental programming concepts, including the concept of a program, a programming language, a compiler, an interpreter
 - be aware of two modes of running a Java program (compiled vs. interpreted)
 - be aware that compile-time errors are better than run-time errors, but the compiler cannot always detect errors during compile time
-
-
-## Tombstone Diagrams (T-Diagrams)
-T-diagrams consist of combinations of the following four components: 
-
-- Programs which are implemented in a particular language (i.e. `Java`, `python`, `c/c++`)
-- Interpreters for a language (**A**) which are implemented in a language (**B**)
-- Language (**A**) to language (**B**) Compilers which are implemented in a language **C**
-- Physical machines implementing a particular language (i.e. x86-64, ARM-64)
-
-These components are represented in T-diagrams with the following diagrams:
-
-<img src="figures/compiler/compiler.001.png" width="800">
-
-We can treat these components like "puzzle pieces" and build diagrams to describe various execution, compilation, or interpreted processes.  For example, in the diagram below, a python script `Hello.py` is being interpreted by the python interpreter running on the x86-64 architecture.
-
-<img src="figures/compiler/compiler.002.png" width="800">
-
-*Note:* In order for the diagram to be valid, adjacent connected diagram components need to match. This can be seen in the diagram below (highlighted with blue boxes).
-
-<img src="figures/compiler/compiler.006.png" width="800">
 
 ## Software Program
 
@@ -46,7 +25,29 @@ Java programs, on the other hand, can be executed in two ways.
 
 - The Java program can also be interpreted by the Java interpreter.
 
-Since CS2030/S uses Java, let's look at the two approaches in more detail (without worrying about how to write a single line of Java first).
+To better understand this distinction, we will introduce a visual aid to describe the relationships between programs, compilers, interpreters, and machines.
+
+### Tombstone Diagrams (T-Diagrams)
+Tombstone Diagrams or T-diagrams consist of combinations of the following four components: 
+
+- *Programs* which are implemented in a particular language (i.e. `Java`, `python`, `c/c++`)
+- Language (**A**) to language (**B**) *Interpreters*
+- Language (**A**) to language (**B**) *Compilers* which are implemented in a language **C**
+- Physical *Machines* implementing a particular language (i.e. x86-64, ARM-64)
+
+These components are represented in T-diagrams with the following diagrams:
+
+<img src="figures/compiler/compiler.001.png" width="800">
+
+We can treat these components like "puzzle pieces" and build diagrams to describe various execution, compilation, or interpreted processes.  For example, in the diagram below, a python script `Hello.py` is being interpreted by the python interpreter running on the x86-64 architecture.
+
+<img src="figures/compiler/compiler.002.png" width="800">
+
+*Note:* In order for the diagram to be valid, adjacent connected diagram components need to match. This can be seen in the diagram below (highlighted with blue boxes).
+
+<img src="figures/compiler/compiler.006.png" width="800">
+
+Since CS2030/S uses Java, we will now look at the two approaches to execute a Java program in more detail (without worrying about how to write a single line of Java first).
 
 ### Compiling and Running Java Programs
 
@@ -62,7 +63,7 @@ Assuming that there is no error in compilation, we can now run
 ```
 $ java Hello
 ```
-to invoke the JVM `java` and execute the bytecode contains in `Hello.class`. This can be seen in the figure below, where the `Hello.class` program is interpreted from JVM language (bytecode) to the x86-64 machine language. The Java Virtual Machine `java` in this diagram is implemented in the x86-64 machine language.
+to invoke the JVM `java` and execute the bytecode contains in `Hello.class`. This can be seen in the figure below, where the `Hello.class` program is interpreted from JVM language (bytecode) to the x86-64 machine language.
 
 <img src="figures/compiler/compiler.004.png"  width="800">
 
