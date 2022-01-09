@@ -12,8 +12,8 @@ T-diagrams consist of combinations of the following four components:
 
 - Programs which are implemented in a particular language (i.e. `Java`, `python`, `c/c++`)
 - Interpreters for a language (**A**) which are implemented in a language (**B**)
-- Language (**A**) to Language (**B**) Compilers which are implemented in a language **C**
-- Physical machines implemented a particular language (i.e. x86-64, ARM-64)
+- Language (**A**) to language (**B**) Compilers which are implemented in a language **C**
+- Physical machines implementing a particular language (i.e. x86-64, ARM-64)
 
 These components are represented in T-diagrams with the following diagrams:
 
@@ -21,7 +21,7 @@ These components are represented in T-diagrams with the following diagrams:
 
 We can treat these components like "puzzle pieces" and build diagrams to describe various execution, compilation, or interpreted processes.  For example, in the diagram below, a python script `Hello.py` is being interpreted by the python interpreter running on the x86-64 architecture.
 
-<img src="figures/compiler/compiler.002.png", width="400">
+<img src="figures/compiler/compiler.002.png" width="800">
 
 *Note:* In order for the diagram to be valid, adjacent connected diagram components need to match. This can be seen in the diagram below (highlighted with blue boxes).
 
@@ -56,7 +56,7 @@ $ javac Hello.java
 ```
 into the command line.  `javac` is the Java compiler.  This step will either lead to the bytecode called `Hello.class` being created or spew out some errors.  This process can be seen in the figure below, where the `Hello.java` program is compiled from Java to the JVM language (bytecode). The Java compiler `javac` in this diagram is implemented in the x86-64 machine language.
 
-<img src="figures/compiler/compiler.003.png">
+<img src="figures/compiler/compiler.003.png" width="800">
 
 Assuming that there is no error in compilation, we can now run
 ```
@@ -64,7 +64,7 @@ $ java Hello
 ```
 to invoke the JVM `java` and execute the bytecode contains in `Hello.class`. This can be seen in the figure below, where the `Hello.class` program is interpreted from JVM language (bytecode) to the x86-64 machine language. The Java Virtual Machine `java` in this diagram is implemented in the x86-64 machine language.
 
-<img src="figures/compiler/compiler.004.png">
+<img src="figures/compiler/compiler.004.png"  width="800">
 
 [^1]: The `$` represents the command prompt in a shell and you do not need to type this.
 
@@ -76,7 +76,7 @@ Beginners tend to confuse between `javac` and `java`, and whether to add the ext
 
 Java (version 8 or later) comes with an interpreter called `jshell` that can read in Java statements, evaluate them, and print the results[^3]. `jshell` is useful for learning and experimenting about Java.   This can be seen in the figure below, where the `Hello.java` program is interpreted from Java directly to the x86-64 machine language. The Java interpreter `jshell` in this diagram is implemented in the x86-64 machine language.
 
-<img src="figures/compiler/compiler.005.png">
+<img src="figures/compiler/compiler.005.png" width="800">
 
 To run `jshell` in interactive mode, we type
 ```
