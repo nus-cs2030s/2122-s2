@@ -31,11 +31,11 @@ To better understand this distinction, we will introduce a visual aid to describ
 Tombstone Diagrams or T-diagrams consist of combinations of the following four components: 
 
 - *Programs* which are implemented in a particular language (i.e. `Java`, `python`, `c/c++`)
-- Language (**A**) to language (**B**) *Interpreters*
-- Language (**A**) to language (**B**) *Compilers* which are implemented in a language **C**
+- Language **A** to language **B** *Interpreters*
+- Language **A** to language **B** *Compilers* which are implemented in a language **C**
 - Physical *Machines* implementing a particular language (i.e. x86-64, ARM-64)
 
-These components are represented in T-diagrams with the following diagrams:
+These components are represented in T-diagrams as shown in the figure below:
 
 <img src="figures/compiler/compiler.001.png" width="800">
 
