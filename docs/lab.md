@@ -54,7 +54,7 @@ A file named `feedback.md` summarizing your marks will be placed into your GitHu
 
 ### Warning
 
-If it is not clear to you by now, let us repeat: You should only interact with your lab submissions on GitHub using the provided scripts `get-labX` and `submit-labX`.  Failure to do so will break our workflow and will be appreciated.  We may deduct marks for students who do not follow this instruction.
+If it is not clear to you by now, let us repeat: You should only interact with your lab submissions on GitHub using the provided scripts `get-labX` and `submit-labX`.  Failure to do so will break our workflow and will not be appreciated.  We may deduct marks for students who do not follow this instruction.
 
 If you accidentally break your repo by running `git` commands on it or edit it directly on GitHub, you should save a copy of your code elsewhere, then reset your lab directory, by (i) requesting your tutor to delete the repo on GitHub, (ii) deleting the corrupted lab directory on PE nodes, (iii) go through Steps 1 and 2 again, then copy back your edited code into the lab directory.
 
