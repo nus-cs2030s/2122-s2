@@ -48,6 +48,8 @@ markdown_extensions:
   - pymdownx.magiclink
   - pymdownx.mark
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
   - pymdownx.tilde
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji

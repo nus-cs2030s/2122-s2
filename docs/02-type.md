@@ -29,10 +29,19 @@ Java and Javascript, however,  would happily convert `4` into a string for you, 
 ### Dynamic vs. Static Type
 
 Python and Javascript are examples of _dynamically typed_ programming languages.  The same variable can hold values of different types, and checking if the right type is used is done during the execution of the program.  Note that, the type is associated with the _values_, and the type of the variable changes depending on the value it holds.  For example, we can do the following:
-```
-i = 4   // i is an integer
-i = "5" // ok, i is now a string
-```
+=== "Javascript"
+
+    ```Javascript
+    let i = 4;   // i is an integer
+    i = "5"; // ok, i is now a string
+    ```
+
+=== "Python"
+
+    ```Python
+    i = 4   // i is an integer
+    i = "5" // ok, i is now a string
+    ```
 
 Java, on the other hand, is a _statically typed_ language.  We need to _declare_ every variable we use in the program and specify its type.  A variable can only hold values of the same type as the type of the variable, so we can't assign, for instance, a string to a variable of type `int`.  Once a variable is assigned a type, its type cannot be changed.
 
