@@ -9,6 +9,7 @@ After reading this unit, students should:
 
 ## Tombstone Diagrams (T-Diagrams)
 T-diagrams consist of combinations of the following four components: 
+
 - Programs which are implemented in a particular language (i.e. `Java`, `python`, `c/c++`)
 - Interpreters for a language (**A**) which are implemented in a language (**B**)
 - Language (**A**) to Language (**B**) Compilers which are implemented in a language **C**
@@ -20,7 +21,7 @@ These components are represented in T-diagrams with the following diagrams:
 
 We can treat these components like "puzzle pieces" and build diagrams to describe various execution, compilation, or interpreted processes.  For example, in the diagram below, a python script `Hello.py` is being interpreted by the python interpreter running on the x86-64 architecture.
 
-<img src="figures/compiler/compiler.002.png">
+<img src="figures/compiler/compiler.002.png", width="400">
 
 *Note:* In order for the diagram to be valid, adjacent connected diagram components need to match. This can be seen in the diagram below (highlighted with blue boxes).
 
