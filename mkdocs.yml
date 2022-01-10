@@ -1,5 +1,13 @@
 nav:
   - Home: 'index.md'
+  - Notes:
+    - Introduction (00-03):
+      - 0. Overview: '00-overview.md'
+      - 1. Program and Compiler: '01-compiler.md'
+      - 2. Variable and Type: '02-type.md'
+      - 3. Functions: '03-function.md'
+    - OOP (04-04):
+      - 4. Encapsulation: '04-encapsulation.md'
   - Guide:
     - Programming Environments: 'environments.md'
     - GitHub Setup: 'github.md'
