@@ -87,7 +87,68 @@ CS2030S is not a module about
 ---
 class: middle,center
 
-## Assessments, Policies, etc.
+## Administrative Matters
+
+---
+class: middle,center
+
+
+CS2030S LumiNUS $\blacktriangleright$ 
+
+[Module Details](https://luminus.nus.edu.sg/modules/b3905e37-dd09-4f2a-843d-e29b563a6ca4/details/module-description) $\blacktriangleright$ 
+
+Module Policies
+
+---
+class: middle,center
+
+<center>
+<div style="position: relative; width:550px">
+<canvas id="assessment"></canvas>
+</div>
+</center>
+
+---
+class:middle
+### Important Dates
+
+.smaller[
+Assessment         | Date                       | Time
+:------------------|:-------------------------- |:-------------
+Midterm | Mon, 28 Feb | 12 - 2 PM
+Practical Exam 1   | Sat, 5 Mar| 9 AM - 12 PM
+Practical Exam 2   | Sat, 9 Apr| 9 AM - 12 PM
+Final | Thu, 28 Apr | 1 - 3 PM
+]
+
+Online or On-site: TBD
+
+---
+class: middle
+
+### Tutorial and Lab Sessions
+
+- Start in Week 3
+- Face-to-face lessons
+- Registration starts tomorrow: manage via ModReg
+
+---
+class: middle
+
+### "Catch-Up" Sessions
+
+- About every three weeks
+- Saturday 10 AM - 12 PM, online
+- Q&amp;A format
+
+---
+class: middle,center
+
+CS2030S LumiNUS $\blacktriangleright$ 
+
+Survey $\blacktriangleright$ 
+
+[Anytime Feedback](https://luminus.nus.edu.sg/modules/b3905e37-dd09-4f2a-843d-e29b563a6ca4/survey/c45e801d-c75d-450c-9d4e-10786366f7e8)
 
 ---
 class: middle,center
@@ -561,6 +622,8 @@ Last Updated: Mon Jan 10 11:00:00 +08 2021
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
 <script src="javascripts/counter.js">
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
 <script>
 remark.macros.scale = function (percentage) {
 	var url = this;
@@ -587,6 +650,52 @@ var slideshow = remark.create({
   });
 
   MathJax.Hub.Configured();
+
+	var ctx = document.getElementById('assessment').getContext('2d');
+	var data = {
+			datasets: [{ data: [5, 30, 10, 25, 10, 20],
+					borderColor: '#eee',
+					backgroundColor: [
+							'rgba(255, 100, 0, 1)',
+							'rgba(100, 255, 0, 1)',
+							'rgba(100, 0, 255, 1)',
+							'rgba(100, 255, 255, 1)',
+							'rgba(255, 255, 100, 1)',
+							'rgba(255, 100, 255, 1)',
+						],
+				}],
+			// These labels appear in the legend and in the tooltips when hovering different arcs
+			labels: [ 'Quizzes (5%)', 'Assignments (30%)', 'Midterm (10%)', 'Final (25%)', 'PE1 (10%)', 'PE2 (20%)' ]
+		};
+
+	// For a pie chart
+	var myPieChart = new Chart(ctx, {
+			type: 'pie',
+			data: data,
+			options: {
+					tooltips: {
+							mode: 'nearest',
+							intersect: false
+						},
+					borderWidth: 1,
+					defaultFontStyle: 'Roboto',
+					responsive: true,
+					plugins: {
+							legend: {
+									position: 'right',
+									labels: {
+											font: {
+													size: 20,
+													family: 'Roboto',
+												},
+											color: '#fff',
+										}
+								}
+						}
+				}
+		});
+
+</script>
 </script>
 </body>
 </html>
