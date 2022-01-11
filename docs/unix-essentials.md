@@ -321,11 +321,11 @@ In `less`, use `<space>` to move down one page, `b` to move Back up one page, an
 
 An online help facility is available in Unix via the `man` command (`man` stands for MANual). To look for more information about any Unix command, for example, `ls`, type `man ls`. Type `man man` and refer to Man Pages to find out more about the facility. To exit `man`, press `q`.
 
-# File Permission Management
+## File Permission Management
 
 File permissions determine _who_ can do _what_ to a file.  Typically, you do not need to fiddle with the file permission, but when you need to, it is usually for an important reason and it is critical to do it right.
 
-## The _What_ of File Permissions
+### The _What_ of File Permissions
 Let's look at _what_ you can do to a file first.  Unix file permissions allow control of three actions: `r` (read), `w` (write) and `x` (execute).  These permission settings allow the following different actions to be done for regular files and directories.
 
 permission | effect on file | effect on directory
@@ -343,7 +343,7 @@ The permissions on a file can be expressed in two ways:
 - using a numerical notation. This notation uses a digit between 0 and 7, which is computed as a sum of the individual digit representing the permissions: `r` is represented with 4, `w` is represented with 2, and `x` is represented with 1.
 For instance, `r-x` has a numerical representation of 5, and `-wx` has a numerical representation of 3.
 
-## The _Who_ of File Permissions
+### The _Who_ of File Permissions
 
 Unix divides the users into three classes: `u` is the <b>u</b>ser who owns the file; `g` refers to the users in the same <b>g</b>roup as the user; and `o` are all the <b>o</b>ther users.
 
@@ -355,7 +355,7 @@ For instance, the permission of 644, or `rw-r--r--`, on a file means that:
 - the group users can only read
 - all the other users can only read
 
-## Checking file permission
+### Checking file permission
 
 You can view the permission of a file by using the `ls -l` command (`l` for long format):
 
@@ -366,7 +366,7 @@ $ ls -l test.txt
 
 Ignoring the first `-` and the last `@`, you can see that the permission of `test.txt` is 644.
 
-## The `chmod` command
+### The `chmod` command
 
 You can use `chmod` command to change the permissions of a file or a directory.
 
@@ -387,7 +387,7 @@ $ ls -l test.txt
 
 [^1]: Giving write permission to other users is a security risk and you should not do this unless you know what you are doing.
 
-## Common Scenarios for `chmod`
+### Common Scenarios for `chmod`
 
 Here are some scenarios where you might need to use the `chmod` command:
 
@@ -397,15 +397,15 @@ Here are some scenarios where you might need to use the `chmod` command:
 
 - A program should have execution permission to run.  If you have a script or an executable file that you can't run, give yourself the execution permission `u+x`.
 
-# Standard Input/Output
+## Standard Input/Output
 
-## History
+### History
 
 Two of the design decisions of Unix that lead to its simplicity are the decisions to (i) decouple the physical input/output devices from the programs, allowing programs written for Unix to read from _abstract_ input and output devices; and (ii) make all programs read and write from these abstract input and output devices by default.  Before Unix, the older operating systems often require programmers to painstakingly set up connections to the teletype machines and other devices for reading inputs and printing outputs.   With Unix, programmers can now focus on solving the tasks at hand and let Unix takes care of the input and output.
 
 The two abstract devices that Unix provides are called _standard input_ and _standard output_.  By default, the standard input refers to the _keyboard_ and the standard output is the _terminal_.
 
-## Examples using `cat` and `wc`
+### Examples using `cat` and `wc`
 
 Let's look at these concepts closer, by examining some examples.
 
@@ -441,7 +441,7 @@ $ wc
 
 You will see that the `wc` command is waiting for you to type in something.  Type in a few sentences, you can hit ++enter++ for a new line.  When you are done, type ++control+d++.  `wc` will count the number of lines, words, and characters for the text that you just entered.
 
-## Output Redirection
+### Output Redirection
 
 By defining two abstract input and output devices (or channels), Unix frees the programmers from worrying about where to read the input from and write the output to.  Most of the time, we can write the output of the program to the standard output.  In instances where we need to write the output to another location, we can just _redirect_ the output.
 
@@ -469,7 +469,7 @@ $ cat test.count
        1      11      64 test.txt
 ```
 
-## Input Redirection
+### Input Redirection
 
 The operator `<` is used to redirect a file into the standard input. So, instead of reading from the keyboard, we can now read from a file.  Commands such as `cat` and `wc` already support from a file directly, so there is no difference in terms of functionality to run the commands by passing in the file name, or by using the `<` operator.
 
