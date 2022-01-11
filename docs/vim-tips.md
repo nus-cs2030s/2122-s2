@@ -196,6 +196,8 @@ You can ++g++++g++++equal++++shift+g++ in command mode (i.e., type out `gg=G`) t
 - `:vsp file.c` splits the `vim` window vertically
 - ++control+w++++control+w++ moves between the different `vim` viewports
 
+{++New++} Alternatively, run `vim -O file1 file2` to immediately open both files in two different viewpoints.
+
 ### Jump to `Foo.java`
 
 Place your cursor on the class name, e.g., `Foo`.  Then hit ++g++ ++f++.
