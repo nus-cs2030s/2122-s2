@@ -99,6 +99,8 @@ The `ls` list the content in the current working directory.
 !!! note "Rule of Silence"
     Unix follows the economical _rule of silence_: programs should not print unnecessary output, to allow other programs and users to easily parse the output from one program.  So, if `ls` has nothing to list, it will list nothing (as opposed to, say, printing "This is an empty directory.")
 
+{++Added++} In Unix, a file or directory with a name that starts with `.` is hidden from `ls`.  Common hidden files are `.vimrc`, the configuration file for `vim`, and `.ssh`, the directory to store your SSH keys and configuration.  To view all the files, including hidden files, run `ls` with the `-a` flag (`a` stands for all).  
+
 ### `mkdir`: MaKe a subDIRectory
 
 The `mkdir` command creates a subdirectory with the given name in the current directory.

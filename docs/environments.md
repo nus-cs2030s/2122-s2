@@ -196,14 +196,44 @@ Let's say you want to log in from Host A to Host B.  On Host A, run:
 ssh-keygen -t rsa
 ```
 
-to generate a pair of keys on Host A.  When prompted, you can save the file `id_rsa` in the default location and enter an empty passphrase.  Then, on Host A, run:
+to generate a pair of keys on Host A.  When prompted, you can save the file `id_rsa` in the default location `~/.ssh` and enter an empty passphrase.  
+
+{++Expanded++} What the command above does is it creates two files, the private key `id_rsa` and the public key `id_rsa.pub`.  Next, you need to plant the public key on Host B.  There are two ways to do this:
+
+#### Method 1: Using `ssh-copy-id`
+
+If Host A has `ssh-copy-id` installed, then, on Host A, run:
 ```
 ssh-copy-id <username>@<hostname of B>
 ```
 
-You will be prompted to enter your password for Host B.  After this step is completed, your public key will be copied to and configured for password-less login to Host B.  You should now be able to `ssh` into Host B without using being prompted for a password every time.
+You will be prompted to enter your password for Host B.  After this step is completed, your public key will be copied to and configured for password-less login to Host B.  
 
-Recall that to log in to a PE host, you need to two steps, first from your local computer to into `stu.comp.nus.edu.sg`, then from `stu.comp.nus.edu.sg` into `pe1xx.comp.nus.edu.sg`.  So to setup password-less login to `pe1xx.comp.nus.edu.sg`, you need two steps:
+#### Method 2: Manually copy the public key to Host B.
+
+First, you need to copy the public key id_rsa.pub to your home directory on the remote host you want to log into.  We will use `scp`, or secure copy, for this.  On Host A,
+
+```
+scp ~/.ssh/id_rsa.pub <username>@<hostname of B>
+```
+
+You will be prompted with your password to login to transfer the file.
+
+Then, log into the Host B, run,
+
+```
+cat id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+to add your public key to the list of keys.
+
+Make sure that the permission for `.ssh` on Host A and Host B are set to 700 and the files `id_rsa` on Host A and `authorized_keys` on Host B are set to 600.  See the [`ls`](unix-essentials.md#ls-list-content-of-a-directory) and [`chmod`](unix-essentials.md#file-permission-management)
+
+After using either one of the methods above, you should be able to `ssh` into Host B without using being prompted for a password every time.
+
+Recall that to log in to a PE host, you need to two steps, first from your local computer to into `stu.comp.nus.edu.sg`, then from `stu.comp.nus.edu.sg` into `pe1xx.comp.nus.edu.sg`.  So to setup password-less login to `pe1xx.comp.nus.edu.sg`, you need two steps.  
+
+For example, using Method 1 (`ssh-copy-id`), you need to do the following.
 
 First, on your local computer:
 ```
