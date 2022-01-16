@@ -70,7 +70,7 @@ In CS2030/S, not only will you be continuing to break your computations into fun
 
 The last point above about why it is important to code in small, reusable functions, follows what is called the _Abstraction Principle_[^1].  The principle states that:
 
-[^1]: This principle is formulated by Benjamin C. Pierce in his book "Types and Programming Languages".
+[^1]: This principle is formulated by Benjamin C. Pierce in his book "Types and Programming Languages."
 
 > "Each significant piece of functionality in a program should be implemented in just one place in the source code. Where similar functions are carried out by distinct pieces of code, it is generally beneficial to combine them into one by abstracting out the varying parts."
 
