@@ -31,6 +31,8 @@ Run the command `~cs2030s/get-labXX` (where X is the lab number) to clone a copy
 
 You can edit the code, compile, test, etc, on the PE hosts.
 
+The lab sheet for each lab is given in the file `Question.md`.  You should get used to to reading the question in text format.  You can open two files side-by-side with `vim -O file1 file2` or in different tabs with `vim -p file1 file2`.
+
 !!! warning "WARNING"
     Do not edit your code directly on GitHub.
 

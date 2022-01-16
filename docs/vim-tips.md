@@ -1,4 +1,4 @@
-# Vim Tips
+# Vim Tips for CS2030S
 
 I collected some tips on `vim` that I find helpful.  If you are new to `vim`, please try out the command `vimtutor` on any machine where `vim` is installed, and check out the nice article [Learn vim Progressively](
 http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/).  
@@ -195,6 +195,8 @@ You can ++g++++g++++equal++++shift+g++ in command mode (i.e., type out `gg=G`) t
 - `:sp file.c` splits the `vim` window horizontally
 - `:vsp file.c` splits the `vim` window vertically
 - ++control+w++++control+w++ moves between the different `vim` viewports
+
+{++New++} Alternatively, run `vim -O file1 file2` to immediately open both files in two different viewpoints.
 
 ### Jump to `Foo.java`
 

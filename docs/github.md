@@ -50,7 +50,7 @@ It should print your GitHub user id as already set.  If there is a typo, you nee
 
 SSH uses _public-key cryptography_ for authentication.  The keys come in pairs: a public key and a private key.  The private key must be kept safe and known only to you.  You should keep the private key in your account, and not share it with others.
 
-To authenticate yourself to another host or service, you configure the host/service with your public key.  When it is time for you to log in, your private key is "matched"[^1] with your public key.  Since only you know your private key, the service or the host can be sure that you are you and not someone else.
+To authenticate yourself to another host or service, you configure the host/service with your public key.  When it is time for you to log in, your private key is "matched" with your public key.  Since only you know your private key, the service or the host can be sure that you are you and not someone else.
 
 Suppose you want to log in from host X to host Y without a password.  You generate a pair of keys on X, then keep the private keys on X and store the public keys on Y.  If you want to [setup SSH Keys](environments.md#setting-up-ssh-keys) so that you can log into PE hosts from your computer without a password, for example, you generate the pair of keys on your computer (X) and then copy the public key to PE hosts.
 
