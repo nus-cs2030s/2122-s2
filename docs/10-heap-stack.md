@@ -8,7 +8,8 @@ After taking this unit, students should:
 
 ## Heap and Stack
 
-The Java Virtual Machine (JVM) manages the memory of Java programs while its bytecode instructions are interpreted and executed.  Different JVM implementations may implement these differently, but typically a JVM implementation partitions the memory into several regions, including
+The Java Virtual Machine (JVM) manages the memory of Java programs while its bytecode instructions are interpreted and executed.  Different JVM implementations may implement these differently, but typically a JVM implementation partitions the memory into several regions, including:
+
 - _method area_ for storing the code for the methods;
 - _metaspace_ for storing meta information about classes;
 - _heap_ for storing dynamically allocated objects;
@@ -33,7 +34,7 @@ This is shown in the figure below.
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.001.png)
 
 
-The first argument to `Circle` constructor is also an object, so to be more precise, when Line 2 above is executed, a `Point` object is also created and allocated on the heap.  So the field `c` inside `Circle` is actually a reference to this object.
+The first argument to the `Circle` constructor is also an object, so to be more precise, when Line 2 above is executed, a `Point` object is also created and allocated on the heap.  So the field `c` inside `Circle` is actually a reference to this object.
 
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.002.png)
 
@@ -95,7 +96,7 @@ You can see that the _references_ to the objects `p1` and `p2` are copied onto t
 Within the method, any modification done to `this` would change the object referenced to by `p1`, and any change made to `q` would change the object referenced to by `p2` as well.
 After the method returns, the stack frame for that method is destroyed.
 
-Let's consider a new `move` method for the class `Point` that takes with arguments `(double x, double y)` and moves the `x` and `y` cordinates of the `Point`.
+Let's consider a new `move` method for the class `Point` that has two arguments arguments `(double x, double y)` and moves the `x` and `y` cordinates of the `Point`.
 
 ```Java
 class Point {
@@ -122,14 +123,14 @@ double y = 5;
 p1.move(x, y);
 ```
 
-Again, we create a stack frame, copy the reference to object `p2` into `this`, copy `theta` from the calling method to `theta` the argument within the method, copy `distance` from the calling method to `d` the argument within the method.  Recall that, in this method, you actually change the `x` and `y` of `this` to move `p2`.  
+Again, we create a stack frame, copy the reference to object `p1` into `this`, copy `x` from the calling method to `x` the argument within the method, copy `y` from the calling method to `y` the argument within the method.   
 
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.007.png)
 
-What is important here is that, as `theta` and `distance` are primitive types instead of references, we copy the values onto the stack.  If we change `theta` or `d` within `move`, the `theta` and `distance` of the calling function will not change.  This behavior is the same as you would expect in C.  However, unlike in C where you can pass in a pointer to a variable, you cannot pass in a reference to a primitive type in any way in Java.  If you want to pass in a variable of primitive type into a method and have its value changed, you will have to use a _wrapper class_.  The details of how to do this are left as an exercise.
+What is important here is that, as `x` and `y` are primitive types instead of references, we copy the values onto the stack.  If we change `x` or `y` within `move`, the `x` and `y` of the calling function will not change.  This behavior is the same as you would expect in C.  However, unlike in C where you can pass in a pointer to a variable, you cannot pass in a reference to a primitive type in any way in Java.  If you want to pass in a variable of primitive type into a method and have its value changed, you will have to use a _wrapper class_.  The details of how to do this are left as an exercise.
 
 To summarize, Java uses _call by value_ for primitive types, and _call by reference_ for objects.
 
-If we made multiple nested method calls, as we usually do, the stack frames get stacked on top of each other.  For instance, in Lab 0, `main` calls `solve`, which calls the `Circle` constructor, which calls the `angleTo`.  When JVM is executing `angleTo`, the call stack contains the stack frames of (in order of top to bottom): `angleTo`, `Circle` constructor, `solve`, and `main`.
+If we made multiple nested method calls, as we usually do, the stack frames get stacked on top of each other. 
 
 One final note: the memory allocated on the stack are deallocated when a method returns.  The memory allocated on the heap, however, stays there as long as there is a reference to it (either from another object or from a variable in the stack).  Unlike C or C++, in Java, you do not have to free the memory allocated to objects.  The JVM runs a _garbage collector_  that checks for unreferenced objects on the heap and cleans up the memory automatically.
