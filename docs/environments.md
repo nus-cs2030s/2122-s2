@@ -2,7 +2,7 @@
 
 ## Java version
 
-Java is a language that continues to evolve.  A new version is released every six months.  For CS2030S, we will _only_ use Java 11, the most recent version with long-term support.  Specifically, we use `openlogic-openjdk-11.0.8+10` on Ubuntu 20.04.3 LTS.
+Java is a language that continues to evolve.  A new version is released every six months.  For CS2030S, we will _only_ use Java 11, the second most recent version with long-term support[^1].  Specifically, we use `openlogic-openjdk-11.0.8+10` on Ubuntu 20.04.3 LTS.
 
 ## Programming Servers
 
@@ -28,7 +28,7 @@ While you can complete the programming assignments on your computers, the practi
 
     For older versions of Windows, such as those used in the SoC's programming labs, you can check out [XShell 6](https://www.netsarang.com/en/free-for-home-school/) (free for home/school use), or [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).  These are GUI-based programs so the command line instructions below do not apply.
 
-4. You need a good [terminal](https://nus-cs2030s.github.io/2122-s2/unix-background.html#what-is-a-terminal) app.  There are many choices, but we recommend [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/) for Microsoft Windows users; the default [Terminal](https://support.apple.com/en-sg/guide/terminal/welcome/mac) or [iTerm2](https://iterm2.com/index.html) for macOS users.  
+4. You need a good [terminal](unix-background.md#what-is-a-terminal) app.  There are many choices, but we recommend [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/) for Microsoft Windows users; the default [Terminal](https://support.apple.com/en-sg/guide/terminal/welcome/mac) or [iTerm2](https://iterm2.com/index.html) for macOS users.  
 
 ### Testing Your SoC Unix Account
 
@@ -144,9 +144,9 @@ This means you have successfully connected to the CS2030S programming environmen
 
 You can now proceed to do three things:
 
-- learn about the [basic Unix commands](https://nus-cs2030s.github.io/2122-s2/unix-essentials.html) to navigate your home directory and manipulate files.
-- learn about how to edit a file in `vim`, by running the command `vimtutor`.  A [CS2030S vim guide](https://nus-cs2030s.github.io/2122-s2/vim.html) is also available.
-- [set up password-less login to the PE hosts](https://nus-cs2030s.github.io/2122-s2/environments.html#setting-up-password-less-login)
+- learn about the [basic Unix commands](unix-essentials.md) to navigate your home directory and manipulate files.
+- learn about how to edit a file in `vim`, by running the command `vimtutor`.  A [CS2030S vim guide](vim-philosophy.md) is also available.
+- [set up password-less login to the PE hosts](environments.md#setting-up-password-less-login)
 
 ### Troubleshooting
 
@@ -187,7 +187,7 @@ of your SoC Unix account which you have created here: https://mysoc.nus.edu.sg/~
 
 To avoid typing in your password repeatedly, you can change the way you authenticate yourself to `stu.comp.nus.edu.sg` and the PE hosts, from using a password to using _public-key cryptography_ for authentication.  The keys come in pairs: a public key and a private key.  The private key must be kept safe and known only to you.  You should keep the private key in your account, and not share it with others.
 
-To authenticate yourself to another host or service, you configure the host/service with your public key.  When it is time for you to log in, your private key is "matched"[^1] with your public key.  Since only you know your private key, the service or the host can be sure that you are you and not someone else.
+To authenticate yourself to another host or service, you configure the host/service with your public key.  When it is time for you to log in, your private key is "matched"[^2] with your public key.  Since only you know your private key, the service or the host can be sure that you are you and not someone else.
 
 The following is a one-time setup to enable this.
 
@@ -253,7 +253,7 @@ Since all the PE hosts share the same file directory, you only need to do this f
 
 Note that a stable network connection is required to use the PE hosts for a long period without interruption. If you encounter frequent disconnections while working at home or on campus while connected wirelessly, please make sure that your WiFi signal is strong and there is no interference from other sources. 
 
-If you find yourself facing frequent disconnection, you can consider running [`screen`](https://en.wikipedia.org/wiki/GNU_Screen/).  After logging into a PE host, run:
+If you find yourself facing frequent disconnection, you can consider running [`screen`](https://en.wikipedia.org/wiki/GNU_Screen).  After logging into a PE host, run:
 ```
 screen
 ```
@@ -265,4 +265,6 @@ screen -r
 
 to resume your previous session.
 
-[^1]: I skipped many cool details here.  This topic is part of CS2105 and CS2107.  Interested students can google up various articles and videos online about how public-key cryptography is used for authentication.
+[^1]: The latest Java LTS version is 17.
+
+[^2]: I skipped many cool details here.  This topic is part of CS2105 and CS2107.  Interested students can google up various articles and videos online about how public-key cryptography is used for authentication.
