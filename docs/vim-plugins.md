@@ -1,4 +1,4 @@
-## Vim Plugins/Extensions on PE Hosts
+# Vim Plugins/Extensions on PE Hosts
 
 We allow the following plugins on the PE nodes during the practical exams.
 

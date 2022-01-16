@@ -1,5 +1,7 @@
+# The Philosophy of `vim`
+
 This article is adapted from the notes of the [Unix@Home Workshop](https://nus-unix-workshop.github.io/2021-s1) 
-held in August 2020.  
+held in August 2020.
 
 After reading this article, students should
 
@@ -8,7 +10,7 @@ After reading this article, students should
 - have experience navigating around a text buffer and manipulating text in `vim`
 - be aware of how to learn more about using `vim`.
 
-To edit our code, we need a proper editor.  Remember that ideally we want to keep our hands on the keyboard and keep ourselves "in the zone" with only the terminal, the keyboard, and ourselves, so we will use a terminal-based editor: no windows, no mouse, no arrow keys, no function keys.  
+To edit our code, we need a proper editor.  Remember that ideally we want to keep our hands on the keyboard and keep ourselves "in the zone" with only the terminal, the keyboard, and ourselves, so we will use a terminal-based editor: no windows, no mouse, no arrow keys, no function keys.
 
 There are only two respectable, widely available text editors in Unix -- `vim` and `emacs`, which one is better has been an ongoing religious war, but for us in SoC, we use `vim`.
 
@@ -35,7 +37,7 @@ I have a few more things to say about using ++h++ ++j++ ++k++ ++l++ to replace t
 
 As a programmer, having a different `NORMAL` modes makes sense since we spend much time reading and navigating around source code.  Thus, allowing the editing commands to optimized.
 
-In the `NORMAL` mode, you can use any of these keys ++i++ ++s++ ++a++ ++o++ (with or without ++shift++) to switch to `INSERT` mode.  To go back to `NORMAL` mode, press ++esc++.  The keys ++i++ ++s++ ++a++ ++o++ have different meanings, which you will learn later.  
+In the `NORMAL` mode, you can use any of these keys ++i++ ++s++ ++a++ ++o++ (with or without ++shift++) to switch to `INSERT` mode.  To go back to `NORMAL` mode, press ++esc++.  The keys ++i++ ++s++ ++a++ ++o++ have different meanings, which you will learn later.
 
 Note that most of the time you will be in `NORMAL` mode.  So a habitual `vim` users would insert some text and immediately switch back to normal mode by hitting ++esc++.
 
@@ -49,25 +51,25 @@ Let me give an example here.  Suppose you have a sentence:
 Wherever there is light, there is also a shadow.
 ```
 
-You want to remove `also a` from the sentence.  
+You want to remove `also a` from the sentence.
 
 What would you do in a typical text editor?  You can use move your hand away from the keyboard, find your mouse, move your mouse cursor to highlight the text, and then hit ++delete++.  Or you could move the cursor (by mouse or by repeatedly hitting the keyboard) to place the cursor after `a`, and then press ++delete++ six times.
 
 In addition to being tedious, this is error-prone.  You might highlight one additional or one less space, or hit ++delete++ one too many times.
 
-What we are used to do is to perform the action of deleting the words ourselves.  For `vim`, we do it differently.  We need to look for the word `also` and delete two words.  This translate to the command ++slash++ ++a++ ++l++ ++s++ ++o++ ++enter++ ++d++ ++2++ ++w++.   
+What we are used to do is to perform the action of deleting the words ourselves.  For `vim`, we do it differently.  We need to look for the word `also` and delete two words.  This translate to the command ++slash++ ++a++ ++l++ ++s++ ++o++ ++enter++ ++d++ ++2++ ++w++.
 
 - ++slash++ triggers a search.  This is an almost universal command -- try ++slash++ on Facebook (web) or on this page.
 - ++a++ ++l++ ++s++ ++o++ ++enter++ tells `vim` what you want to search.
 After enter, your cursor should be placed at the beginning of `also`.
 - ++d++ ++2++ ++w++ tell `vim` to "delete two words".
 
-Instead of worrying about the actual actions to perform the deletion, we issue higher-level commands to describe what we want to do.  This is powerful since this is how our brain thinks -- "I need to insert this here, change this word to that, remove two lines, etc"  All these maps into commands in `vim`.  As a result, once you master `vim` basics, you can type as fast as you think[^3]!  
+Instead of worrying about the actual actions to perform the deletion, we issue higher-level commands to describe what we want to do.  This is powerful since this is how our brain thinks -- "I need to insert this here, change this word to that, remove two lines, etc"  All these maps into commands in `vim`.  As a result, once you master `vim` basics, you can type as fast as you think[^3]!
 
 A common pattern for `vim` command consists of three parts: (i) place the cursor; (ii) performance an action; (iii) move to the new placement of the cursor.  In the example above,
 ++slash++ ++a++ ++l++ ++s++ ++o++ ++enter++ places the cursor, ++d++ is the action (delete), and ++2++ ++w++ is the movement (move the cursor forward by two words).
 
-Another common command that students used is ++g++ ++g++ ++equal++ ++shift+g++.  This command is used to indent the source code in the current file.  ++g++ ++g++ is the command to place the cursor at the top of the file.  ++equal++ is the the action (indent), and ++shift+g++ is the command to place the cursor on the last line of the file.  
+Another common command that students used is ++g++ ++g++ ++equal++ ++shift+g++.  This command is used to indent the source code in the current file.  ++g++ ++g++ is the command to place the cursor at the top of the file.  ++equal++ is the the action (indent), and ++shift+g++ is the command to place the cursor on the last line of the file.
 
 ### Be A Good Unix Citizen
 

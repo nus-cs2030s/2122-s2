@@ -1,4 +1,4 @@
-# Quick Lessons
+# Quick `vim` Lessons
 
 Here is a quick walkthrough to get a taste of `vim.`
 

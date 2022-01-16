@@ -1,4 +1,4 @@
-## Setting Up Your `vim` Environment
+# Setting Up `vim` on PE Hosts
 
 Like many other Unix programs, you can configure your preferences by creating an `rc` (run commands) file in your home directory.  These `rc` files will be read by the corresponding programs and executed line-by-line as if the text is entered into the program through a keyboard.  You can view these `rc` as a script that will be executed automatically whenever a program starts.
 
