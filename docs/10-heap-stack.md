@@ -24,10 +24,10 @@ Considers the following two lines of code.
 Circle c;
 c = new Circle(new Point(1, 1), 8);
 ```
-Line 1 declares a variable `c`.  When Java executes this line of code, it allocates some memory space for an object reference for `c`, the content is initialized to `null`.  Since `c` is a variable, it resides in the stack.
+Line 1 declares a variable `c`.  When the JVM executes this line of code, it allocates some memory space for an object reference for `c`, the content is initialized to `null`.  Since `c` is a variable, it resides in the stack.
 
 
-Line 2 creates a new Circle object.  When Java executes this line of code, it allocates some memory space for a `Circle` object on the heap.  The memory address of this memory space becomes the reference of the object and is assigned to the variable `c`.
+Line 2 creates a new Circle object.  When the JVM executes this line of code, it allocates some memory space for a `Circle` object on the heap.  The memory address of this memory space becomes the reference of the object and is assigned to the variable `c`.
 
 This is shown in the figure below.
 
@@ -77,18 +77,18 @@ class Point {
 ```
 and the invocation:
 ```Java
-Point p1 = new Point(0,0);
-Point p2 = new Point(1,1);
+Point p1 = new Point(0, 0);
+Point p2 = new Point(1, 1);
 p1.distanceTo(p2);
 ```
 
 After declaring `p1` and `p2` and creating both objects, we have:
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.005.png)
 
-When `distanceTo` is called, JVM creates a _stack frame_ for this instance method call.  This stack frame is a region of memory that tentatively contains (i) the `this` reference, (ii) the method arguments, and (iii) local variables within the method, among other things[^3][^4].  When a class method is called, the stack frame does not contain the `this` reference.
+When `distanceTo` is called, the JVM creates a _stack frame_ for this instance method call.  This stack frame is a region of memory that tentatively contains (i) the `this` reference, (ii) the method arguments, and (iii) local variables within the method, among other things[^1][^2].  When a class method is called, the stack frame does not contain the `this` reference.
 
-[^3]: This is not that difference from how an OS handles function call in a machine code, as you will see in CS2100/CS2106.
-[^4]: The other things are JVM implementation independent and not relevant to our discussion here.
+[^1]: This is not that different from how an OS handles function call in a machine code, as you will see in CS2100/CS2106.
+[^2]: The other things are JVM implementation independent and not relevant to our discussion here.
 
 ![stack-and-heap](figures/stack-and-heap/stack-and-heap.006.png)
 
@@ -96,7 +96,7 @@ You can see that the _references_ to the objects `p1` and `p2` are copied onto t
 Within the method, any modification done to `this` would change the object referenced to by `p1`, and any change made to `q` would change the object referenced to by `p2` as well.
 After the method returns, the stack frame for that method is destroyed.
 
-Let's consider a new `move` method for the class `Point` that has two arguments arguments `(double x, double y)` and moves the `x` and `y` cordinates of the `Point`.
+Let's consider a new `move` method for the class `Point` that has two arguments `(double x, double y)` and moves the `x` and `y` cordinates of the `Point`.
 
 ```Java
 class Point {
@@ -116,8 +116,8 @@ class Point {
 ```
 
 ```Java
-Point p1 = new Point(0,0);
-Point p2 = new Point(1,1);
+Point p1 = new Point(0, 0);
+Point p2 = new Point(1, 1);
 double x = 5;
 double y = 5;
 p1.move(x, y);
@@ -133,4 +133,4 @@ To summarize, Java uses _call by value_ for primitive types, and _call by refere
 
 If we made multiple nested method calls, as we usually do, the stack frames get stacked on top of each other. 
 
-One final note: the memory allocated on the stack are deallocated when a method returns.  The memory allocated on the heap, however, stays there as long as there is a reference to it (either from another object or from a variable in the stack).  Unlike C or C++, in Java, you do not have to free the memory allocated to objects.  The JVM runs a _garbage collector_  that checks for unreferenced objects on the heap and cleans up the memory automatically.
+One final note: the memory allocated on the stack is deallocated when a method returns.  The memory allocated on the heap, however, stays there as long as there is a reference to it (either from another object or from a variable in the stack).  Unlike C or C++, in Java, you do not have to free the memory allocated to objects.  The JVM runs a _garbage collector_  that checks for unreferenced objects on the heap and cleans up the memory automatically.
