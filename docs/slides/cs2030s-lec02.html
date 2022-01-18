@@ -22,35 +22,131 @@ class: middle, center
 
 ## Lecture 2
 
-### 18 January 2021
+### 17 January 2022
+---
+class: middle
+
+.small[```Java
+class Circle {
+	double x;
+	double y;
+	double r;
+  
+	double getArea() {
+	  return 3.141592653589793 * r * r;
+	}
+}
+```]
+
 ---
 class: top,center
 
 ## Abstraction Barrier
 
 ---
-class: middle,center
+class: middle,left
 
 ## Information Hiding
 
-_"Don't let them in, don't let them see."_  -- Elsa
+New Java syntax: _access modifiers_
+
+- private
+- public
 
 ---
-class: top,center
+class: middle
+
+New Java keyword: **this**
+
+```Java
+this.x = x;
+```
+
+---
+class: middle,left
+
+## Constructor
+
+.small[```Java
+public Circle(double x, double y, double r) {
+    this.x = x;
+    this.y = y;
+    this.r = r;
+}
+```]
+---
+class: middle,left
+
+### Checking if a point is in a circle
+
+.small[```Java
+double cX = c.getX();
+double cY = c.getY();
+double r = c.getR();
+boolean isInCircle = ((x - cX) * (x - cX) + 
+                     (y - cY) * (y - cY)) 
+                     <= r * r;
+```]
+---
+class: middle,left
 
 ## Tell, Don't Ask
 
----
-class: middle,center
+.small[```Java
+boolean isInCircle = c.contains(x, y);
+```]
 
-## Class Fields and Methods
+---
+class: middle,left
+
+.small[```Java
+c.contains(x, y);
+```]
+
+`c` is called the target of method invocation `contains`
+
+---
+class: middle,left
+
+### Class Fields and Methods
 
 Java keyword `static`
 
 ---
+class: middle,left
+
+### Class Fields
+
+.tiny[```Java
+class Math {
+	:
+	public static final double PI = 3.141592653589793;
+	:
+	:
+}
+```]
+
+---
+class: middle,left
+
+## Class Methods
+
+.small[```Java
+public static int getNumOfCircles() {
+    return Circle.lastId;
+}
+```
+]
+---
 class: top,center
 
 ## Composition
+
+---
+class: middle,center
+
+
+# Stack and Heap
 
 ---
 class: top,center
@@ -99,29 +195,41 @@ We will discuss two methods:
 ---
 class: middle,center
 
+## Method Signature
+
+The method name, type of arguments, order of arguments, and number of arguments.
+
+---
+class: middle,center
+
 ## Overriding
 
 `@Override`
 ---
-class: middle,center
+class: middle
 
-# Polymorphism
+# Reminders:
 
-### _many_ _forms_
+- Do the Diagnostic Quiz!
+
+- Follow the module policies
+
 ---
-class: middle,center
+class: middle
 
-# Polymorphism
+# Reminders:
 
-### _many_ _forms_
+Don't just **read** the examples given... have a **play** around with them. Try changing something and see what happens.
+
+You can not learn effectively without trying it yourself!
 
 ---
 class: bottom
 
 .tiny[
-Version: v1.1
+Version: v1.0
 
-Last Updated: Mon Jan 11 16:20:11 +08 2021
+Last Updated: Mon Jan 17 12:00:00 +08 2022
 ]
 </textarea>
 
@@ -143,7 +251,7 @@ var slideshow = remark.create({
 	},
 	ratio: '16:9',
 	highlightStyle: 'ir-black',
-    slideNumberFormat: 'CS2030S AY20/21 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
 });
  // Setup MathJax
   MathJax.Hub.Config({
