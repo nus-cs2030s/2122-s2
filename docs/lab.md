@@ -25,9 +25,9 @@ A repo will be created automatically for you.
 
 ### 2. Get a Copy on PE Hosts
 
-For your first-ever lab, you will need to create a configuration file (see the "One-Time Setup" section below). After that, proceed as per normal below.
+For your first-ever lab, you will need to create a configuration file (see the [GitHub Setup](github.md) guide). After that, proceed as per normal below.
 
-Run the command `~cs2030s/get-labXX` (where X is the lab number) to clone a copy of the lab on your home directory.  You will see a new lab directory named something like `labX-username` created, with the skeleton files and questions inside.
+Run the command `~cs2030s/get-labX` (where X is the lab number) to clone a copy of the lab on your home directory.  You will see a new lab directory named something like `labX-username` created, with the skeleton files and questions inside.
 
 You can edit the code, compile, test, etc, on the PE hosts.
 
