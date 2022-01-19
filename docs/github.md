@@ -19,7 +19,7 @@ Create and edit a file called `.gitconfig` in **your home directory on the PE ho
   name = Your Name
   email = Your Email
 [github]  
-  user = Your GitHub ID
+  user = Your GitHub username
 ```
 
 Your email should be whatever you used to sign up GitHub (which may not be your SoC or NUS email).
@@ -40,9 +40,9 @@ After saving this file, run:
 git config --get github.user
 ```
 
-It should return your GitHub user id.
+It should return your GitHub user name.
 
-It should print your GitHub user id as already set.  If there is a typo, you need to edit `.gitconfig` again and reload it by repeating the command above.
+It should print your GitHub user name as already set.  If there is a typo, you need to edit `.gitconfig` again and reload it by repeating the command above.
 
 ## 2. Setting up Password-less Login
 
