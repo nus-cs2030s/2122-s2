@@ -2,9 +2,9 @@
 
 ## Why Coding Style is Important
 
-One of the goals of CS2030/S is to move you away from the mindset that you are writing code that you will discard after it is done (e.g., in CS1101S missions) and you are writing code that noone else will read except you and your tutor.  CS2030/S prepares you to work in a software engineering teams in many ways, and one of the ways is to enforce a consistent coding style.
+One of the goals of CS2030/S is to move you away from the mindset of writing code that you will discard when done with, and that only you and your tutor will read (e.g., in CS1101S missions).  CS2030/S prepares you for working in software engineering teams in many ways, one of which is by enforcing a consistent coding style.
 
-If everyone on the team follows the same style, the intend of the programmer can become clear (e.g., is this a class or a field?), the code is more readable and less bug prone (e.g., the [Apple `goto fail` bug](https://www.wired.com/2014/02/gotofail/)).  Empirical studies support this:
+If everyone on the team follows the same style, the intent of the programmer can become clear (e.g., is this a class or a field?), the code is more readable and less bug prone (e.g., the [Apple `goto fail` bug](https://www.wired.com/2014/02/gotofail/)).  Empirical studies support this:
 
 !!! quote
     "It is not merely a matter of aesthetics that programs should be written in a particular style. Rather there is a psychological basis for writing programs in a conventional manner: programmers have strong expectations that other programmers will follow these discourse rules. If the rules are violated, then the utility afforded by the expectations that programmers have built up over time is effectively nullified. The results from the experiments with novice and advanced student programmers and with professional programmers described in this paper provide clear support for these claims."
@@ -15,26 +15,27 @@ Many major companies enforce coding styles, and some have published them.  For C
 
 ## CS2030/S Coding Style
 
-1. No tab
-	Use only whitespace.  
+1. No hard tabs as whitespace. Use only regular spaces.
 
 	For `vim` users, you can add the following line in your `~/.vimrc` file:
+
 	```
 	set expandtab
 	```
-	So that when you press <tab> it is expanded to whitespace.
 
-	Most other source code editors have similar configuration.  
+	This makes it so that pressing ++tab++ enters whitespace as a soft tab comprised of regular spaces.
+
+	Most other source code editors afford similar configuration.
 
 2. Exactly one blank line after import statements and exactly one top-level (i.e., non-nested) class.
 
 3. Each top-level class resides in a source file of its own.
 
-4. When a class has overladed methods (e.g., multiple constructors or methods of the same name), they appear sequentially with no other code in between.
+4. When a class has overloaded methods (e.g., multiple constructors or methods of the same name), they appear sequentially with no other code in between.
 
-5. Braces are always used (even if the body is empty or contains a single statement}
+5. Braces (`{}`) are always used, even if the resulting body would be empty or contain only one statement.
 
-6. Use "Egyptian brackets": 
+6. Use "Egyptian brackets":
 
 	- Opening brace have no line break before; but has line break after
 	- Closing brace has a line break before; and has a line break after (except when there is `else` or comma following a closing brace.
@@ -43,7 +44,7 @@ Many major companies enforce coding styles, and some have published them.  For C
 	```Java
 	   if (x == 0) {
 		 x++;
-	   } 
+	   }
 	```
 
 	is good.
@@ -51,11 +52,11 @@ Many major companies enforce coding styles, and some have published them.  For C
 
 	```Java
 	   if (x == 0) { x++; }
-	   if (x == 0) 
+	   if (x == 0)
 	   {
 		 x++;
 	   }
-	   if (x == 0) 
+	   if (x == 0)
 	   {
 		 x++; }
 	```
@@ -65,7 +66,7 @@ Many major companies enforce coding styles, and some have published them.  For C
 7. Block indentation is exactly two spaces.
 
 	```Java
-	if (x == 0) { 
+	if (x == 0) {
 	  x++;
 	  for (i = 0; i < x; i++) {
 		x += i;
@@ -82,8 +83,8 @@ Many major companies enforce coding styles, and some have published them.  For C
 	```
 
 	To help you with indentation.
-	
-	Most other source code editors have similar configuration.  
+
+	Most other source code editors have similar configuration.
 
 8. Each statement is followed by a line break, no matter how short the statement is.
 
@@ -92,7 +93,7 @@ Many major companies enforce coding styles, and some have published them.  For C
 	```
 	is bad.
 	```Java
-	  x++; 
+	  x++;
 	  i++;
 	```
 	is good.
@@ -117,7 +118,7 @@ line into multiple lines to enhance readability, this is called _line wrapping_.
 	is also bad.
 
 	```Java
-	System.out.println("Daenerys of the House Targaryen," + 
+	System.out.println("Daenerys of the House Targaryen," +
 		"the First of Her Name, The Unburnt, Queen of the Andals," +
 		"the Rhoynar and the First Men, Queen of Meereen," +
 		"Khaleesi of the Great Grass Sea, Protector of the Realm," +
@@ -131,10 +132,10 @@ line into multiple lines to enhance readability, this is called _line wrapping_.
 
 10. There should be a blank line between constructors, methods, nested classes and static initializers.  Blank lines can be used between fields to create logical groupings.
 
-11. White space should separate Java keywords from parenthesis and braces, and be added on both sides of binary operators (`+`, `-`, `/`, etc) as well as `:` in enhanced for.  Space should also appears before and after `//` comments
+11. Spaces should separate Java keywords from parentheses and braces, and should be added on both sides of binary operators (`+`, `-`, `/`, etc.) as well as `:` in enhanced `for` loops.  Spaces should also appear before and after `//` comments that follow statements.
 
 	```Java
-	if(x==0){ 
+	if(x==0){
 	  x++;//to make sure x is at least one.
 	  for(i=0;i<x;i++){
 		x+=i;
@@ -145,7 +146,7 @@ line into multiple lines to enhance readability, this is called _line wrapping_.
 	is bad.
 
 	```Java
-	if (x == 0) { 
+	if (x == 0) {
 	  x++; // to make sure x is at least one.
 	  for (i = 0; i < x; i++) {
 		x += i;
@@ -155,7 +156,7 @@ line into multiple lines to enhance readability, this is called _line wrapping_.
 
 	is good.
 
-12. One variable per declaration.  
+12. One variable per declaration.
 
 	```Java
 	int x, y;
@@ -223,7 +224,7 @@ line into multiple lines to enhance readability, this is called _line wrapping_.
 	```
 	is good!
 
-18. Class names are writte in UpperCamelCase, method names and field names in lowerCamelCase, constant names in ALL_CAPS_SNAKE_CASE.  Type parameters in single capital letter.
+18. Class names are written in UpperCamelCase, method names and field names in lowerCamelCase, and constant names in ALL_CAPS_SNAKE_CASE.  Type parameters are written in single capital letters.
 
 19. Caught exceptions should not be ignored.
 
@@ -233,10 +234,10 @@ line into multiple lines to enhance readability, this is called _line wrapping_.
 
 To automatically check for style violation, we use a tool call [`checkstyle`](http://checkstyle.org).
 
-To run, 
+To run,
 
 ```
-java -jar ~cs2030s/bin/checkstyle.jar -c ~cs2030s/bin/cs2030_checks.xml *.java 
+java -jar ~cs2030s/bin/checkstyle.jar -c ~cs2030s/bin/cs2030_checks.xml *.java
 ```
 
 Hint: put the command into a `bash` script so that you do not need to type such a long string all the time.
