@@ -28,7 +28,7 @@ While you can complete the programming assignments on your computers, the practi
 
     For older versions of Windows, such as those used in the SoC's programming labs, you can check out [XShell 6](https://www.netsarang.com/en/free-for-home-school/) (free for home/school use), or [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html).  These are GUI-based programs so the command line instructions below do not apply.
 
-4. You need a good [terminal](unix-background.md#what-is-a-terminal) app.  There are many choices, but we recommend [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/) for Microsoft Windows users; the default [Terminal](https://support.apple.com/en-sg/guide/terminal/welcome/mac) or [iTerm2](https://iterm2.com/index.html) for macOS users.  
+4. You need a good [terminal](unix-background.md#what-is-a-terminal) app.  There are many choices, but we recommend [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/) for Microsoft Windows users; the default [Terminal](https://support.apple.com/en-sg/guide/terminal/welcome/mac) or [iTerm2](https://iterm2.com/index.html) for macOS users.
 
 ### Testing Your SoC Unix Account
 
@@ -50,7 +50,7 @@ ssh ooiwt@stu.comp.nus.edu.sg
 ```
 to log into `stu.comp.nus.edu.sg`.
 
-After the command above, follow the instructions on the screen.  The first time you ever connect to a host, you will be warned that you are connecting to a previously unknown host.  
+After the command above, follow the instructions on the screen.  The first time you ever connect to a host, you will be warned that you are connecting to a previously unknown host.
 
 ```
 The authenticity of host 'stu.comp.nus.edu.sg (137.132.80.61)' can't be established.
@@ -92,7 +92,7 @@ ooiwt@stu1:~$
 
 If you have reached this step, your SoC Unix username and password are working.
 
-Type ++ctrl++ ++d++ to exit before continuing with the next step. 
+Type ++ctrl++ ++d++ to exit before continuing with the next step.
 
 ### Accessing The PE Hosts
 
@@ -108,7 +108,7 @@ ssh -t <username1>@stu.comp.nus.edu.sg ssh <username2>@<pe1xx>.comp.nus.edu.sg
 ```
 
 - In non-exam scenarios, replace `username1` and `username2` with your SoC Unix username and `pe1xx` with one of `pe111` to `pe120`.  You will be prompted for your password twice.  The first prompt will be for your password to `stu.comp.nus.edu.sg`, and the second, to `pe1xx.comp.nus.edu.sg`.  Again, in a non-exam scenario, they will both be your SoC Unix password.
-- For practical exams, you will be issued a special exam account to log into the PE hosts.  In this case, `username1` will be your SoC Unix username and `username2` will be your special exam account. 
+- For practical exams, you will be issued a special exam account to log into the PE hosts.  In this case, `username1` will be your SoC Unix username and `username2` will be your special exam account.
 
 You should see something like this:
 ```
@@ -165,7 +165,7 @@ If you get the following error:
 3. `Permission denied, please try again`
 
     You did not enter the correct password or username.  Please use the username and password
-of your SoC Unix account which you have created here: https://mysoc.nus.edu.sg/~newacct/.  
+of your SoC Unix account which you have created here: https://mysoc.nus.edu.sg/~newacct/.
 
     Check that you have entered your username correctly.  It is _case-sensitive_.
 
@@ -173,7 +173,7 @@ of your SoC Unix account which you have created here: https://mysoc.nus.edu.sg/~
 
 4. `ssh: connect to host stu.comp.nus.edu.sg port 22: Operation timed out`
 
-    It means that you failed to connect to `stu.comp.nus.edu.sg` via `ssh`.  There could be two reasons for this: (i) `stu.comp.nus.edu.sg` or its ssh service is down; (ii) you are connecting via a network where `stu.comp.nus.edu.sg` is not accessible (such as outside Singapore).  
+    It means that you failed to connect to `stu.comp.nus.edu.sg` via `ssh`.  There could be two reasons for this: (i) `stu.comp.nus.edu.sg` or its ssh service is down; (ii) you are connecting via a network where `stu.comp.nus.edu.sg` is not accessible (such as outside Singapore).
 
     The likelihood of (i) is small.  The more likely scenario is (ii), in which case, connect to [SoC VPN](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn?s[]=vpn) first.
 
@@ -196,7 +196,7 @@ Let's say you want to log in from Host A to Host B.  On Host A, run:
 ssh-keygen -t rsa
 ```
 
-to generate a pair of keys on Host A.  When prompted, you can save the file `id_rsa` in the default location `~/.ssh` and enter an empty passphrase.  
+to generate a pair of keys on Host A.  When prompted, you can save the file `id_rsa` in the default location `~/.ssh` and enter an empty passphrase.
 
 {++Expanded++} What the command above does is it creates two files, the private key `id_rsa` and the public key `id_rsa.pub`.  Next, you need to plant the public key on Host B.  There are two ways to do this:
 
@@ -207,31 +207,49 @@ If Host A has `ssh-copy-id` installed, then, on Host A, run:
 ssh-copy-id <username>@<hostname of B>
 ```
 
-You will be prompted to enter your password for Host B.  After this step is completed, your public key will be copied to and configured for password-less login to Host B.  
+You will be prompted to enter your password for Host B.  After this step is completed, your public key will be copied to and configured for password-less login to Host B.
 
-#### Method 2: Manually copy the public key to Host B.
+#### Method 2: Manually copying the public key to Host B
 
-First, you need to copy the public key id_rsa.pub to your home directory on the remote host you want to log into.  We will use `scp`, or secure copy, for this.  On Host A,
+First, you will need to copy the public key `id_rsa.pub` to your home directory on the remote host you want to log into.  We will use `scp`, or secure copy, for this.  On Host A, run:
 
+=== "Linux/Mac"
+
+    ```shell
+    scp ~/.ssh/id_rsa.pub <username>@<hostname of B>
+    ```
+
+=== "Windows Command Prompt"
+
+    ```shell
+    scp %USERPROFILE%/.ssh/id_rsa.pub <username>@<hostname of B>:
+    ```
+
+=== "Windows Powershell"
+
+    ```shell
+    scp ~/.ssh/id_rsa.pub <username>@<hostname of B>:
+    ```
+
+In the process, you will be prompted for your password in order to transfer the file. A successful transfer may show something like this:
+
+```shell
+id_rsa.pub                                                                            100%    0     0.0KB/s   00:00
 ```
-scp ~/.ssh/id_rsa.pub <username>@<hostname of B>
-```
 
-You will be prompted with your password to login to transfer the file.
-
-Then, log into the Host B, run,
+With the file now transferred, `ssh` to log back into Host B, and enter your password again when prompted. Then, run:
 
 ```
 cat id_rsa.pub >> ~/.ssh/authorized_keys
 ```
 
-to add your public key to the list of keys.
+This will use the file you just transferred to append your public key to the list of authorized keys.
 
 Make sure that the permission for `.ssh` on Host A and Host B are set to 700 and the files `id_rsa` on Host A and `authorized_keys` on Host B are set to 600.  See the [`ls`](unix-essentials.md#ls-list-content-of-a-directory) and [`chmod`](unix-essentials.md#file-permission-management)
 
 After using either one of the methods above, you should be able to `ssh` into Host B without using being prompted for a password every time.
 
-Recall that to log in to a PE host, you need to two steps, first from your local computer to into `stu.comp.nus.edu.sg`, then from `stu.comp.nus.edu.sg` into `pe1xx.comp.nus.edu.sg`.  So to setup password-less login to `pe1xx.comp.nus.edu.sg`, you need two steps.  
+Recall that to log in to a PE host, you need to two steps, first from your local computer to into `stu.comp.nus.edu.sg`, then from `stu.comp.nus.edu.sg` into `pe1xx.comp.nus.edu.sg`.  So to setup password-less login to `pe1xx.comp.nus.edu.sg`, you need two steps.
 
 For example, using Method 1 (`ssh-copy-id`), you need to do the following.
 
@@ -251,7 +269,7 @@ Since all the PE hosts share the same file directory, you only need to do this f
 
 ## Stability of Network Connections
 
-Note that a stable network connection is required to use the PE hosts for a long period without interruption. If you encounter frequent disconnections while working at home or on campus while connected wirelessly, please make sure that your WiFi signal is strong and there is no interference from other sources. 
+Note that a stable network connection is required to use the PE hosts for a long period without interruption. If you encounter frequent disconnections while working at home or on campus while connected wirelessly, please make sure that your WiFi signal is strong and there is no interference from other sources.
 
 If you find yourself facing frequent disconnection, you can consider running [`screen`](https://en.wikipedia.org/wiki/GNU_Screen).  After logging into a PE host, run:
 ```
