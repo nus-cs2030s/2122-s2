@@ -1,7 +1,6 @@
 # Unix CLI: The Essentials
 
-This article is adapted from the notes of the [Unix@Home Workshop](https://nus-unix-workshop.github.io/2021-s1) 
-held in August 2020.  It contains the essential knowledge that a CS2030S students need to survive using the PE nodes to do the labs (and to use a Unix CLI in general).
+This article was adapted from the notes of the [Unix@Home Workshop](https://nus-unix-workshop.github.io/2021-s1) held in August 2020.  It contains essential knowledge that a CS2030/S student would need to survive using the PE nodes to work on labs (and to use a Unix CLI in general).
 
 After following this article, students should be able to:
 
@@ -23,11 +22,13 @@ This structure is also known as a _directory tree_.
 There are two important directories that you need to know.
 
 ### Root Directory
+
 The root directory is the directory at the top of the directory tree[^1]. It is simply referred to as `/`, without any name.  Under the root directory are many other systems directory, which a casual user does not normally need to (and have no permission to) modify.
 
 [^1]: In computing, trees are upside down with the root at the top and leaves at the bottom!
 
 ### Home Directory
+
 Each user has his/her own _home_ directory.  The above figure shows where the home directory of the user `ooiwt` resides in the directory tree. The user `ooiwt` may create files or directories in his/her home directory, but not elsewhere unless permission is given.
 
 The home directory is referred to with the symbol `~` in `bash`.  Sometimes we add the username behind `~` to indicate the home directory of the other user. E.g., `~bob` means the home directory of a user named `bob`.
@@ -50,10 +51,10 @@ To summarize, here are the short form representations:
 
 Symbol|Meaning
 ------|-----------------------------
-  `/` |the root directory           
-  `~` |the home directory           
+  `/` |the root directory
+  `~` |the home directory
   `.` |the current working directory
-  `..`|the parent directory         
+  `..`|the parent directory
 
 ## Specifying a Path
 
@@ -61,8 +62,7 @@ To specify a directory or a file in the Unix directory tree, we can use either t
 
 ### Absolute path
 
-The absolute path is constructed as follows, starting from the root of the directory structure, find a path (a sequence of directories) to the location that you want to specify, then concatenate the names of the directories together, separated by the forward-slash `/`.  This is a similar notation used for Web site URLs so you should already be familiar with it.  For instance, the path
-`/home/o/ooiwt` is the absolute path of the directory named `ooiwt` in the figure above.
+The absolute path is constructed as follows, starting from the root of the directory structure, find a path (a sequence of directories) to the location that you want to specify, then concatenate the names of the directories together, separated by the forward-slash `/`.  This is a similar notation used for Web site URLs so you should already be familiar with it.  For instance, the path `/home/o/ooiwt` is the absolute path of the directory named `ooiwt` in the figure above.
 
 An absolute path is independent of the current working directory and always start with `/` or `~`
 
@@ -81,9 +81,7 @@ deals with navigation and directories.
 
 ### `pwd`: Print Current Working directory
 
-`pwd` shows you which directory you are currently in.  
-Type `pwd` into the command prompt, and it will print the absolute path to your current working directory. For instance,
-Suppose you are in `/home/o/ooiwt`, entering
+`pwd` shows you which directory you are currently in.  Type `pwd` into the command prompt, and it will print the absolute path to your current working directory. For instance, suppose you are in `/home/o/ooiwt`, entering
 ```Bash
 pwd
 ```
@@ -99,13 +97,13 @@ The `ls` list the content in the current working directory.
 !!! note "Rule of Silence"
     Unix follows the economical _rule of silence_: programs should not print unnecessary output, to allow other programs and users to easily parse the output from one program.  So, if `ls` has nothing to list, it will list nothing (as opposed to, say, printing "This is an empty directory.")
 
-{++Added++} In Unix, a file or directory with a name that starts with `.` is hidden from `ls`.  Common hidden files are `.vimrc`, the configuration file for `vim`, and `.ssh`, the directory to store your SSH keys and configuration.  To view all the files, including hidden files, run `ls` with the `-a` flag (`a` stands for all).  
+{++Added++} In Unix, a file or directory with a name that starts with `.` is hidden from `ls`.  Common hidden files are `.vimrc`, the configuration file for `vim`, and `.ssh`, the directory to store your SSH keys and configuration.  To view all the files, including hidden files, run `ls` with the `-a` flag (`a` stands for all).
 
 ### `mkdir`: MaKe a subDIRectory
 
 The `mkdir` command creates a subdirectory with the given name in the current directory.
 
-In the example below, we assume that we start with an empty directory.  
+In the example below, we assume that we start with an empty directory.
 
 ```bash
 $ ls
@@ -116,7 +114,7 @@ $ ls -F
 workshop/
 ```
 
-Here, we create a directory called `workshop`.  Now, when we `ls`, you can see the directory listed.  
+Here, we create a directory called `workshop`.  Now, when we `ls`, you can see the directory listed.
 
 You may also use `ls -F` for more information (`-F` is one of the many _options_/_flags_ available for the `ls` command. To see a complete list of the options, refer to the man pages, i.e., `man ls`.)
 
@@ -125,8 +123,7 @@ The slash `/` beside the filename tells you that the file is a directory.  A nor
 You may also use the `ls -l` command (hyphen el, not hyphen one) to display almost all the file information, include the size of the file and the date of modification.
 
 !!! tip "Use Up Arrow for Command History"
-    `bash` maintains a history of your previously executed commands, and you may use the ++control+p++ (previous) and ++control+n++ (next) to 
-go through it. Press the ++control+p++ until you find a previously executed command. You may then press ++enter++ to execute it or edit the command before executing it. This is handy when you need to repeatedly execute a long `bash` command.
+    `bash` maintains a history of your previously executed commands, and you may use the ++control+p++ (previous) and ++control+n++ (next) to go through it. Press the ++control+p++ until you find a previously executed command. You may then press ++enter++ to execute it or edit the command before executing it. This is handy when you need to repeatedly execute a long `bash` command.
 
 ### `cd`: Change Directory
 
@@ -144,7 +141,7 @@ Suppose our starting working directory is `/home/o/ooiwt`, after we `cd` into `w
 
 As mentioned in "[Unix CLI: Background](unix-background.md)", it is common to include the current working directory into the shell's prompt.  So, you may see your command prompt updated to include the new working directory.
 
-Entering `cd` alone (without argument) brings you back to your home directory.  
+Entering `cd` alone (without argument) brings you back to your home directory.
 
 ### `rmdir`: ReMove a subDIRectory
 
@@ -231,9 +228,8 @@ The command `cp` takes in two arguments, the first is the source, and the second
 
 Note that we use `.` above to indicate that we wish to copy the whole sub-tree of `workshop` over the current directory.  The command should complete without any message.  Upon completion, you can run `ls` to double-check that the workshop directory exists under `workshop`.
 
-!!! Warning: `cp` Overwrites
-    If there is an existing file with the same name, `cp` will overwrite
-	the existing file without warning.
+!!! warning: `cp` Overwrites Files
+    If there is an existing file with the same name, `cp` will overwrite the existing file without warning.
 
 ### `mv`: MoVe or rename files
 
@@ -265,9 +261,8 @@ bar.txt foo.txt test.txt
 
 Here, you can see that we have moved `foo.txt` over to the current directory.
 
-!!! Warning: `mv` Overwrites
-    If there is an existing file with the same name, `mv` will overwrite
-	the existing file without warning. `mv` comes with a `-i` flag that interactively asks you if you are sure if you want to overwrite a file.  It is a good idea to always run `mv -i`. Hit ++y++ to continue overwriting the existing file.  You can look up on the Internet on how to make `-i` the default using `alias` command in `.bashrc`.
+!!! warning: `mv` Overwrites Files
+    If there is an existing file with the same name, `mv` will overwrite the existing file without warning. `mv` comes with a `-i` flag that interactively asks you if you are sure if you want to overwrite a file.  It is a good idea to always run `mv -i`. Hit ++y++ to continue overwriting the existing file.  You can look up on the Internet on how to make `-i` the default using `alias` command in `.bashrc`.
 
 !!! tip "Use ++tab++ for Name Completion"
     If you have a very long file name, you may use the `bash` auto-completion feature to reduce typing. For instance, you may type:
@@ -293,7 +288,7 @@ bar.txt test.txt
 !!! warning "rm -rf "
     While the Unix command line provides lots of flexibility and power, with great power comes great responsibility.  Some of the commands are extremely dangerous.  `rm -rf *` is the most famous one.  The notation `*` refers to all files, and the flag `-f` means forceful deletion (no question asked!), and `-r` means remove recursively everything under the current directory tree.  Accidentally running this command has ruined many lives.  [Read more here](https://www.quora.com/What-are-some-crazy-rm-rf-stories-you-have-heard-about)
 
-`rm` comes with a `-i` flag that interactively asks you if you are sure if you want to delete a file.  It is a good idea to always run `rm -i`.
+`rm` also comes with an `-i` flag that interactively asks you if you are sure if you want to delete a file.  It is a good idea to always run `rm -i`.
 
 ```
 $ rm -i bar.txt
@@ -336,7 +331,7 @@ permission | effect on file | effect on directory
 `w`| writing into a file | create/delete/rename files in the directory
 `x`| executing a file | access contents and meta-info (size, creation time) of files in the directory
 
-These three actions can be controlled independently.  
+These three actions can be controlled independently.
 
 The permissions on a file can be expressed in two ways:
 
@@ -378,7 +373,7 @@ $ chmod 666 test.txt
 $ ls -l test.txt
 -rw-rw-rw-@ 1 ooiwt  staff  64 Jul 28 09:52 test.txt
 ```
-would change add the permission `w` to both group and other users[^1].
+would change add the permission `w` to both group and other users[^3].
 
 An alternative way is to just specify the changes.  To remove the write permission from others, you can write:
 ```
@@ -387,7 +382,7 @@ $ ls -l test.txt
 -rw-rw-r--@ 1 ooiwt  staff  64 Jul 28 09:52 test.txt
 ```
 
-[^1]: Giving write permission to other users is a security risk and you should not do this unless you know what you are doing.
+[^3]: Giving write permission to other users is a security risk and you should not do this unless you know what you are doing.
 
 ### Common Scenarios for `chmod`
 
@@ -493,4 +488,3 @@ In most CS programming assignments, however, to keep things simple, you will be 
 ## Other Useful Online Tools
 
 - [explainshell](https://explainshell.com/) explain each shell command for you
-
