@@ -1,7 +1,7 @@
 # Unix CLI: Advanced
 
-This article is adapted from the notes of the [Unix@Home Workshop](https://nus-unix-workshop.github.io/2021-s1) 
-held in August 2020.  
+This article is adapted from the notes of the [Unix@Home Workshop](https://nus-unix-workshop.github.io/2021-s1)
+held in August 2020.
 
 After reading this article, students should
 
@@ -13,7 +13,7 @@ After reading this article, students should
 
 # Composing Programs with `|`
 
-Another key innovation of Unix is that led to its success is the invention of the `|` operator.  
+Another key innovation of Unix is that led to its success is the invention of the `|` operator.
 
 Before Unix, operating systems tend to provide complex, monolithic, programs.  The philosophy of Unix, however, is to provide many small, simple, utility programs, that can be composed to complete a more complex task.  These small programs each do one thing only (and do it well) and so are easier to write and less prone to bugs.
 
@@ -30,7 +30,7 @@ But this is just the same as
 ```
 $ wc < test.txt
 ```
-that we have seen before.  What's the power in `|`?  
+that we have seen before.  What's the power in `|`?
 
 Now, recall that we have made copies of `test.txt` earlier, into `foo.txt` and `bar.txt`.  If you have not done so or have removed them, you can quickly reproduce the files with:
 ```
@@ -152,7 +152,7 @@ $ cat ID | sort | uniq | grep CEG | wc -l
 
 # Pattern Matching in `bash`
 
-We now show you another productivity shortcut.  In an example earlier, you have seen how we passed in more than one file names into `cat`.  Recall that we can use ++tab++ to auto-complete the file names, so we can hit fewer keys on the keyboards.  
+We now show you another productivity shortcut.  In an example earlier, you have seen how we passed in more than one file names into `cat`.  Recall that we can use ++tab++ to auto-complete the file names, so we can hit fewer keys on the keyboards.
 Now, we show you there is an even faster way.
 
 Instead of
@@ -196,7 +196,7 @@ The expression `[f-t]*t` matches all file names the start with alphabet `f`, `g`
 ```
 $ ls *.txt
 bar.txt foo.txt test.txt
-$ ls {fo,ba}??txt   
+$ ls {fo,ba}??txt
 bar.txt foo.txt
 ```
 
@@ -208,14 +208,14 @@ The expression `{fo,ba}??txt` matches any file names the start with either `fo` 
 ## Minimizing Hand Movements
 
 You have seen how you can manage files and navigate around the directory structure, all by interacting with the command-line interface.  No windows. No mouse.  Just you, the keyboard,
-and the terminal.  You do not even need to use any arrow keys or function keys.  
+and the terminal.  You do not even need to use any arrow keys or function keys.
 
 Why is this a big deal?  Let's look at the image of the keyboard below:
 
 ![keyboard](figures/keyboard.png)
 
 We only need to use the keys colored in pink.  And since these keys concentrated in a small region on the keyboard, for most of us, we can reach the keys if we just position our hands over the keyboard[^1], we
-only need move _our fingers_ to type.  
+only need move _our fingers_ to type.
 
 [^1]: The recommended placement of hands over the keyboard is so that the thumbs are over the ++space++ bar, the left fingers are over ++a++ ++s++ ++d++ ++f++, and the right fingers are over ++j++ ++k++ ++l++ ++semicolon++.
 
@@ -229,7 +229,7 @@ We can even minimize the movement of our fingers in several ways by typing less.
 - We can use ++tab++ to auto-complete a command or a file name.
 - We can use ++control+p++ or ++control+n++ to repeat a previous commands.
 
-There are many more `bash` shortcuts for productivity, if you are keen, take a look at (this cheat sheet](https://github.com/fliptheweb/bash-shortcuts-cheat-sheet).
+There are many more `bash` shortcuts that can boost productivity. If you are keen, take a look at [this cheat sheet](https://github.com/fliptheweb/bash-shortcuts-cheat-sheet).
 
 You have also seen that Unix has many small, simple, utilities that we can compose to solve a task.  But composing them requires much typing:
 
@@ -258,7 +258,7 @@ $ bash < hello.sh
 hello!
 ```
 
-Recall that we said Unix shells do not necessarily interact with the users?  This is an example.  We pass the file `hello.sh` to _a new instance of `bash`_, asking it to interpret the lines inside this file as commands to execute.  
+Recall that we said Unix shells do not necessarily interact with the users?  This is an example.  We pass the file `hello.sh` to _a new instance of `bash`_, asking it to interpret the lines inside this file as commands to execute.
 
 Remember that we want to minimize typing, so can we run it with less typing?  What if we can just pass the filename directly to `bash` to execute?
 
@@ -267,8 +267,7 @@ $ ./hello.sh
 bash: ./hello.sh: Permission denied
 ```
 
-Here, we specify the relative path of the script `hello.sh`, including the prefix `./` (for reasons that we will explain later).  But we should get an
-error telling us `Permission defined`.  Recall from the [`File Permissions`](unix-essentials.md) section that a file needs to have the executable `x` permission to be executed.  So we need to add this permission for ourselves:
+Here, we specify the relative path of the script `hello.sh`, including the prefix `./` to tell the shell to search the current directory for the specified script.  However, we run into a `Permission denied` error.  Recall from the [`File Permissions`](unix-essentials.md) section that a file needs to have the executable `x` permission to be executed.  So we need to add this permission for ourselves:
 ```
 $ chmod u+x hello.sh
 $ ./hello.sh
