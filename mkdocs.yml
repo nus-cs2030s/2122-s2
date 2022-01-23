@@ -16,7 +16,7 @@ nav:
       - 10. Heap and Stack: '10-heap-stack.md'
       - 11. Inheritance: '11-inheritance.md'
       - 12. Overriding: '12-overriding.md'
-      - 13. Composition: '13-overloading.md'
+      - 13. Overloading: '13-overloading.md'
       - 14. Polymorphism: '14-polymorphism.md'
       - 15. Method Invocation: '15-dynamic-binding.md'
       - 16. LSP: '16-lsp.md'
