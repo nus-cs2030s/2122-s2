@@ -9,7 +9,7 @@ After this unit, the student should:
 
 We have seen that, with the power of dynamic binding and polymorphism, we can write succinct, future-proof code.  Recall that example below, where the magic happens in Line 4.  The method invocation `curr.equals(obj)` will call the corresponding implementation of the `equals` method depending on the run-time type of `curr`.
 
-```Java hl_lines=3
+```Java hl_lines="3"
 // version 0.1 (with polymorphism)
 boolean contains(Object array[], Object obj) {
   for (Object curr : array) {
@@ -30,7 +30,7 @@ This unit elaborates on Java's decision process to resolve which method implemen
 During compilation, Java determines the method descriptor of the method invoked, using the compile-time type of the target.
 
 For example, in the line
-```
+```Java
 curr.equals(obj)
 ```
 above, the target `curr` has the compile-time type `Object`.
@@ -58,7 +58,7 @@ During execution, when a method is invoked, the method descriptor from Step 1 is
 
 For example, let's consider again the invocation in the highlighted line below again:
 
-```Java hl_lines=3
+```Java hl_lines="3"
 // version 0.1 (with polymorphism)
 boolean contains(Object array[], Object obj) {
   for (Object curr : array) {
