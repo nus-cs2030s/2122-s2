@@ -1,4 +1,4 @@
-# Unit 12: Polymorphism
+# Unit 14: Polymorphism
 
 After reading this unit, students should
 
@@ -18,7 +18,7 @@ void say(Object obj) {
 ```
 
 Note that this method receives an `Object` instance.  Since both `Point` <: `Object` and `Circle` <: `Object`, we can do the following:
-```
+```Java
 Point p = new Point(0, 0);
 say(p);
 Circle c = new Circle(p, 4);
@@ -113,7 +113,7 @@ This is more complicated than `toString`.  There are a few new concepts involved
 
 All these complications would go away, however, if we define `Circle::equals` to take in a `Circle` as a parameter, like this:
 
-```
+```Java
 class Circle {
 	 :
   /**

@@ -50,6 +50,58 @@ class: middle
 ---
 class: middle,center
 
+## Interface
+
+_"What can it do?"_
+
+---
+
+```Java
+interface GetAreable {
+  double getArea();
+}
+```
+
+---
+class: middle
+
+### Implementing an Interface
+
+.tiny[
+```Java
+class Circle extends Shape implements GetAreable {
+  :
+  public double getArea() {
+    :
+  }
+  :
+}
+```
+]
+---
+class: middle, center
+
+If a class $C$ implements an interface $I$
+
+then $C <: I$ 
+
+---
+class: middle
+
+In Java:
+
+- A class can extend at most one class
+- A class can implement zero or more interfaces
+- An interface can extend zero or more interfaces
+
+---
+class: top,center
+
+### Concrete vs Abstract
+
+---
+class: middle,center
+
 ## Wrapper Classes
 
 ---
