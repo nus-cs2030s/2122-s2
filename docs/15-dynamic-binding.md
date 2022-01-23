@@ -35,7 +35,7 @@ curr.equals(obj)
 ```
 above, the target `curr` has the compile-time type `Object`.
 
-Let's generalize the compile-time type of the target to $$C$$.  To determine the method descriptor, the compiler searches for all methods that can be correctly invoked on the given argument.
+Let's generalize the compile-time type of the target to $C$.  To determine the method descriptor, the compiler searches for all methods that can be correctly invoked on the given argument.
 
 In the example above, we look at the class `Object`, and there is only one method called `equals`.  The method can be correctly invoked with one argument of type `Object`.
 
@@ -54,7 +54,7 @@ In the example above, the method descriptor `boolean equals(Object)` will be sto
 
 ## During Run Time
 
-During execution, when a method is invoked, the method descriptor from Step 1 is first retrieved.  Then, the run-time type of the target is determined.  Let the run-time type of the target be $$R$$.  Java then looks for an accessible method with the matching descriptor in $$R$$.  If no such method is found, the search will continue up the class hierarchy, first to the parent class of $$R$$, then to the grand-parent class of $$R$$, and so on, until we reach the root `Object`.  The first method implementation with a matching method descriptor found will be the one executed.
+During execution, when a method is invoked, the method descriptor from Step 1 is first retrieved.  Then, the run-time type of the target is determined.  Let the run-time type of the target be $R$.  Java then looks for an accessible method with the matching descriptor in $R$.  If no such method is found, the search will continue up the class hierarchy, first to the parent class of $R$, then to the grand-parent class of $R$, and so on, until we reach the root `Object`.  The first method implementation with a matching method descriptor found will be the one executed.
 
 For example, let's consider again the invocation in the highlighted line below again:
 
@@ -76,4 +76,4 @@ Now, suppose that `Circle` overrides the method `Object::equals(Object)` with it
 
 ## Invocation of Class Methods
 
-The description above applies to instance methods.  Class methods, on the other hand, do not support dynamic binding.  The method to invoke is resolved statically during compile time.  The same process in Step 1 is taken, but the corresponding method implementation in class $$C$$ will always be executed during run-time, without considering the run-time type of the target.
+The description above applies to instance methods.  Class methods, on the other hand, do not support dynamic binding.  The method to invoke is resolved statically during compile time.  The same process in Step 1 is taken, but the corresponding method implementation in class $C$ will always be executed during run-time, without considering the run-time type of the target.
