@@ -1,4 +1,4 @@
-# Unit 34: Parallel Streams
+# Unit 37: Parallel Streams
 
 ## Learning Objectives
 

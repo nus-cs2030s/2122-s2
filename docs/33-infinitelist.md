@@ -1,4 +1,4 @@
-# Unit 30: Infinite list
+# Unit 33: Infinite list
 
 ## Preliminary: An Eagerly Evaluated List
 

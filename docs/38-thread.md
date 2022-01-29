@@ -1,4 +1,4 @@
-# Unit 35: Threads
+# Unit 38: Threads
 
 ## Synchronous Programming
 
@@ -12,7 +12,7 @@ What if we want our program to do something while we wait for the method to retu
 
 ## Threads
 
-One way to achieve this is to use _threads_.  A thread is a single flow of execution in a program.  Since the beginning of this module, we have been writing single-thread programs, except for parallel streams in Unit 34.
+One way to achieve this is to use _threads_.  A thread is a single flow of execution in a program.  Since the beginning of this module, we have been writing single-thread programs, except for parallel streams in Unit 37.
 
 Java provides a class called [`java.lang.Thread`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Thread.html) that we can use to encapsulate a function to run in a separate thread.  The following example how we can create and run two threads:
 

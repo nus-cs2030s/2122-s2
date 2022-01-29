@@ -1,4 +1,4 @@
-# Unit 37: Fork and Join
+# Unit 40: Fork and Join
 
 ## Thread Pool
 
@@ -25,7 +25,7 @@ for (int i = 0; i < 100; i++) {
 }
 ```
 
-We assume that `Queue<T>` can be safely modified concurrently (i.e., it is thread-safe) in the sample code above.  Otherwise, just like the example you have seen in [parallel streams](34-parallel.md) with `List`, items might be lost.
+We assume that `Queue<T>` can be safely modified concurrently (i.e., it is thread-safe) in the sample code above.  Otherwise, just like the example you have seen in [parallel streams](37-parallel.md) with `List`, items might be lost.
 
 ## Fork and Join
 

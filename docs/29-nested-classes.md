@@ -1,4 +1,4 @@
-# Unit 26: Nested Class
+# Unit 29: Nested Class
 
 So far, we have defined a class only at the "top-level" of our program.  Java allows us to define a class within another class, or within a method.  
 

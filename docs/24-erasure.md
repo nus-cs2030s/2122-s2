@@ -1,4 +1,4 @@
-# Unit 21: Type Erasure
+# Unit 24: Type Erasure
 
 After taking this unit, students are expected to:
 
@@ -89,7 +89,7 @@ Object[] objArray = pairArray;
 objArray[0] = new Pair<Double,Boolean>(3.14, true);
 ```
 
-This is similar to what we have in [Unit 18](18-variance.md), where we showed we could get an `ArrayStoreException` due to Java arrays being covariant.  We would not, however, get an exception when we try to put a pair of double and boolean, into an array meant to store a pair of string and integer!  This type checking is done during run-time, and due to type erasure, the run-time has no information about what is the type arguments to `Pair`.  The run-time sees:
+This is similar to what we have in [Unit 21](21-variance.md), where we showed we could get an `ArrayStoreException` due to Java arrays being covariant.  We would not, however, get an exception when we try to put a pair of double and boolean, into an array meant to store a pair of string and integer!  This type checking is done during run-time, and due to type erasure, the run-time has no information about what is the type arguments to `Pair`.  The run-time sees:
 
 ```Java
 // create a new array of pairs

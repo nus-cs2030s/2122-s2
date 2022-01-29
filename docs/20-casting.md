@@ -1,11 +1,11 @@
-# Unit 17: Run-Time Class Mismatch
+# Unit 20: Run-Time Class Mismatch
 
 After taking this unit, students should:
 
 - Understand the need for narrowing type conversion and type casting when writing code that depends on higher-level abstraction
 - Understand the possibility of encountering run-time errors if typecasting is not done properly.
 
-We have seen in [Unit 15](15-interface.md) how we can write code that is reusable and general by making our code dependent on types at a higher-level of abstraction.  Our main example is the following `findLargest` method, which takes in an array of objects that support the `getArea` method, and returns the largest area among these objects.
+We have seen in [Unit 18](18-interface.md) how we can write code that is reusable and general by making our code dependent on types at a higher-level of abstraction.  Our main example is the following `findLargest` method, which takes in an array of objects that support the `getArea` method, and returns the largest area among these objects.
 
 ```Java
 // version 0.3
@@ -56,7 +56,7 @@ Circle c2 = (Circle) findLargest(circles); // ok
 
 The return type of `findLargest` (version 0.4) is now `GetAreable`.  On Line 6 above, we assign the return object with a compile-time type of `GetAreable` to `ga`, which also has `GetAreable` as its compile-time type.  Since the variable `ga` is of type `GetAreable`, however, it is not very useful.  Recall that `GetAreable` is an interface with only one method `getArea`.  We cannot use it as a circle.
 
-On Line 7, we try to return the return object to a variable with compile-time type `Circle`.  This line, however, causes a compile-time error.  Since `Circle` <: `GetAreable`, this is a narrowing type conversion and thus is not allowed (See [Unit 12](12-polymorphism.md)).  We will have to make an explicit cast of the result to `Circle` (on Line 8).  Only with casting, our code can compile and we get a reference with a compile-time type of `Circle`.
+On Line 7, we try to return the return object to a variable with compile-time type `Circle`.  This line, however, causes a compile-time error.  Since `Circle` <: `GetAreable`, this is a narrowing type conversion and thus is not allowed (See [Unit 14](14-polymorphism.md)).  We will have to make an explicit cast of the result to `Circle` (on Line 8).  Only with casting, our code can compile and we get a reference with a compile-time type of `Circle`.
 
 ## Cast Carefully
 

@@ -1,4 +1,4 @@
-# Unit 20: Generics
+# Unit 23: Generics
 
 After taking this unit, students should:
 
@@ -71,9 +71,9 @@ class Pair {
 }
 ```
 
-At the cost of using a [wrapper class](16-wrapper.md) in place of primitive types, we get a single class that can be used to store any type of values.  
+At the cost of using a [wrapper class](19-wrapper.md) in place of primitive types, we get a single class that can be used to store any type of values.  
 
-You might recall that we used a similar approach for our [`contains` method](12-polymorphism.md) to implement a general _method_ that works for any type of object.  Here, we are using this approach for a general _class_ that encapsulates any type of object.
+You might recall that we used a similar approach for our [`contains` method](14-polymorphism.md) to implement a general _method_ that works for any type of object.  Here, we are using this approach for a general _class_ that encapsulates any type of object.
 
 Unfortunately, the issues we faced with narrowing type conversion and potential run-time errors apply to the `Pair` class as well.  Suppose that a function returns a `Pair` containing a `String` and an `Integer`, and we accidentally treat this as an `Integer` and a `String` instead, the compiler will not be able to detect the type mismatch and stop the program from crashing during run-time.
 
@@ -203,7 +203,7 @@ The code above won't compile since the compiler expects the second argument to a
 
 ## Bounded Type Parameters
 
-Let's now try to apply our newly acquired trick to fix the issue with `findLargest`.  Recall that we have the following `findLargest` method (which we now put into an ad hoc class just for clarity), which [requires us to perform a narrowing type conversion](17-casting.md) to cast from `GetAreable` and possibly leading to a run-time error.
+Let's now try to apply our newly acquired trick to fix the issue with `findLargest`.  Recall that we have the following `findLargest` method (which we now put into an ad hoc class just for clarity), which [requires us to perform a narrowing type conversion](20-casting.md) to cast from `GetAreable` and possibly leading to a run-time error.
 
 ```Java
 class A {

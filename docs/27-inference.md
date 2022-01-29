@@ -1,4 +1,4 @@
-# Unit 24: Type Inference
+# Unit 27: Type Inference
 
 After this unit, students should:
 
@@ -60,7 +60,7 @@ and Java could still infer that `S` should be `Shape`.  The type inference proce
 
 Intersecting the two lists, we know that `S` could be `Shape` or one of its supertypes: `GetAreable` and `Object`.   The most specific type among these is `Shape`.  So, `S` is inferred to be `Shape`.
 
-Type inferencing can have unexpected consequences.  Let's consider an [older version of `contains` that we wrote](20-generics.md):
+Type inferencing can have unexpected consequences.  Let's consider an [older version of `contains` that we wrote](23-generics.md):
 
 ```Java
 class A {
