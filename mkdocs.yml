@@ -6,7 +6,7 @@ nav:
       - 1. Program and Compiler: '01-compiler.md'
       - 2. Variable and Type: '02-type.md'
       - 3. Functions: '03-function.md'
-    - OOP (04-17):
+    - OOP (04-19):
       - 4. Encapsulation: '04-encapsulation.md'
       - 5. Information Hiding: '05-infohiding.md'
       - 6. Tell, Don't Ask: '06-tell-dont-ask.md'
@@ -21,12 +21,12 @@ nav:
       - 15. Method Invocation: '15-dynamic-binding.md'
       - 16. LSP: '16-lsp.md'
       - 17. Abstract Class: '17-abstract.md'
-    #   - 18. Interface: '18-interface.md'
-    #   - 19. Wrapper Class: '19-wrapper.md'
-    # - Types (20-XX):
-    #   - 20. Casting: '20-casting.md'
-    #   - 21. Variance: '21-variance.md'
-    #   - 22. Exception: '22-exception.md'
+      - 18. Interface: '18-interface.md'
+      - 19. Wrapper Class: '19-wrapper.md'
+    - Types (20-22):
+      - 20. Casting: '20-casting.md'
+      - 21. Variance: '21-variance.md'
+      - 22. Exception: '22-exception.md'
     #   - 23. Generics: '23-generics.md'
     #   - 24. Type Erasure: '24-erasure.md'
     #   - 25. Unchecked Warnings: '25-unchecked.md'
