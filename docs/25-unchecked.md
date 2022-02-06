@@ -177,7 +177,7 @@ String s = a.get(0);
 
 where the method `populateArray` uses raw types:
 ```Java
-vod populateArray(Array a) {
+void populateArray(Array a) {
 	a.set(0, 1234);
 }
 ```

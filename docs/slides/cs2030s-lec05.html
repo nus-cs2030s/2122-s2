@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
 
 <!-- CHANGE TITLE -->
-<title>CS2030S AY20/21 S2 Lecture 5</title>
+<title>CS2030S AY21/22 S2 Lecture 5</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -22,24 +22,20 @@ class: middle, center
 
 ## Lecture 5
 
-### 8 February 2021
+### 7 February 2022
 ---
 class: middle
 
-### Reminder: CNY Eve and CNY classes
-
-- All classes end officialy at 2 PM on CNY Eve.
-- Tutors of affected labs and recitations will contact you to arrange for online make-up session.
+### Reminders
 
 ---
-class: middle
+class: middle,center
 
-### Lab 3
-
-- Released one day earlier (10 Feb, Wednesday)
-- Due four days later (19 Feb, Friday)
+## Creating our own Exceptions
 
 ---
+
+
 class: middle,center
 
 ## Remember Pairs?
@@ -119,12 +115,9 @@ class: middle,wide
 
 .small[
 ```Java
-Pair foo() {
-  return new Pair("hello", 4);
-}
+Pair p = new Pair("hello", 4);
 
-Pair p = foo();
-Integer i = (Integer) p.getFirst(); 
+Integer i = (Integer) p.getFirst();
 // run-time ClassCastException
 ```
 ]
@@ -155,16 +148,13 @@ class Pair<S,T> {
 ]
 
 ---
-class: middle,wide
+class: middle, wide
 
-.small[
+.tiny[
 ```Java
-Pair<String,Integer> foo() {
-  return new Pair<String,Integer>("hello", 4);
-}
+Pair<String,Integer> p = new Pair<String, Integer>("hello", 4);
 
-Pair<String,Integer> p = foo();
-Integer i = (Integer) p.getFirst(); 
+Integer i = (Integer) p.getFirst();
 // compile-time error
 ```
 ]
@@ -201,6 +191,23 @@ public static <T> boolean contains(T[] array, T obj) {
 }
 ```
 ]
+---
+class: middle
+
+.tiny[
+```Java
+String[] strArray = new String[] { "hello", "world" };
+A.contains(strArray, 123);
+```
+]
+
+.tiny[
+```Java
+String[] strArray = new String[] { "hello", "world" };
+A.<String>contains(strArray, 123); // type mismatch error
+```
+]
+
 ---
 class: middle,center
 
@@ -293,13 +300,6 @@ class: middle
 ---
 class: middle
 
-### How to implement generics
-
-- *code sharing* (Java): erase type arguments and type parameters after type checking
-
----
-class: middle
-
 .tiny[
 ```Java
 Pair<String,Integer> p = new Pair<String,Integer>("hello", 4);
@@ -357,13 +357,48 @@ class: middle
 ---
 class: middle
 
-### Can't mix array and generics
+.small[
+```Java
+Array<String> strArray = new Array<String>(2);
+Object[] objArray = strArray.getArray();
+objArray[0] = 5;
+String s = strArray.get(0);
+```
+]
+
+
+---
+class: middle
+
+### Supressing Unchecked Warnings
 
 .small[
 ```Java
-new Pair<String,Integer>[2]; // error
-new Pair<S,T>[2]; // error
-new T[2]; // error
+Array(int size) {
+  // The only way we can put an object into 
+  // array is through the method set() and we 
+  // only put object of type T inside.
+  // So it is safe to cast `Object[]` to `T[]`.
+  @SuppressWarnings("unchecked")
+  T[] temp = (T[]) new Object[size];
+  this.array = temp;
+}
+```
+]
+
+
+---
+class: middle
+
+### Don't use Raw Types 
+
+.small[
+```Java
+Array strArray = new Array(2);
+
+vod setArray(Array a) {
+  a.set(0, 1234);
+}
 ```
 ]
 
@@ -374,7 +409,7 @@ class: bottom
 .tiny[
 Version: v1.0
 
-Last Updated: Sun Jan 31 15:15:00 +08 2021
+Last Updated: Sun Feb 6 15:15:00 +08 2021
 ]
 </textarea>
 
@@ -396,7 +431,7 @@ var slideshow = remark.create({
 	},
 	ratio: '16:9',
 	highlightStyle: 'ir-black',
-    slideNumberFormat: 'CS2030S AY20/21 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
 });
  // Setup MathJax
   MathJax.Hub.Config({
