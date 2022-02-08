@@ -15,7 +15,8 @@ Many major companies enforce coding styles, and some have published them.  For C
 
 ## CS2030/S Coding Style
 
-1. No tab
+1. No tabs.
+
 	Use only whitespace.  
 
 	For `vim` users, you can add the following line in your `~/.vimrc` file:
@@ -23,6 +24,8 @@ Many major companies enforce coding styles, and some have published them.  For C
 	set expandtab
 	```
 	So that when you press <tab> it is expanded to whitespace.
+	
+	**Note:** For CS2030S, this option is already included in the `~/.vimrc` file if you follow the [Vim setup guide](vim-setup.md). In fact, we recommend you follow the [Vim setup guide](vim-setup.md) instead and don't manually manage your own version of your `~/.vimrc` file.
 
 	Most other source code editors have similar configuration.  
 
@@ -79,9 +82,13 @@ Many major companies enforce coding styles, and some have published them.  For C
 	set shiftwidth=2
 	set autoindent
 	set smartindent
+	" For Java: enabling this includes Java-specific indentation settings that handles annotations like @Override
+	filetype plugin indent on
 	```
 
 	To help you with indentation.
+			    
+	**Note:** For CS2030S, these options are already included in the `~/.vimrc` file if you follow the [Vim setup guide](vim-setup.md). In fact, we recommend you follow the [Vim setup guide](vim-setup.md) instead and don't manually manage your own version of your `~/.vimrc` file.
 	
 	Most other source code editors have similar configuration.  
 
