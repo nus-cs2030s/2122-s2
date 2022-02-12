@@ -37,7 +37,7 @@ A.<String>contains(stringArray, "hello"); // ok
 A.<Circle>contains(circleArray, circle); // ok
 ```
 
-But trying to search for a circle in an array of string would lead to a type error:
+But trying to search for a circle in an array of strings would lead to a type error:
 ```Java
 A.<String>contains(stringArray, circle); // error
 ```
@@ -107,12 +107,12 @@ class Array<T> {
   private T[] array;
 
   Array(int size) {
-	// The only way we can put an object into the array is through
-	// the method set() and we only put an object of type T inside.
-	// So it is safe to cast `Object[]` to `T[]`.
-	@SuppressWarnings("unchecked")
+  // The only way we can put an object into the array is through
+  // the method set() and we only put an object of type T inside.
+  // So it is safe to cast `Object[]` to `T[]`.
+  @SuppressWarnings("unchecked")
     T[] a = (T[]) new Object[size];
-	this.array = a;
+  this.array = a;
   }
 
   public void set(int index, T item) {
@@ -260,19 +260,19 @@ The line of code below now compiles:
 circleArray.copyTo(shapeArray); 
 ```
 
-Our new `Array<T> is now
+Our new `Array<T>` is now
 ```Java
 // version 0.5 (with flexible copy using wildcards)
 class Array<T> {
   private T[] array;
 
   Array(int size) {
-	// The only way we can put an object into the array is through
-	// the method set() and we only put an object of type T inside.
-	// So it is safe to cast `Object[]` to `T[]`.
-	@SuppressWarnings("unchecked")
+  // The only way we can put an object into the array is through
+  // the method set() and we only put an object of type T inside.
+  // So it is safe to cast `Object[]` to `T[]`.
+  @SuppressWarnings("unchecked")
     T[] a = (T[]) new Object[size];
-	this.array = a;
+  this.array = a;
   }
 
   public void set(int index, T item) {
@@ -312,14 +312,27 @@ This rule can be remembered with the mnemonic PECS, or "Producer Extends; Consum
 
 ## Unbounded Wildcards
 
-It is also possible to have unbounded wildcards, such as `Array<?>`.  `Array<?>` is the supertype of all generic `Array<T>`.
+It is also possible to have unbounded wildcards, such as `Array<?>`.  `Array<?>` is the supertype of every parameterized type of `Array<T>`.  Recall that `Object` is the supertype of all reference types.  When we want to write a method that takes in a reference type, but we want the method to be flexible enough, we can make the method accept a parameter of type `Object`.  Similarly, `Array<?>` is useful when you want to write a method that takes in an array of some specific type, and you want the method to be flexible enough to take in an array of any type.  For instance, if we have:
+ 
+```Java
+void foo(Array<?> array) {
+}
+```
+
+We could call it with:
+```Java
+Array<Circle> ac;
+Array<String> as;
+foo(ac); // ok
+foo(as); // ok
+```
 
 A method that takes in generic type with unbounded wildcard would be pretty restrictive, however.  Consider this:
 ```Java
 void foo(Array<?> array) {
-	 :
-	x = array.get(0);
-	array.set(0, y);
+   :
+  x = array.get(0);
+  array.set(0, y);
 
 }
 ```
@@ -342,7 +355,40 @@ Array<?> a1 = new Array<String>(0); // Does compile
 Array<?> a2 = new Array<Integer>(0); // Does compile
 ```
 
-The type `Array` here is a Raw Type and while it is the supertype of all `Array<T>`, in this module we do not use Raw Types.
+If we have a function
+```Java
+void bar(Array<Object> array) {
+}
+```
+
+Then, the method `bar` is restricted to _only_ takes in an `Array<Object>` instance as argument.
+```Java
+Array<Circle> ac;
+Array<String> as;
+bar(ac); // compilation error
+bar(as); // compilation error
+```
+
+What about raw types?  Suppose we write the method below that accepts a raw type
+```Java
+void qux(Array array) {
+}
+```
+
+Then, the method `qux` is also flexible enough to take in any `Array<T>` as argument.
+```Java
+Array<Circle> ac;
+Array<String> as;
+bar(ac); 
+bar(as); 
+```
+
+Unlike `Array<?>`, however, the compiler does not have the information about the type of the component of the array, and cannot type check for us.  It is up to the programmer to ensure type safety.  For this reason, we must not use raw types.
+
+Intuitively, we can think of `Array<?>`, `Array<Object>`, and `Array` as follows:
+- `Array<?>` is an array of objects of some specific, but unknown type;
+- `Array<Object>` is an array of `Object` instances, with type checking by the compiler;
+- `Array` is an array of `Object` instances, without type checking.
 
 ## Back to `contains`
 
@@ -388,16 +434,23 @@ Now, we can search for a shape in an array of circles.
 
 ## Revisiting Raw Types
 
-In previous units, we said that you may use Raw Types only in two scenarios. Namely, when using generics and `instanceof` together, and when creating arrays. However, now with unbounded wildcards we can now see it is possible to remove both of these exceptions. We can now use `instanceof` in the following way:
+In previous units, we said that you may use raw types only in two scenarios. Namely, when using generics and `instanceof` together, and when creating arrays. However, with unbounded wildcards, we can now see it is possible to remove both of these exceptions. We can now use `instanceof` in the following way:
 
 ```Java
 a instanceof A<?> 
 ```
 
-and create arrays in the following way:
+Recall that in the example above, `instanceof` checks of the run-time type of `a`.  Previously, we said that we can't check for, say,
+```Java
+a instanceof A<String> 
+```
+since the type argument `String` is not available during run-time due to erasure.  Using `<?>` fits the purpose here because it explicitly communicates to the reader of the code that we are checking that `a` is an instance of `A` with some unknown (erased) type parameter.
 
+Similarly, we can create arrays in the following way:
 ```Java
 new Comparable<?>[10];
 ```
 
-Going forward now in the module, we will not permit the use of Raw Types in any scenario.
+Previously, we said that we could not create an array using the expression `new Comparable<String>[10]` because generics and arrays do not mix well.  Java insists that the array creation expression uses a _reifiable_ type, i.e., a type where no type information is lost during compilation.  Unlike `Comparable<String>`, however, `Comparible<?>` is reifiable.  Since we don't know what is the type of `?`, no type information is lost during erasure!
+
+Going forward now in the module, we will not permit the use of raw types in any scenario.
