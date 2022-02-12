@@ -328,6 +328,22 @@ What should the type of the returned element `x` be?  Since `Array<?>` is the su
 
 The type for `y` is every more restrictive.  Since there are many possibilities of what type of array it is receiving, we can only put `null` into `array`! 
 
+There is an important distinction to be made between `Array`, `Array<?>` and `Array<Object>`.  Whilst `Object` is the supertype of all `T`, it does not follow that `Array<Object>` is the supertype of all `Array<T>` due to generics being invariant. Therefore, the following statements will fail to compile:
+
+```Java
+Array<Object> a1 = new Array<String>(0); 
+Array<Object> a2 = new Array<Integer>(0);
+```
+
+Whereas the following statements will compile:
+
+```Java
+Array<?> a1 = new Array<String>(0); // Does compile
+Array<?> a2 = new Array<Integer>(0); // Does compile
+```
+
+The type `Array` here is a Raw Type and while it is the supertype of all `Array<T>`, in this module we do not use Raw Types.
+
 ## Back to `contains`
 
 Now, let's simplify our `contains` methods with the help of wildcards.  Recall that to add flexibility into the method parameter and allow us to search for a shape in an array of circles, we have modified our method into the following:
