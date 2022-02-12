@@ -368,3 +368,19 @@ Now, we can search for a shape in an array of circles.
 ```Java
      A.<Shape>contains(circleArray, shape);
 ```
+
+## Revisiting Raw Types
+
+In previous units, we said that you may use Raw Types only in two scenarios. Namely, when using generics and `instanceof` together, and when creating arrays. However, now with unbounded wildcards we can now see it is possible to remove both of these exceptions. We can now use `instanceof` in the following way:
+
+```Java
+a instanceof A<?> 
+```
+
+and create arrays in the following way:
+
+```Java
+new Comparable<?>[10];
+```
+
+Going forward now in the module, we will not permit the use of Raw Types in any scenario.
