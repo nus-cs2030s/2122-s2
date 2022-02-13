@@ -386,6 +386,7 @@ bar(as);
 Unlike `Array<?>`, however, the compiler does not have the information about the type of the component of the array, and cannot type check for us.  It is up to the programmer to ensure type safety.  For this reason, we must not use raw types.
 
 Intuitively, we can think of `Array<?>`, `Array<Object>`, and `Array` as follows:
+
 - `Array<?>` is an array of objects of some specific, but unknown type;
 - `Array<Object>` is an array of `Object` instances, with type checking by the compiler;
 - `Array` is an array of `Object` instances, without type checking.
