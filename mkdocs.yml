@@ -60,6 +60,7 @@ nav:
        - Lessons: 'vim-quick-lessons.md'
        - Tips: 'vim-tips.md'
        - Plugins: 'vim-plugins.md'
+    - Using Panopto: 'panopto/panopto.md'
     - Java Style Guide: 'style.md'
     - JavaDoc Guide: 'javadoc.md'
     - Lab Guide: 'lab.md'
