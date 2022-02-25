@@ -1,20 +1,20 @@
 # Panopto Guide for CS2030S
 
+This guide is for Windows and Mac users.  Linux users should use FFmpeg (see [SoC e-Exam SOP](https://mysoc.nus.edu.sg/academic/e-exam-sop-for-students/) for instructions).
 
+## Installing Panopto
 
-## Installation
-
-1. In LumiNus, click CS2030S under **My Modules** > **Enrolled Modules**.
+1. In LumiNUS, click CS2030S under **My Modules** > **Enrolled Modules**.
 
 2. Scroll down on the left-hand sidebar. Click **Multimedia**.
 
 3. Click on channel **Screen Recordings**.
 
-4. Click on the **Create** button at the top of your page. Select "**Panopto for Windows**" or "**Panopto for Mac**". A popup window appears.
+4. Click on the **Create** button at the top of your page. Select "**Panopto for Windows**" or "**Panopto for Mac**". A pop up window appears.
 
     ![image not found](1.png)
 
-5. In the popup window, click on the **Download Panopto** button. Wait for the installer to be downloaded.
+5. In the pop up window, click on the **Download Panopto** button. Wait for the installer to be downloaded.
 
     ![image not found](2.png)
 
@@ -23,7 +23,7 @@
 7. Panopto will be launched after the installation is complete. Close the launched Panopto window.
 
 
-## Recording and Uploading Test
+## Recording and Uploading
 
 1. In LumiNUS, click CS2030S under **My Modules** > **Enrolled Modules**.
 
@@ -31,17 +31,17 @@
 
 3. Click on channel "Screen Recordings".
 
-4. Click on folder "Panopto Testing".
+4. For testing, click on folder "Panopto Testing".  For actual assessment, a different folder will be used.
 
 
     ![image not found](3-1.png)
 
-5. Inside the folder, click on the **Create** button at the top of your page. Select "**Panopto for Windows**" or "**Panopto for Mac**". A popup window appears.
+5. Inside the folder, click on the **Create** button at the top of your page. Select "**Panopto for Windows**" or "**Panopto for Mac**". A pop up window appears.
 
 
     ![image not found](4-1.png)
 
-6. In the popup window, click on the "**Open Panopto**" button. Panopto will launch.
+6. In the pop up window, click on the "**Open Panopto**" button. Panopto will launch.
 
     ![image not found](5.png)
 
@@ -85,9 +85,9 @@
 
 9. Start recording by clicking on the **Record** button on top left of the **Create New Recording** page.
 
-    Note that you have to select an audio source in order to enable the **Record button**, if your computer does not have an audio device, please approach your lab tutor on Week 6, 16 Sept.
+    Note that you have to select an audio source in order to enable the **Record button**, if your computer does not have an audio device, please approach your lab tutor.
 
-10. Click **Stop** on top left of the **Create New Recording** page. A popup will appear indicating **Recording is Complete**.
+10. Click **Stop** on top left of the **Create New Recording** page. A pop up will appear indicating **Recording is Complete**.
 Click **Done** on the popup.
 
     ![image not found](9-1.png)
@@ -96,11 +96,11 @@ Click **Done** on the popup.
 
     ![image not found](10-1.png)
 
-12. Check the Luminus folder that your recording is now displayed in the Luminus folder.
+12. Check the LumiNUS folder that your recording is now displayed in the LumiNUS folder.
 
     ![image not found](11-1.png)
 
-13. Congratulations you are done! You may delete your screen recording.
+13. Congratulations you are done!
 
 Prepared by Song Kai, Luo Xinjian, Wang Chengxin for CS1010.
 Adapted by Wei Tsang for CS2030S
