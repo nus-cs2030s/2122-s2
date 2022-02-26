@@ -178,9 +178,9 @@ For instance, the following toy program would result in `IllegalArgumentExceptio
 
 ```Java
 class Toy {
-  static Circle createCircles() {
+  static void createCircles() {
 	int radius = 10;
-	for (int i = 0; i <= 10; i++) {
+	for (int i = 0; i <= 11; i++) {
 		new Circle(new Point(1, 1), radius--);
 	}
   }
