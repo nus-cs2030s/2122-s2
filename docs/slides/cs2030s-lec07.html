@@ -28,8 +28,28 @@ class: middle
 
 # Revisiting Type Inference
 
-Our explanation was too simplified and missed out an important detail
+Our explanation was too simplified. Lets try again.
 
+---
+class: middle
+
+.tiny[
+```Java
+interface I1 { }         class A implements I1 { }
+
+class B extends A { }    class C<T> { }
+```
+]
+
+.small[
+```Java
+public <T extends A> T run(C<? extends T> c)
+
+
+
+I1 i = run(new C<A>());
+```
+]
 ---
 class: middle
 
@@ -55,7 +75,10 @@ class: middle
 
 # What has changed:
 
-The possible types considered include *only those used in the method invocation/expression*, and all their super types.
+Look at the bounds
+
+
+
 
 Then pick the most specific one!
 
