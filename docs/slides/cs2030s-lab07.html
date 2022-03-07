@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="stylesheets/cs1010.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
+
+<!-- CHANGE TITLE -->
+<title>CS2030S AY21/22 S2 Week 7 Lab</title>
+<meta charset="utf-8">
+</head>
+<body>
+<textarea id="source">
+class: middle, center
+
+## CS2030<sub>s</sub>
+
+### Programming Methodology II
+---
+class: middle, center
+
+## Week 7 
+
+### 3 March 2022
+---
+class: middle,center
+
+## Lab 4
+
+???
+
+Go through how to solve Lab 4 and common mistakes in your group.
+
+---
+class: middle
+
+.tiny[
+```Java
+class Box<T> {
+  private final T t;
+
+  private static final Box<?> EMPTY = new Box<>(null);
+
+  private Box(T t) {
+    this.t = t;
+  }
+
+		   :
+}
+```
+]
+
+???
+
+- Need to keep fields and constructor private
+- EMPTY should be static and final
+- Best type for EMPTY is Box<?> 
+
+---
+class: middle
+
+.tiny[
+```Java
+  public static <T> Box<T> empty() {
+    @SuppressWarnings("unchecked")
+    Box<T> box = (Box<T>) EMPTY;
+    return box;
+  }
+```
+]
+
+???
+
+- Cannot return Box<?> nor Box<Object> as the type would not match
+- Better to let compiler infer the type of the item in the box.
+
+---
+class: middle
+
+.tiny[
+```Java
+  public static <T> Box<T> ofNullable(T t) {
+    if (t == null) {
+      return empty();
+    }
+    return new Box<>(t);
+  }
+
+  public static <T> Box<T> of(T t) {
+    if (t == null) {
+      return null;
+    }
+    return new Box<>(t);
+  }
+```
+]
+
+???
+
+- Should be a static generic method.  Note that we need to declare a different type variable T here.
+
+---
+class: middle
+
+.tiny[
+```Java
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (obj instanceof Box<?>) {
+      Box<?> box = (Box<?>) obj;
+      if (this.t == box.t) {
+        return true;
+      }
+      if (this.t == null || box.t == null) {
+        return false;
+      }
+      return this.t.equals(box.t);
+    }
+    return false;
+  }
+```
+]
+
+---
+class: middle
+
+.tiny[
+```Java
+public Box<T> filter(BooleanCondition<? super T> condition) {
+    if (!isPresent()) {
+      return empty();
+    }
+    if (condition.test(this.t) == false) {
+      return empty();
+    }
+    return this;
+  }
+```
+]
+
+???
+
+- condition is a consumer 
+
+---
+class: middle
+
+.tiny[
+```Java
+  public <R> Box<R> map(Transformer<? super T, ? extends R> trnsfmr) {
+    if (!isPresent()) {
+      return empty();
+    }
+    return Box.ofNullable(trnsfmr.transform(this.t));
+  }
+```
+]
+
+???
+
+- Common mistake: did not use ? super T to make map flexible.
+
+---
+class: middle
+
+.tiny[
+```Java
+class AddOne implements Transformer<Integer,Integer> {
+  
+  @Override
+  public Integer transform(Integer t) {
+    return t + 1; 
+  }
+}
+Box<Number> b = Box.of(4).map(new AddOne());
+```
+]
+
+???
+
+Here is an example of how map could be used.  Would not compile without PECS.
+
+---
+class: middle,wide
+
+#### Example of Implementation of `BooleanCondition<T>`
+
+.tiny[
+```Java
+
+class DivisibleBy implements BooleanCondition<Integer> {
+  private int i;
+
+  public DivisibleBy(int i) {
+    this.i = i;
+  }
+
+  @Override
+  public boolean test(Integer t) {
+    return t % i == 0;
+  }
+}
+```
+]
+
+???
+
+- Remember to specify private/public 
+- Passing the right type as type arguments to BooleanCondition
+
+---
+class: middle,wide
+
+#### Example of Implementation of `Transformer<T,R>`
+
+.tiny[
+```Java
+class BoxIt<T> implements Transformer<T, Box<T>> {
+  
+  @Override
+  public Box<T> transform(T t) { 
+    return Box.of(t); 
+  }
+}
+```
+]
+
+---
+class: middle,center
+
+## Mock PE
+
+---
+class: middle,wide
+
+### Goals
+
+.small[
+- **Familiarize with Logging into Exam Hosts**
+    - do it multiple times! Including tonight/tomorrow morning **from whereever you are going to take your PE1**
+	- no extra time given to students who failed to follow login instructions during PE1
+- **Make sure screen recording with Panopto is working**
+    - failure to submit screen recording may lead to PE1 results voided
+]
+
+---
+class: middle
+
+#### Step 1: Record Screen
+
+- Start Panopto to record your screen
+- Record into LumiNUS Screen Recordings &gt; Mock PE &gt; Uploads
+- Try to record at least an hour to make sure there is no issue with long term recording on your laptop
+- Check periodically to make sure recording works
+
+---
+class: middle
+
+#### Step 2: Login
+
+- Look for email from Wei Tsang containing account information 
+  and password
+- Follow instructions carefully to login
+- Almost all failures to login can be solved by following instructions 
+  and typing in the password carefully
+
+---
+class: middle
+
+#### Step 3: Setup
+
+- After log in, you should see an empty home directory when you `ls`.
+- If you see any Java files, please report immediately.
+- You can take 5 minutes to setup your `vim` if you need to.
+
+---
+class: middle
+
+#### Step 4: Retrieve Files
+
+.smaller[
+- For those in Batch I (9 AM), run
+```Shell
+~cs2030s/start-pe-0900
+```
+
+- For those in Batch II (10:30 AM), run
+```Shell
+~cs2030s/start-pe-1030
+```
+
+- This should copy the question and skeleton files to your home directory.
+]
+
+---
+class: middle
+
+`ls` should give something like this:
+.tiny[
+```
+BooleanCondition.java        Questions.md
+CS2030STest.java             SourceList.java
+EmptyList.java               StringToLength.java
+GreaterThanTwo.java          Test1.java
+IntegerToString.java         Test2.java
+InvalidOperandException.java Test3.java
+Operand.java                 Test4.java
+Operation.java               Test5.java
+Pair.java                    Transformer.java
+```
+]
+
+---
+class: middle
+
+#### Step 5: Solve!
+
+- Pretend it is the PE1 and solve the questions now.
+- Questions are taken from last year's 2-hour long PE1.
+- Expectation: one question per hour.
+
+---
+class: middle
+
+#### Submission
+
+- There is no separate submission.  Leave the files in the account after 
+  you are done.
+- Exam accounts will be disabled tomorrow noon.
+- We will retrieve the files you worked on, and email them to you sometime tomorrow afternoon.
+
+---
+class: bottom
+
+.tiny[
+Version: v1.0
+
+Last Updated: Mon Jan 10 10:51:25 +08 2022
+]
+</textarea>
+
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
+<script src="javascripts/counter.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
+<script>
+remark.macros.scale = function (percentage) {
+	var url = this;
+	return '<img src="' + url + '" style="width: ' + percentage + '" />';
+};
+// ![:scale 50%](image.jpg)
+
+var slideshow = remark.create({
+    navigation: {
+	    scroll: false
+	},
+	ratio: '16:9',
+	highlightStyle: 'ir-black',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+});
+ // Setup MathJax
+  MathJax.Hub.Config({
+	  tex2jax: {
+		inlineMath: [['$', '$']],
+		// inlineMath: [['$', '$'], ['\\(', '\\)']],
+		displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+		skipTags: ['script', 'noscript', 'style', 'pre']
+	  }
+  });
+
+  MathJax.Hub.Configured();
+
+	var ctx = document.getElementById('assessment').getContext('2d');
+	var data = {
+			datasets: [{ data: [5, 30, 10, 25, 10, 20],
+					borderColor: '#eee',
+					backgroundColor: [
+							'rgba(255, 100, 0, 1)',
+							'rgba(100, 255, 0, 1)',
+							'rgba(100, 0, 255, 1)',
+							'rgba(100, 255, 255, 1)',
+							'rgba(255, 255, 100, 1)',
+							'rgba(255, 100, 255, 1)',
+						],
+				}],
+			// These labels appear in the legend and in the tooltips when hovering different arcs
+			labels: [ 'Quizzes (5%)', 'Assignments (30%)', 'Midterm (10%)', 'Final (25%)', 'PE1 (10%)', 'PE2 (20%)' ]
+		};
+
+</script>
+</script>
+</body>
+</html>
