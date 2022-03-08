@@ -14,12 +14,6 @@
 <textarea id="source">
 class: middle, center
 
-## CS2030<sub>s</sub>
-
-### Programming Methodology II
----
-class: middle, center
-
 ## Week 8 
 
 ### 10 March 2022
@@ -31,6 +25,20 @@ class: middle
 - Anonymous classes
 - Nested classes
 - Java packages
+
+???
+
+We will go through four exercises with students to introduce them to new concepts important for Lab 5.  
+
+As a guideline, in the first hour, spend
+- 5-10 mins on nested wildcards
+- 5 mins on anonymous classes
+- 10-15 mins on nested classes
+- 10 mins on java packages
+
+Take a break, then start with Lab 5:
+- Motivate them on the need of Maybe<T>
+- Then let them work on the lab in the rest of the time.
 
 ---
 class: middle,center
@@ -168,9 +176,14 @@ class: middle
 
 ### Exercise: Nested Class
 
-- Copy files from `~cs2030s/lab-week8`
+- Copy files from `~cs2030s/lab-week8` with 
+```bash
+cp -r ~cs2030s/lab-week8 ~/`
+```
+
 - This is a simplfied version of `Box<T>` from Lab 4
-- Look at `Box.java`
+- Look at `Box.java`.
+- Run `jshell < test.jsh` to test Box.
 
 ---
 class: middle
@@ -192,6 +205,10 @@ class: middle
   }
 ```
 ]
+
+???
+
+Snippets from Box.java
 
 ---
 class: middle
@@ -218,6 +235,10 @@ class: middle
 ```
 ]
 
+???
+
+Snippets from Box.java
+
 ---
 class: middle
 
@@ -234,14 +255,17 @@ class: middle
 ]
 
 - Can we tidy up our code, separate these two cases into different classes?  
-- Let dynamic binding takes of the conditions for us.
+- Let dynamic binding takes care of the conditional statements for us.
 
 ---
 class: middle
 
+Stretegy:
+
 - Make `Box<T>` an abstract class 
 - Create private static nested classes `Empty` and `NonEmpty<T>`
 - Put fields/methods related to empty box into `Empty`, non-empty box into `NonEmpty<T>`
+- Box<T> dictates the API to be implemented in `Empty` and `NonEmpty<T>`.
 
 ---
 class: middle,wide
@@ -304,14 +328,10 @@ abstract class Box<T> {
 ```
 ]
 
+???
 
----
-class: middle
+They can find the solution hidden under ~/lab-week8/.Box-spoilers.java
 
-To test, run:
-```bash
-  jshell < test.jsh
-```
 
 ---
 class: middle,center
@@ -416,6 +436,10 @@ void find(Map<Int, String> map) {
 ```
 ]
 
+???
+
+Unfortunately without lambdas, it is less convincing to say Maybe<T> leads to more elegant code.
+
 ---
 class: middle
 
@@ -429,13 +453,26 @@ class: middle
 (`Maybe<T>` is an important component for Lab 6 and 7)
 ]
 
+???
+
+Stress that they need to complete their Lab 5 so that they can reuse it in Lab 6 and 7.
+
+---
+class: middle
+
+### Lab 5
+
+- Please accept Lab 5 (LumiNUS &gt; Module Overview &gt; Week 8 &gt; Lab)
+- Run `~cs2030s/get-lab5` on PE hosts.
+- Solve and submit before Tuesday night
+
 ---
 class: bottom
 
 .tiny[
 Version: v1.0
 
-Last Updated: Mon Mar  7 21:55:51 +08 2022
+Last Updated: Tue Mar  8 09:18:03 +08 2022
 ]
 </textarea>
 
@@ -472,24 +509,6 @@ var slideshow = remark.create({
   });
 
   MathJax.Hub.Configured();
-
-	var ctx = document.getElementById('assessment').getContext('2d');
-	var data = {
-			datasets: [{ data: [5, 30, 10, 25, 10, 20],
-					borderColor: '#eee',
-					backgroundColor: [
-							'rgba(255, 100, 0, 1)',
-							'rgba(100, 255, 0, 1)',
-							'rgba(100, 0, 255, 1)',
-							'rgba(100, 255, 255, 1)',
-							'rgba(255, 255, 100, 1)',
-							'rgba(255, 100, 255, 1)',
-						],
-				}],
-			// These labels appear in the legend and in the tooltips when hovering different arcs
-			labels: [ 'Quizzes (5%)', 'Assignments (30%)', 'Midterm (10%)', 'Final (25%)', 'PE1 (10%)', 'PE2 (20%)' ]
-		};
-
 </script>
 </script>
 </body>
