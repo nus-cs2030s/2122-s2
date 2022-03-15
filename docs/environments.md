@@ -175,7 +175,7 @@ of your SoC Unix account which you have created here: https://mysoc.nus.edu.sg/~
 
     It means that you failed to connect to `stu.comp.nus.edu.sg` via `ssh`.  There could be two reasons for this: (i) `stu.comp.nus.edu.sg` or its ssh service is down; (ii) you are connecting via a network where `stu.comp.nus.edu.sg` is not accessible (such as outside Singapore).  
 
-    The likelihood of (i) is small.  The more likely scenario is (ii), in which case, connect to [SoC VPN](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn?s[]=vpn) first.
+    The likelihood of (i) is small.  The more likely scenario is (ii).  In either case, connect to [SoC VPN](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn?s[]=vpn) first, then `ssh` into one of the PE host.
 
 5. `Could not chdir to home directory /home/o/ooiwt: Permission denied`
 
