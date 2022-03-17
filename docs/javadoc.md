@@ -13,9 +13,9 @@ One of the goals of CS2030S is to move you away from the mindset that you are wr
 Example:
 ```Java
 /**
- * Encapsulates a circle on a 2D plane.  The `Circle` class supports operators
- * supported includes (i) checking if a point is contained in the circle,
- * and (ii) moving the circle around to a new position.
+ * Encapsulates a circle on a 2D plane.  The operators supported 
+ * includes (i) checking if a point is contained in the circle,
+ * and (ii) moving the circle to a new position.
  */
 ```
 
