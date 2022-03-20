@@ -32,14 +32,14 @@ nav:
       - 25. Unchecked Warnings: '25-unchecked.md'
       - 26. Wildcards: '26-wildcard.md'
       - 27. Type Inference: '27-inference.md'
-    - Functional (28-32):
+    - Functional (28-34):
        - 28. Immutability: '28-immutability.md'
        - 29. Nested Classes: '29-nested-classes.md'
        - 30. Functions: '30-functions.md'
        - 31. Box and Maybe: '31-box-maybe.md'
        - 32. Lazy Evaluation: '32-lazy.md'
-    #   - 33. Infinite List: '33-infinitelist.md'
-    #   - 34. Stream: '34-stream.md'
+       - 33. Infinite List: '33-infinitelist.md'
+       - 34. Stream: '34-stream.md'
     #   - 35. Loggable: '35-logger.md'
     #   - 36. Monad: '36-monad.md'
     # - Parallel (37-XX):
