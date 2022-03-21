@@ -277,11 +277,11 @@ We have the following objects set up.
 
 ![altEvens](figures/infinitelist/infinitelist.003.png)
 
-Let's now trace through what happens when we call `altEvens.head()`.  This method leads to the call `this.head().produce()`, where `this` refers to `altEvens`.  The call to `produce` invoked `mapper.transform(this.head.produce())` of the producer labelled 1 in the figure below.  This leads to `this.head.produce()` of this producer being called.  Within this producer, `this` refers to `odds`, and so `this.head.produce()` invoked `mapper.transform(this.head.produce())` of the producer labelled 2.   Now, `this` refers to `evens`, and `this.head.produce()` causes the producer `() -> 1` (labelled 3) to produce 1.
+Let's now trace through what happens when we call `altEvens.head()`.  This method leads to the call `this.head().produce()`, where `this` refers to `altEvens`.  The call to `produce` invoked `mapper.transform(this.head.produce())` of the producer labelled 1 in the figure below.  This leads to `this.head.produce()` of this producer being called.  Within this producer, `this` refers to `odds`, and so `this.head.produce()` invoked `mapper.transform(this.head.produce())` of the producer labelled 2.   Now, `this` refers to `evens`, and `this.head.produce()` causes the producer `() -> 0` (labelled 3) to produce 0.
 
 ![altEvens](figures/infinitelist/infinitelist.004.png)
 
-The execution now returns to the invocation of `mapper.transform(this.head.produce())` and call `mapper.transform(1)` (labelled 4).  This returns the value 2, which we pass into the `mapper.transform(2)` (labelled 5).  The `mapper` is `x -> x * 2` so we have the result 4, which we return from `altEvens.head()`.
+The execution now returns to the invocation of `mapper.transform(this.head.produce())` and call `mapper.transform(0)` (labelled 4).  This returns the value 1, which we pass into the `mapper.transform(1)` (labelled 5).  The `mapper` is `x -> x * 2` so we have the result 2, which we return from `altEvens.head()`.
 
 This process shows a very different order of execution than `EagerList`.
 If we run, 
