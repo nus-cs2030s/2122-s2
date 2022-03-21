@@ -113,7 +113,7 @@ l.tail().tail().head(); // 18
 Lazy evaluation allows us to delay the computation that produces data until the data is needed.  This powerful concept enables us to build computationally-efficient data structures.  We will focus on building a list with a possibly infinite number of elements -- something that couldn't be done without lazy evaluation.  Any eager-evaluation-based solution will just run in an infinite loop if the list is infinitely long.  For instance,
 
 ```Java
-EagerList.iterate(1, i > 0, i -> i + 1); // infinite loop
+EagerList.iterate(1, i -> i > 0, i -> i + 1); // infinite loop
 ```
 
 Just as we saw in the previous unit, we can delay a computation by using the `Producer` functional interface (or anything equivalent).  Instead of doing `compute()` which is immediately evaluated when executed, we replace it with a `Producer` `() -> compute()`, which "stores" the computation in an instance of `Producer`, and we only call it when we invoke the `produce()` method.
