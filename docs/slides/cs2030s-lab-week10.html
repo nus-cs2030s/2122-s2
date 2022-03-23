@@ -229,7 +229,7 @@ class: middle
 - Log in to SoC VPN using your NUSNET account
 - Fully test SoC VPN connection by connecting to PE host directly from outside NUS without tunneling
 ```bash
-ssh pe1xx@comp.nus.edu.sg
+ssh <username>@pe1xx.comp.nus.edu.sg
 ```
 - Technical issues: please contact `helpdesk@comp.nus.edu.sg`
 
@@ -289,7 +289,7 @@ class: middle
 ```Java
 class InfiniteList<T> {
   private Lazy<Maybe<T>> head;
-  private Lazy<InfiniteList<T>> value;
+  private Lazy<InfiniteList<T>> tail;
    :
 }
 ```
