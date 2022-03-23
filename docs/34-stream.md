@@ -85,7 +85,7 @@ There are several intermediate operations that convert from infinite stream to f
 For instance, 
 
 ```Java
-Stream.iterate(0, x -> x + 1).takeWhile(x < 5); 
+Stream.iterate(0, x -> x + 1).takeWhile(x -> x < 5); 
 ```
 
 create a (lazy) finite stream of elements 0 to 4.
@@ -95,7 +95,7 @@ create a (lazy) finite stream of elements 0 to 4.
 A particularly useful intermediate operation of `Stream` is `peek`.  `peek` takes in a `Consumer`, allowing us to apply a lambda on a "fork" of the stream.  For instance,
 
 ```Java
-Stream.iterate(0, x -> x + 1).peek(System.out::println).takeWhile(x < 5).forEach(x -> {});
+Stream.iterate(0, x -> x + 1).peek(System.out::println).takeWhile(x -> x < 5).forEach(x -> {});
 ```
 
 ### Reducing a Stream
