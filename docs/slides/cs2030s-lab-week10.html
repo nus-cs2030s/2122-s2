@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/cs1010.css">
+
+<!-- CHANGE TITLE -->
+<title>CS2030S AY21/22 S2 Week 10 Lab 7</title>
+<meta charset="utf-8">
+</head>
+<body>
+<textarea id="source">
+class: middle, center
+
+## Week 10
+
+### 24 March 2022
+---
+class: middle,center
+
+### Highlights of `Lazy<T>` 
+
+---
+class: middle,wide
+
+### `Lazy::get` version 1
+
+.tiny[
+```Java
+  public T get() {
+    return this.producer.produce();
+  }
+```
+]
+
+What is wrong?
+
+---
+class: middle,wide
+
+### `Lazy::get` version 2
+
+.tiny[
+```Java
+  public T get() {
+    return this.value.orElseGet(this.producer);
+  }
+```
+]
+
+What is wrong?
+
+---
+class: middle,wide
+
+### `Lazy::get` version 3
+
+.tiny[
+```Java
+  public T get() {
+    T t = this.value.orElseGet(this.producer);
+    this.value = Maybe.some(t);
+    return t;
+  }
+```
+]
+
+???
+
+---
+class: middle,wide
+
+### `Lazy::toString`
+
+.tiny[
+```Java
+  public String toString() {
+    return this.value.map(x -> String.valueOf(x)).orElse("?");
+  }
+```
+]
+
+???
+---
+class: middle,wide
+
+Keys to being lazy:
+- do not call `get()` directly anywhere; instead, delay `get()` using a producer.
+- do not call `produce()` directly (except in `get()`), call `get()` to use cached value if available.
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+  public <R> Lazy<R> map(Transformer<? super T, ? extends R> mapper) {
+    return new Lazy<R>(() -> mapper.transform(this.get()));
+  }
+
+  public <R> Lazy<R> flatMap(Transformer<? super T, 
+      ? extends Lazy<? extends R>> mapper) {
+    return new Lazy<R>(() -> mapper.transform(this.get()).get());
+  }
+```
+]
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+  public <S, R> Lazy<R> 
+      combine(Lazy<S> s, Combiner<? super T, ? super S, ? extends R> f) {
+    return new Lazy<R>(() -> f.combine(this.get(), s.get()));
+  }
+
+  public Lazy<Boolean> filter(BooleanCondition<? super T> pred) {
+    return new Lazy<Boolean>(() -> pred.test(this.get()));
+  }
+```
+]
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+class EagerList<T> {
+  private List<T> list;
+  :
+  public static <T> EagerList<T> generate(int n, T seed, Transformer<T, T> f) {
+    EagerList<T> l = new EagerList<>(new ArrayList<T>());
+    T curr = seed;
+    for (int i = 0; i < n; i++) {
+      l.list.add(curr);
+      curr = f.transform(curr);
+    }
+    return l;
+  }
+
+  public T get(int i) {
+    return this.list.get(i);
+  }
+
+  public int indexOf(T v) {
+    return this.list.indexOf(v);
+  }
+
+  :
+}
+```
+]
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+class  LazyList<T> {
+  private List<Lazy<T>> list;
+  :
+  public static <T>  LazyList<T> generate(int n, T seed, Transformer<T, T> f) {
+    LazyList<T>  l = new  LazyList<>(new ArrayList<Lazy<T>>());
+    Lazy<T> curr = Lazy.of(seed);
+    for (int i = 0; i < n; i++ ) {
+      l.list.add(curr);
+      curr = curr.map(x -> f.transform(x));
+    }
+    return l;
+  }
+
+  public T get(int i) {
+    return this.list.get(i).get();
+  }
+
+  public int indexOf(T v) {
+    return this.list.indexOf(Lazy.of(v));
+  }
+
+  :
+}
+```
+]
+
+???
+Contrast this to EagerList to show the minimal changes.
+
+Spend as much time as you need to make sure students understand why this works.
+The implicit calls to `transform` and `equals` are not obvious.
+
+---
+class: middle
+
+### What you need for PE2
+- Installing SoC VPN
+
+???
+
+---
+class: middle
+
+### Issues with host `stu`
+
+- We overwhelmed `stu` at the beginning of PE1.  Students cannot login.
+- `stu` went down for a long period of time before Lab 5 deadline.
+
+---
+class: middle
+
+Good news: there are other ways to access PE hosts besides tunneling through 
+  `stu`: through SoC VPN
+
+Download and install "FortiClient VPN" from here:
+[https://www.fortinet.com/support/product-downloads#vpn](https://www.fortinet.com/support/product-downloads#vpn)
+
+Connection instructions here:
+[https://dochub.comp.nus.edu.sg/cf/guides/network/vpn](https://dochub.comp.nus.edu.sg/cf/guides/network/vpn)
+
+???
+
+Give students sometime to download and install now.  If they are stuck, try to help them if you can.  Make sure all students can login to their SoC VPN before you continue.
+
+---
+class: middle
+
+- SoC VPN $\not = $ NUS VPN
+- Log in to SoC VPN using your NUSNET account
+- Fully test SoC VPN connection by connecting to PE host directly from outside NUS without tunneling
+```bash
+ssh pe1xx@comp.nus.edu.sg
+```
+- Technical issues: please contact `helpdesk@comp.nus.edu.sg`
+
+---
+class: middle
+
+### Goals of Lab 7
+
+- Extend `cs2030s.fp` with `InfiniteList<T>`
+- Practice using `Lazy<T>` and `Maybe<T>`
+- Practice using lambdas and lazy evaluation
+
+---
+class: middle
+
+### Lab 7
+
+- Please accept Lab 7 (LumiNUS &gt; Module Overview &gt; Week 10 &gt; Lab)
+- Run `~cs2030s/get-lab7` on PE hosts.
+- Solve and submit before next next Tuesday night
+
+---
+class: middle
+
+### `InfiniteList<T>` from Lecture
+
+.tiny[
+```Java
+class InfiniteList<T> {
+  private Producer<T> head;
+  private Producer<InfiniteList<T>> tail;
+   :
+}
+```
+]
+
+---
+class: middle
+
+Recall the issues:
+- No memoization - produce the same values over and over. 
+- Filtered values are `null` -- cannot distinguish between a genuine `null` and 
+  a value that is not there.
+
+---
+class: middle,wide
+
+- `Lazy<T>` can handle memoization of producer.
+- `Maybe<T>` can distinguish between `Some(null)` and `None`.
+
+---
+class: middle
+
+### Better `InfiniteList<T>` in Lab 7
+
+.tiny[
+```Java
+class InfiniteList<T> {
+  private Lazy<Maybe<T>> head;
+  private Lazy<InfiniteList<T>> value;
+   :
+}
+```
+]
+
+
+---
+class: middle
+
+`InfiniteList::toString` is given
+
+.tiny[
+```Java
+  public String toString() {
+    return "[" + this.head + " " + this.tail + "]";
+  }
+```
+]
+
+.tiny[
+```Java
+jshell> InfiniteList.generate(() -> 1)
+$.. ==> [? ?]
+jshell> InfiniteList.generate(() -> 1).head()
+$.. ==> 1
+```
+]
+
+---
+class: middle
+
+.tiny[
+```Java
+jshell> InfiniteList<Integer> numbers = InfiniteList.iterate(1, incr)
+jshell> numbers
+numbers ==> [[1] ?]
+
+jshell> numbers.head()
+$.. ==> 1
+jshell> numbers
+numbers ==> [[1] ?]
+
+jshell> numbers.tail().head()
+    iterate: 1
+$.. ==> 2
+jshell> numbers
+numbers ==> [[1] [[2] ?]]
+```
+]
+
+---
+class: middle,wide
+
+### `InfiniteList::map`
+.tiny[
+```Java
+jshell> InfiniteList.iterate(1, x -> x + 1).map(x -> x * 2)
+$.. ==> [? ?]
+jshell> InfiniteList.iterate(1, x -> x + 1).map(x -> x * 2).head()
+$.. ==> 2
+jshell> InfiniteList.iterate(1, x -> x + 1).map(x -> x * 2).tail().head()
+$.. ==> 4
+jshell> InfiniteList.iterate(1, x -> x + 1).map(x -> x * 2).map(x -> x - 1).head()
+$.. ==> 1
+```
+]
+
+---
+class: middle,wide
+
+### `InfiniteList::filter`
+
+Mark filtered (removed) element as `None` instead of `null`
+
+.tiny[
+```Java
+jshell> InfiniteList.generate(() -> 1).filter(x -> x % 2 == 0)
+$.. ==> [? ?]
+jshell> InfiniteList.iterate(1, x -> x + 1).filter(x -> x % 2 == 0)
+$.. ==> [? ?]
+jshell> InfiniteList.iterate(1, x -> x + 1).filter(x -> x % 2 == 0).head()
+$.. ==> 2
+```
+]
+
+---
+class: middle
+
+.tiny[
+```Java
+jshell> InfiniteList<Integer> nums = InfiniteList.iterate(1, x -> x + 1)
+jshell> InfiniteList<Integer> evens = nums.filter(x -> x % 2 == 0)
+
+jshell> evens.tail().head()
+$.. ==> 4
+jshell> nums.toString()
+$.. ==> "[[1] [[2] [[3] [[4] ?]]]]"
+jshell> evens.toString()
+$.. ==> "[[] [[2] [[] [[4] ?]]]]"
+```
+]
+
+---
+class: middle
+
+Making the list finite with a sentinel -- a special tail that marks the end of the list.
+
+- Create a static nested class called `Sentinel`
+- Add a private final static field `SENTINEL` (similar to `EMPTY` and `NONE`)
+- Override `toString` to return "-"
+- Add a `isSentinel` method to check if the list is an instance of `Sentinel`
+- Throw `NoSuchElementException` if we try to access the `head` or `tail` of a sentinel
+---
+class: middle,wide
+
+.tiny[
+```Java
+jshell> InfiniteList.generate(() -> 2).filter(x -> x % 3 == 0).isSentinel()
+$.. ==> false
+jshell> InfiniteList.sentinel()
+$.. ==> -
+jshell> InfiniteList.sentinel().isSentinel()
+$.. ==> true
+jshell> InfiniteList.sentinel().map(x -> 2).isSentinel()
+$.. ==> true
+```
+]
+
+---
+class: middle,wide
+
+### `InfiniteList::limit`
+
+.tiny[
+```Java
+jshell> InfiniteList.iterate(1, x -> x + 1).limit(4)
+$.. ==> [[1] ?]
+jshell> InfiniteList.iterate(1, x -> x + 1).limit(1).head()
+$.. ==> 1
+jshell> InfiniteList.iterate(1, x -> x + 1).limit(1).tail().head());
+// NoSuchElementException thrown
+```
+]
+
+---
+class: middle
+
+### Augmenting `Maybe<T>` might be Helpful
+
+.tiny[
+```Java
+  /**
+   * If the value within this Maybe is missing, do nothing.
+   * Otherwise, consume the value with the given consumer.
+   *
+   * @param consumer The consumer to consume the value
+   */
+  public abstract void consumeWith(Consumer<? super T> consumer);
+```
+]
+
+---
+class: middle
+
+### The `Consumer<T>` Functional Interface
+.tiny[
+```Java
+@FunctionalInterface
+public interface Consumer<T> {
+  /**
+   * The functional method to consume a value.
+   *
+   * @param t the value to consume
+   */
+  void consume(T t);
+}
+```
+]
+
+---
+class: middle,wide
+
+### `InfiniteList::toList`
+
+convert to `java.util.List`
+
+.tiny[
+```Java
+jshell> InfiniteList.iterate("A", s -> s + "Z").limit(2).map(s -> s.length()).toList()
+$.. ==> [1, 2]
+jshell> InfiniteList.iterate(1, x -> x + 1).limit(2).filter(x -> x % 2 == 0).toList()
+$.. ==> [2]
+jshell> InfiniteList.iterate(1, x -> x + 1).filter(x -> x % 2 == 0).limit(2).toList()
+$.. ==> [2, 4]
+```
+]
+---
+class: middle,wide
+
+### `InfiniteList::count` `InfiniteList::reduce`
+
+.tiny[
+```Java
+jshell> InfiniteList.iterate(0, x -> x + 1).limit(5).reduce(0, (x, y) -> x + y)
+$.. ==> 10
+jshell> InfiniteList.iterate(0, x -> x + 1).filter(x -> x % 2 == 1).limit(10).count()
+$.. ==> 10
+```
+]
+
+
+---
+class: bottom
+
+.tiny[
+Version: v1.1
+
+Last Updated: Wed Mar 23 19:19:45 +08 2022
+]
+</textarea>
+
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
+<script src="javascripts/counter.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
+<script>
+remark.macros.scale = function (percentage) {
+	var url = this;
+	return '<img src="' + url + '" style="width: ' + percentage + '" />';
+};
+// ![:scale 50%](image.jpg)
+
+var slideshow = remark.create({
+    navigation: {
+	    scroll: false
+	},
+	ratio: '16:9',
+	highlightStyle: 'ir-black',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+});
+ // Setup MathJax
+  MathJax.Hub.Config({
+	  tex2jax: {
+		inlineMath: [['$', '$']],
+		// inlineMath: [['$', '$'], ['\\(', '\\)']],
+		displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+		skipTags: ['script', 'noscript', 'style', 'pre']
+	  }
+  });
+
+  MathJax.Hub.Configured();
+</script>
+</script>
+</body>
+</html>
