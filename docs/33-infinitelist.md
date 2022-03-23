@@ -113,7 +113,7 @@ l.tail().tail().head(); // 18
 Lazy evaluation allows us to delay the computation that produces data until the data is needed.  This powerful concept enables us to build computationally-efficient data structures.  We will focus on building a list with a possibly infinite number of elements -- something that couldn't be done without lazy evaluation.  Any eager-evaluation-based solution will just run in an infinite loop if the list is infinitely long.  For instance,
 
 ```Java
-EagerList.iterate(1, i > 0, i -> i + 1); // infinite loop
+EagerList.iterate(1, i -> i > 0, i -> i + 1); // infinite loop
 ```
 
 Just as we saw in the previous unit, we can delay a computation by using the `Producer` functional interface (or anything equivalent).  Instead of doing `compute()` which is immediately evaluated when executed, we replace it with a `Producer` `() -> compute()`, which "stores" the computation in an instance of `Producer`, and we only call it when we invoke the `produce()` method.
@@ -277,11 +277,11 @@ We have the following objects set up.
 
 ![altEvens](figures/infinitelist/infinitelist.003.png)
 
-Let's now trace through what happens when we call `altEvens.head()`.  This method leads to the call `this.head().produce()`, where `this` refers to `altEvens`.  The call to `produce` invoked `mapper.transform(this.head.produce())` of the producer labelled 1 in the figure below.  This leads to `this.head.produce()` of this producer being called.  Within this producer, `this` refers to `odds`, and so `this.head.produce()` invoked `mapper.transform(this.head.produce())` of the producer labelled 2.   Now, `this` refers to `evens`, and `this.head.produce()` causes the producer `() -> 1` (labelled 3) to produce 1.
+Let's now trace through what happens when we call `altEvens.head()`.  This method leads to the call `this.head().produce()`, where `this` refers to `altEvens`.  The call to `produce` invoked `mapper.transform(this.head.produce())` of the producer labelled 1 in the figure below.  This leads to `this.head.produce()` of this producer being called.  Within this producer, `this` refers to `odds`, and so `this.head.produce()` invoked `mapper.transform(this.head.produce())` of the producer labelled 2.   Now, `this` refers to `evens`, and `this.head.produce()` causes the producer `() -> 0` (labelled 3) to produce 0.
 
 ![altEvens](figures/infinitelist/infinitelist.004.png)
 
-The execution now returns to the invocation of `mapper.transform(this.head.produce())` and call `mapper.transform(1)` (labelled 4).  This returns the value 2, which we pass into the `mapper.transform(2)` (labelled 5).  The `mapper` is `x -> x * 2` so we have the result 4, which we return from `altEvens.head()`.
+The execution now returns to the invocation of `mapper.transform(this.head.produce())` and call `mapper.transform(0)` (labelled 4).  This returns the value 1, which we pass into the `mapper.transform(1)` (labelled 5).  The `mapper` is `x -> x * 2` so we have the result 2, which we return from `altEvens.head()`.
 
 This process shows a very different order of execution than `EagerList`.
 If we run, 
