@@ -47,6 +47,46 @@ class: middle
 ### Function as cross-barrier state manipulator
 
 ---
+class: middle
+
+```Java
+int incr(int x) {
+	return x + 1;
+}
+  
+int abs(int x) {
+	return x > 0 ? x : -x;
+}
+```
+---
+class: middle
+
+.small[
+```Java
+Pair<Integer,String> incrWithLog(int x) {
+	return Pair.of(incr(x), "incr " + x);
+}
+  
+Pair<Integer,String> absWithLog(int x) {
+	return Pair.of(abs(x), "abs " + x);
+}
+```
+]
+
+---
+class: middle
+.tiny[
+```Java
+Pair<Integer,String> incrWithLog(Pair<Integer,String> p) {
+	return Pair.of(incr(p.first), p.second + " incr " + p.first);
+}
+  
+Pair<Integer,String> absWithLog(Pair<Integer,String> p) {
+	return Pair.of(abs(p.first), p.second + " abs " + p.first);
+}
+```
+]
+---
 class: middle,center
 
 ![of](../figures/monad/monad.001.png)
