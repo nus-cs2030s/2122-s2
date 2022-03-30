@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
 
 <!-- CHANGE TITLE -->
-<title>CS2030S AY20/21 S2 Lecture 10</title>
+<title>CS2030S AY21/22 S2 Lecture 10</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -22,35 +22,80 @@ class: middle, center
 
 ## Lecture 10
 
-### 29 March 2021
+### 28 March 2022
 ---
 class: middle
 
 ### Announcements
 
 - Reminder: Lab 7 due next Monday
-- This week lab session: your tutor will arrange
+- This week lab session: Mock PE2
+- PE2 Survey is due tonight
 
 ---
 class: middle
 
-### PE2
+### PE2 Scope
 
-Changes to exam procedure (watch out for announcements)
-
-- You will be given time to login and setup
-- Explicit commands to get and submit your code
+- Up to Unit 36
+- Up to Lab 6
+- Up to Recitation 9
 
 ---
 class: middle
 
-background-image: url(../figures/53k674.jpg)
+### What's next?
+
+- Next lectures: Async, Recap
+- Lab 8 on Async next week
+- PE2: Saturday, 9 Apr, 9 AM - 12 PM
+- Final: Thursday, 28 Apr, 1 - 3 PM
 
 ---
 class: middle
 
 ### Function as cross-barrier state manipulator
 
+---
+class: middle
+
+```Java
+int incr(int x) {
+	return x + 1;
+}
+  
+int abs(int x) {
+	return x > 0 ? x : -x;
+}
+```
+---
+class: middle
+
+.small[
+```Java
+Pair<Integer,String> incrWithLog(int x) {
+	return Pair.of(incr(x), "incr " + x);
+}
+  
+Pair<Integer,String> absWithLog(int x) {
+	return Pair.of(abs(x), "abs " + x);
+}
+```
+]
+
+---
+class: middle
+.tiny[
+```Java
+Pair<Integer,String> incrWithLog(Pair<Integer,String> p) {
+	return Pair.of(incr(p.first), p.second + " incr " + p.first);
+}
+  
+Pair<Integer,String> absWithLog(Pair<Integer,String> p) {
+	return Pair.of(abs(p.first), p.second + " abs " + p.first);
+}
+```
+]
 ---
 class: middle,center
 
@@ -72,7 +117,7 @@ class: middle
 .smaller[
 ```Java
 return Maybe.of(map.get(student))
-            .flatMap(map -> Maybe.of(map.get(modue))
+            .flatMap(map -> Maybe.of(map.get(module))
             .flatMap(map -> Maybe.of(map.get(assessment)))
             .orElse("No such entry");
 ```
@@ -83,7 +128,7 @@ class: middle,wide
 .smaller[
 ```Java
 return Maybe.of(map.get(student))          .flatMap(map -> Maybe.of(map
-                   .get(modue))            .flatMap(map -> Maybe.of(map
+                   .get(module))            .flatMap(map -> Maybe.of(map
                    .get(assessment)))      .orElse("No such entry");
 ```
 ]
@@ -178,7 +223,7 @@ class: middle,center
 
 is just 
 
-`functor.map(x -> g(f))`
+`functor.map(x -> g(f(x)))`
 
 ---
 class: middle
@@ -238,7 +283,7 @@ class: bottom
 .tiny[
 Version: v1.0
 
-Last Updated: Mon Mar 15 13:32:04 +08 2021
+Last Updated: Mon Mar 27 10:00:00 +08 2022
 ]
 </textarea>
 
@@ -260,7 +305,7 @@ var slideshow = remark.create({
 	},
 	ratio: '16:9',
 	highlightStyle: 'ir-black',
-    slideNumberFormat: 'CS2030S AY20/21 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
 });
  // Setup MathJax
   MathJax.Hub.Config({

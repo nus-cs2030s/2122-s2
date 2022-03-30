@@ -189,7 +189,7 @@ Let's use the [`Instant`](https://docs.oracle.com/javase/9/docs/api/java/time/In
     System.out.println(howMany + " " + Duration.between(start,stop).toMillis() + " ms");
 ```
 
-The code above measures roughly the time it takes to count the number of primes between 2 million and 3 million.  On my iMac, it takes slightly more than 1 second.  If I remove `parallel()`, it takes about 450-550 ms.  So we gain about 50% performance.
+The code above measures roughly the time it takes to count the number of primes between 2 million and 3 million.  On my iMac, it takes 450-550 ms.  If I remove `parallel()`, it takes slightly more than 1 second.  So with `parallel()` we gain about 50% performance.
 
 Can we parallelize some more?  Remember how we implement `isPrime`[^2]
 
