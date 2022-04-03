@@ -42,11 +42,11 @@ nav:
        - 34. Stream: '34-stream.md'
        - 35. Loggable: '35-logger.md'
        - 36. Monad: '36-monad.md'
-    - Parallel (37-37):
+    - Parallel (37-40):
        - 37. Parallel Streams: '37-parallel.md'
-    #   - 38. Threads: '38-thread.md'
-    #   - 39. Async: '39-async.md'
-    #   - 40. Fork and Join: '40-forkjoin.md'
+       - 38. Threads: '38-thread.md'
+       - 39. Async: '39-async.md'
+       - 40. Fork and Join: '40-forkjoin.md'
   - Guide:
     - Programming Environments: 'environments.md'
     - GitHub Setup: 'github.md'
