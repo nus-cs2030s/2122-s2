@@ -28,7 +28,32 @@ class: middle
 
 ### Announcements
 
-- 
+- This weeks lab/recitations are the last ones
+- One more lecture next week to Recap
+- PE2: Saturday, 9 Apr, 9 AM - 12 PM (this Saturday)
+- You should see the grouping/zoom links for PE2
+- **IMPORTANT** Make sure you make your code in PE2 able to be compiled
+
+---
+class: middle
+
+### PE2 Scope
+
+- Up to Unit 36
+- Up to Lab 6
+- Up to Recitation 9
+
+---
+class: middle
+
+### PE1 Stats!
+
+- Average: 19.4
+- Median: 22.0
+- Std Dev: 9.6
+
+### 203 students got >= 28/30 marks.   Well done!
+
 
 ---
 class: middle, center
@@ -81,7 +106,7 @@ class: middle wide
 .tiny[
 ```Java
 Maybe<Integer> foo(int x) {
-    Maybe<Integer> a = Maybe.of(x);
+    Maybe<Integer> a = Maybe.of(taskA(x));
     Maybe<Integer> b = a.flatMap(i -> taskB(i));
     Maybe<Integer> c = a.flatMap(i -> taskC(i));
     Maybe<Integer> d = a.flatMap(i -> taskD(i));
@@ -97,7 +122,7 @@ class: middle wide
 .tiny[
 ```Java
 Lazy<Integer> foo(int x) {
-    Lazy<Integer> a = Maybe.of(x);
+    Lazy<Integer> a = Lazy.of(taskA(x));
     Lazy<Integer> b = a.flatMap(i -> taskB(i));
     Lazy<Integer> c = a.flatMap(i -> taskC(i));
     Lazy<Integer> d = a.flatMap(i -> taskD(i));
@@ -112,7 +137,7 @@ class: middle, wide
 .tiny[
 ```Java
 CompletableFuture<Integer> foo(int x) {
-    CompletableFuture<Integer> a = CompletableFuture.completedFuture(x);
+    CompletableFuture<Integer> a = CompletableFuture.completedFuture(taskA(x));
     CompletableFuture<Integer> b = a.thenComposeAsync(i -> taskB(i));
     CompletableFuture<Integer> c = a.thenComposeAsync(i -> taskC(i));
     CompletableFuture<Integer> d = a.thenComposeAsync(i -> taskD(i));
