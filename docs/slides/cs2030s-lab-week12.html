@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/cs1010.css">
+
+<!-- CHANGE TITLE -->
+<title>CS2030S AY21/22 S2 Week 12 Lab 8</title>
+<meta charset="utf-8">
+</head>
+<body>
+<textarea id="source">
+class: middle, center
+
+## Week 12
+
+### 7 April 2022
+---
+class: middle
+
+### Activity
+
+- How to Log In to Exam Nodes
+- Lab 7
+- Lab 8
+
+---
+class: middle
+
+### How to login to exam nodes
+
+- Same username/password/host as assigned during PE1
+- Information resent to you this week
+
+---
+class: middle
+
+### Login Instructions
+
+We now have two options: 
+
+- tunneling through `stu`
+- SoC VPN
+
+---
+class: middle
+
+### Option 1: Tunneling Through `stu`
+
+The following is no longer recommended for PE2
+.tiny[
+```bash
+ssh -t <username>@stu.comp.nus.edu.sg ssh <plabid>@peXXX.comp.nus.edu.sg
+```
+]
+As stu is not able to handle too many logins at the same time.
+
+---
+class: middle
+
+Do this instead:
+
+Anytime between 9:00 and 9:30 AM
+.small[
+```bash
+ssh <username>@stu.comp.nus.edu.sg
+```
+]
+
+to log into `stu` first.
+
+When the public password is released, from `stu`
+.small[
+```bash
+ssh <plabid>@peXXX.comp.nus.edu.sg
+```
+]
+---
+class: middle
+
+### Option 2: Using SoC VPN
+
+If using `stu` is an issue, log into SoC VPN (setup during the lab in Week 10).
+
+Then **from your computer**,
+.small[
+```bash
+ssh <plabid>@peXXX.comp.nus.edu.sg
+```
+]
+bypassing `stu` altogether.
+
+---
+class: middle
+
+### Exam Accounts
+
+- Exam accounts are open today from 8 AM until tomorrow (Friday) noon.
+
+- Please practice logging in using your exam account using both options above on the computer and network connection you will use for PE2 
+
+- No extra time will be given to students who failed to follow login instructions.
+
+---
+class: middle
+
+## Lab 7 `InfiniteList<T>`
+
+---
+class: middle
+
+### `head`
+
+.tiny[
+```Java
+  public T head() {
+    if (this.head.get().isNone()) { // equals(Maybe.none())
+	  return this.tail.get().head();
+	} else {
+	  return this.head.get();
+	}
+  }
+```
+
+Should not use `if-else` when `Maybe<T>` already handles this for us.
+]
+
+???
+
+We show an example of a "bad" if-else here. 
+
+I use `isNone()` just to shorten the code on the slide.  We don't have that in `Maybe<T>`
+
+---
+class: middle
+
+### `head` and `tail`
+
+.tiny[
+```Java
+  public T head() {
+    return this.head.get()
+	    .orElseGet(() -> this.tail.get().head());
+  }
+
+  public InfiniteList<T> tail() {
+    return this.head.get()
+        .map(x -> this.tail.get())
+        .orElseGet(() -> this.tail.get().tail());
+  }
+```
+]
+
+---
+class: middle
+
+### `map` and `filter`
+
+.tiny[
+```Java
+  public <R> InfiniteList<R> map(Transformer<? super T, ? extends R> mapper) {
+    return new InfiniteList<R>(
+        head.map(x -> x.map(mapper)),
+        tail.map(l -> l.map(mapper)));
+  }
+
+  public InfiniteList<T> filter(BooleanCondition<? super T> predicate) {
+    return new InfiniteList<T>(
+        head.map(x -> x.filter(predicate)),
+        tail.map(l -> l.filter(predicate)));
+  }
+```
+]
+
+---
+class: middle
+
+### `limit`
+
+Idea: 
+- If n is 0, return an empty list (sentinel)
+- Otherwise, 
+    - if head is filtered, call limit(n) on tail
+	- if head is not filtered, call limit(n-1) on tail
+
+---
+class: middle
+
+### `limit`
+
+.tiny[
+```Java
+public InfiniteList<T> limit(long n) {
+  if (n <= 0) {
+    return InfiniteList.sentinel();
+  }
+  return new InfiniteList<T>(head,
+    tail.map(list ->
+         head.get()
+             .map(x -> list.limit(n - 1))
+             .orElseGet(() -> list.limit(n))
+    )
+  );
+}
+```
+]
+
+---
+class: middle,wide
+
+### `takeWhile(condition)`
+
+.small[
+For head:
+- if head is not filtered and `condition` is true, keep the head
+- Otherwise, filter it (set to none)
+
+For tail:
+- if head is not filtered and `condition` is false, return a sentinel (end of list)
+- Otherwise, `tail.takeWhile(condition)`
+]
+
+---
+class: middle,wide
+
+### `takeWhile(cond)`
+
+.tiny[
+```Java
+public InfiniteList<T> takeWhile(BooleanCondition<? super T> cond) {
+  Lazy<Boolean> filtered = head.filter(maybe -> maybe.isNone());
+  Lazy<Boolean> failTest = head.filter(maybe -> maybe.filter(cond).isNone());
+
+  Lazy<Maybe<T>> h = filtered
+       .combine(failTest, (x, y) -> !x && !y)
+       .map(x -> x ? head.get() : Maybe.none());
+  Lazy<InfiniteList<T>> t = filtered
+       .combine(failTest, (x, y) -> !x && y)
+       .map(x -> x ? sentinel() : tail.map(l -> l.takeWhile(cond)).get());
+
+  return new InfiniteList<>(h, t);
+}
+```
+]
+
+---
+class: middle,wide
+
+### `reduce`
+
+.tiny[
+```Java
+public <R> R reduce(R identity, Combiner<R, ? super T, R> accumulator) {
+  R result = identity;
+  InfiniteList<T> list = this;
+  while (!list.isSentinel()) {
+    final R tmp = result;
+    result = list.head.get()
+        .map(h -> accumulator.combine(tmp, h))
+        .orElse(result);
+    list = list.tail.get();
+  }
+  return result;
+}
+```
+]
+
+---
+class: middle,wide
+
+### `toList`
+
+.tiny[
+```Java
+public List<T> toList() {
+  ArrayList<T> array = new ArrayList<>();
+  InfiniteList<T> list = this;
+  while (!list.isSentinel()) {
+    list.head.get().consumeWith(array::add);
+    list = list.tail.get();
+  }
+  return array;
+}
+```
+]
+
+---
+class: middle,wide
+
+### `count`
+
+.tiny[
+```Java
+public long count() {
+  return reduce(0L, (x, y) -> x + 1L);
+}
+```
+]
+
+---
+class: middle,center
+
+## Lab 8: Bus API
+
+---
+class: middle,wide
+
+Web API for bus services:
+https://cs2030-bus-api.herokuapp.com/bus_services/96
+
+Web API for bus stops:
+https://cs2030-bus-api.herokuapp.com/bus_stops/16189
+
+---
+class: middle
+
+.smaller[
+```text
+ooiwt:~/lab8-skeleton$ java Main
+16189 Clementi
+Search for: 16189  <-> Clementi:
+From 16189
+- Can take 96 to:
+  - 17171 Clementi Stn
+  - 17091 Aft Clementi Ave 1
+  - 17009 Clementi Int
+- Can take 151 to:
+  - 17091 Aft Clementi Ave 1
+- Can take 151e to:
+  - 17091 Aft Clementi Ave 1
+
+Took 9,424ms
+```
+]
+
+---
+class: middle
+
+for each pair (bus stop, string)
+- get the bus services serving the stop
+- for each bus service:
+    - get the bus stops served by the service
+	- look for matching string
+
+---
+class: middle
+
+Code given:
+- `BusStop` and `BusService`: encapsulates a bus stop and a bus service
+- `BusAPI` provides interface to query the Web API
+- `BusSg` implements the bus route query above
+- `BusRoutes` encapsulates the result of a query
+- `Main` reads from stdin and invokes `BusSg`'s methods, then print the result
+
+---
+class: middle
+
+The following is done one-by-one sequentially
+
+for each pair (bus stop, string):
+- get the bus services serving the stop
+- for each bus service:
+    - get the bus stops served by the service
+	- look for matching string
+
+---
+class: middle
+
+Web API query is slow.
+
+To speed things up, you will query the Web API asynchronously.
+
+---
+class: middle
+
+Java `HttpClient` class provides two methods to send a Web HTTP request:
+
+- `send`
+- `sendAsync`
+
+---
+class: middle,wide
+
+Start with `BusAPI.java`,
+
+.smaller[
+```Java
+response = client.send(request, BodyHandlers.ofString());
+```
+]
+Change to
+.smaller[
+```java
+response = client.sendAsync(request, BodyHandlers.ofString());
+```
+]
+
+---
+class: middle
+
+This will trigger a sequence of required changes to make program asynchronous.
+
+Do not call `join()` or `get()` except in the final step in `main()`, or else your code will become synchronous.
+
+---
+class: bottom
+
+
+
+.tiny[
+Version: v1.1
+
+Last Updated: Wed Mar 23 19:19:45 +08 2022
+]
+</textarea>
+
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
+<script src="javascripts/counter.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
+<script>
+remark.macros.scale = function (percentage) {
+	var url = this;
+	return '<img src="' + url + '" style="width: ' + percentage + '" />';
+};
+// ![:scale 50%](image.jpg)
+
+var slideshow = remark.create({
+    navigation: {
+	    scroll: false
+	},
+	ratio: '16:9',
+	highlightStyle: 'ir-black',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+});
+ // Setup MathJax
+  MathJax.Hub.Config({
+	  tex2jax: {
+		inlineMath: [['$', '$']],
+		// inlineMath: [['$', '$'], ['\\(', '\\)']],
+		displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+		skipTags: ['script', 'noscript', 'style', 'pre']
+	  }
+  });
+
+  MathJax.Hub.Configured();
+</script>
+</script>
+</body>
+</html>
