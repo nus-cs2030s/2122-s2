@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
 
 <!-- CHANGE TITLE -->
-<title>CS2030S AY20/21 S2 Lecture 11</title>
+<title>CS2030S AY21/22 S2 Lecture 11</title>
 <meta charset="utf-8">
 </head>
 <body>
@@ -22,24 +22,38 @@ class: middle, center
 
 ## Lecture 11
 
-### 5 April 2021
+### 4 April 2022
 ---
 class: middle
 
 ### Announcements
 
-- PE1 Q2 still being marked
-- Mock PE this week
+- This weeks lab/recitations are the last ones
+- One more lecture next week to Recap
+- PE2: Saturday, 9 Apr, 9 AM - 12 PM (this Saturday)
+- You should see the grouping/zoom links for PE2
+- **IMPORTANT** Make sure you make your code in PE2 able to be compiled
 
 ---
 class: middle
 
-### PE2
+### PE2 Scope
 
-Changes to exam procedure (watch out for announcements)
+- Up to Unit 36
+- Up to Lab 6
+- Up to Recitation 9
 
-- You will be given time to login and setup
-- Explicit commands to get and submit your code
+---
+class: middle
+
+### PE1 Stats!
+
+- Average: 19.4
+- Median: 22.0
+- Std Dev: 9.6
+
+### 203 students got >= 28/30 marks.   Well done!
+
 
 ---
 class: middle, center
@@ -54,7 +68,7 @@ class: middle, center
 ---
 class: middle, center
 
-## Sychronous Programming
+## Synchronous Programming
 
 ---
 class: middle, center
@@ -92,7 +106,7 @@ class: middle wide
 .tiny[
 ```Java
 Maybe<Integer> foo(int x) {
-    Maybe<Integer> a = Maybe.of(x);
+    Maybe<Integer> a = Maybe.of(taskA(x));
     Maybe<Integer> b = a.flatMap(i -> taskB(i));
     Maybe<Integer> c = a.flatMap(i -> taskC(i));
     Maybe<Integer> d = a.flatMap(i -> taskD(i));
@@ -108,7 +122,7 @@ class: middle wide
 .tiny[
 ```Java
 Lazy<Integer> foo(int x) {
-    Lazy<Integer> a = Maybe.of(x);
+    Lazy<Integer> a = Lazy.of(taskA(x));
     Lazy<Integer> b = a.flatMap(i -> taskB(i));
     Lazy<Integer> c = a.flatMap(i -> taskC(i));
     Lazy<Integer> d = a.flatMap(i -> taskD(i));
@@ -123,7 +137,7 @@ class: middle, wide
 .tiny[
 ```Java
 CompletableFuture<Integer> foo(int x) {
-    CompletableFuture<Integer> a = CompletableFuture.completedFuture(x);
+    CompletableFuture<Integer> a = CompletableFuture.completedFuture(taskA(x));
     CompletableFuture<Integer> b = a.thenComposeAsync(i -> taskB(i));
     CompletableFuture<Integer> c = a.thenComposeAsync(i -> taskC(i));
     CompletableFuture<Integer> d = a.thenComposeAsync(i -> taskD(i));
@@ -176,7 +190,7 @@ class: bottom
 .tiny[
 Version: v1.0
 
-Last Updated: Mon Mar 15 13:32:04 +08 2021
+Last Updated: Mon Apr 3 10:00:00 +08 2022
 ]
 </textarea>
 
@@ -198,7 +212,7 @@ var slideshow = remark.create({
 	},
 	ratio: '16:9',
 	highlightStyle: 'ir-black',
-    slideNumberFormat: 'CS2030S AY20/21 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
 });
  // Setup MathJax
   MathJax.Hub.Config({
