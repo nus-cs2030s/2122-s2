@@ -133,7 +133,7 @@ class: middle,wide
 ```java
     int code;
     Address addr = user.getAddress();
-    if (addr == null) {
+    if (addr != null) {
       if (addr.getCountry().equals("Singapore")) {
         code = addr.getPostalCode();
       } else {
