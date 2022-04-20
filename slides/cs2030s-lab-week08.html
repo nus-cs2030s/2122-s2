@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="stylesheets/cs1010.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
+
+<!-- CHANGE TITLE -->
+<title>CS2030S AY21/22 S2 Week 8 Lab 5</title>
+<meta charset="utf-8">
+</head>
+<body>
+<textarea id="source">
+class: middle, center
+
+## Week 8 
+
+### 10 March 2022
+---
+class: middle
+
+### What you need for Lab 5 
+- Nested wildcards
+- Anonymous classes
+- Nested classes
+- Java packages
+
+???
+
+We will go through four exercises with students to introduce them to new concepts important for Lab 5.  
+
+As a guideline, in the first hour, spend
+- 5-10 mins on nested wildcards
+- 5 mins on anonymous classes
+- 10-15 mins on nested classes
+- 10 mins on java packages
+
+Take a break, then start with Lab 5:
+- Motivate them on the need of Maybe<T>
+- Then let them work on the lab in the rest of the time.
+
+---
+class: middle,center
+
+### Nested Wildcards
+
+---
+class: middle
+
+### Exercise: Nested Wildcards
+
+Launch JShell and follow along:
+
+.small[
+```Java
+class Animal { }
+class Dog extends Animal { }
+class Box<T> { }
+```
+]
+
+???
+
+Let's say we have these classes
+
+---
+class: middle,wide
+
+#### Which one compiles?
+
+.smaller[
+```Java
+class A {
+  static <T> void foo(Box<List<T>> box) {  }
+}
+
+A.<Animal>foo(new Box<List<Animal>>());
+A.<Animal>foo(new Box<List<Dog>>());
+A.<Animal>foo(new Box<ArrayList<Animal>>());
+A.<Animal>foo(new Box<ArrayList<Dog>>());
+```
+]
+
+???
+
+---
+class: middle,wide
+
+#### Which one compiles?
+
+.smaller[
+```Java
+class A {
+  static <T> void foo(Box<? extends List<T>> box) { }
+}
+
+A.<Animal>foo(new Box<List<Animal>>());
+A.<Animal>foo(new Box<List<Dog>>());
+A.<Animal>foo(new Box<ArrayList<Animal>>());
+A.<Animal>foo(new Box<ArrayList<Dog>>());
+```
+]
+???
+
+---
+class: middle,wide
+
+#### Which one compiles?
+
+.smaller[
+```Java
+class A {
+  static <T> void foo(Box<? extends List<? extends T>> box) { }
+}
+
+A.<Animal>foo(new Box<List<Animal>>());
+A.<Animal>foo(new Box<List<Dog>>());
+A.<Animal>foo(new Box<ArrayList<Animal>>());
+A.<Animal>foo(new Box<ArrayList<Dog>>());
+```
+]
+???
+
+---
+class: middle
+
+#### When you have nested generic, remember to apply PECS at all levels.
+
+.tiny[
+```Java
+class A {
+  static <T> void foo(Box<? extends List<? extends T>> box) {  }
+}
+```
+]
+
+???
+
+---
+class: middle,center
+
+### Anonymous Class
+
+---
+class: middle
+
+Suppose we use `AddK` only once and never again.  Rewrite `AddK` as an anonymous class.
+
+.tiny[
+```Java
+    class AddK implements Transformer<Integer, Integer> {
+	  int k;
+	  AddK(int k) {
+	    this.k = k;
+	  }
+      @Override
+      public Integer transform(Integer t) {
+        return t + k;
+      }
+    }
+
+   Box.of(4).map(new AddK(3));
+```
+]
+
+???
+
+---
+class: middle,center
+
+### Nested Class
+
+---
+class: middle
+
+### Exercise: Nested Class
+
+- Copy files from `~cs2030s/lab-week8` with 
+```bash
+cp -r ~cs2030s/lab-week8 ~/`
+```
+
+- This is a simplfied version of `Box<T>` from Lab 4
+- Look at `Box.java`.
+- Run `jshell < test.jsh` to test Box.
+
+---
+class: middle
+
+.tiny[
+```Java
+ public static <T> Box<T> ofNullable(T t) {
+    if (t != null) {
+      return (Box<T>) new Box<>(t);
+    }
+    return empty();
+  }
+
+  public boolean isPresent() {
+    if (this.t != null) {
+      return false;
+    }
+    return true;
+  }
+```
+]
+
+???
+
+Snippets from Box.java
+
+---
+class: middle
+
+.tiny[
+```Java
+  public Box<T> filter(BooleanCondition<? super T> condition) {
+    if (this.t != null) {
+      if (condition.test(this.t) == false) {
+        return empty();
+      }
+      return (Box<T>) this;
+    }
+    return empty();
+  }
+
+  @Override
+  public String toString() {
+    if (this.t != null) {
+      return "[" + t + "]";
+    }
+    return "[]";
+  }
+```
+]
+
+???
+
+Snippets from Box.java
+
+---
+class: middle
+
+- Observe the pattern:
+
+.tiny[
+```Java
+  if (this.t != null) {
+    // do something to t
+  } else {
+	// handle case where t is null
+  }
+```
+]
+
+- Can we tidy up our code, separate these two cases into different classes?  
+- Let dynamic binding takes care of the conditional statements for us.
+
+---
+class: middle
+
+Stretegy:
+
+- Make `Box<T>` an abstract class 
+- Create private static nested classes `Empty` and `NonEmpty<T>`
+- Put fields/methods related to empty box into `Empty`, non-empty box into `NonEmpty<T>`
+- Box<T> dictates the API to be implemented in `Empty` and `NonEmpty<T>`.
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+abstract class Box<T> {
+  // private final T t; // moved to NonEmpty
+  // private static final Box<?> EMPTY = new Box<>(null); // moved to Empty
+
+  public static <T> Box<T> ofNullable(T t) {
+    if (t != null) {
+      return nonEmpty(t);
+    }
+    return empty();
+  }
+
+  public static <T> Box<T> empty() {
+    @SuppressWarnings("unchecked")
+    Box<T> box = (Box<T>) Empty.EMPTY;
+    return box;
+  }
+
+  public static <T> Box<T> nonEmpty(T t) {
+    return new NonEmpty(t);
+  }
+
+  public abstract boolean isPresent();
+  public abstract Box<T> filter(BooleanCondition<? super T> condition);
+
+   :
+
+}
+```
+]
+
+---
+class: middle
+
+.tiny[
+```Java
+abstract class Box<T> {
+  :
+  private static class Empty extends Box<Object> { 
+	  :
+	@Override
+	public boolean isPresent() {
+	  return false;
+	} 
+  }
+
+  private static class NonEmpty<T> extends Box<T> { 
+     :
+	@Override
+	public boolean isPresent() {
+	  return true;
+	} 
+  }
+}
+```
+]
+
+???
+
+They can find the solution hidden under ~/lab-week8/.Box-spoilers.java
+
+
+---
+class: middle,center
+
+### Java packages
+
+---
+class: middle
+
+- We can group related classes into a _package_ in Java to provide an additional abstraction barrier and to manage the namespace.
+- Every package has a name using hierarchical dot notation (e.g., `com.google.common.math`, `java.io`)
+- So far, every class that we write belongs to the same, _default_, package.
+
+---
+class: middle
+
+- We can control whether a field/method/class is accessible outside a package
+- Without any access modifier, a field/method is accessible by any class within the package only
+- With `protected` modifier, a field/method is accessible by any class within the package and outside the package through inheritance.
+
+---
+class: middle,wide
+
+### Creating a package 
+
+.small[
+- We name our package `cs2030s.fp`
+- Make directories `cs2030s/fp`
+```bash
+mkdir -p cs2030s/fp
+```
+- Move `BooleanCondition.java` to `cs2030s/fp`:
+```bash
+mv BooleanCondition.java cs2030s/fp
+```
+]
+
+---
+class: middle,wide
+
+.small[
+- Tell Java that `BooleanCondition` is part of a package.  Add the line
+```Java
+package cs2030s.fp;
+```
+as the first line of `BooleanCondition.java`
+- Make an class/inteface accessible from outside the package.  Add the access modifier `public` to the declaration:
+```Java
+public interface BooleanCondition<T> { }
+```
+]
+---
+class: middle,wide
+
+.small[
+- We can now use `cs2030s.fp.BooleanCondition` in our `Box<T>`
+- To avoid typing its full name, import it at the top of `Box.java`;
+```Java
+import cs2030s.fp.BooleanCondition;
+```
+]
+
+---
+class: middle, center
+
+### Lab 5
+
+Due next Tuesday night<br>
+
+3% 
+
+---
+class: middle
+
+### `Maybe<T>`
+
+- Encapsulate a value that may be `null`
+- Common abstraction in programming languages
+- E.g., 
+    - `Nullable<T>` in C#, 
+	- `T | None` in Python, 
+	- `Option<T>` in Rust, 
+	- `Optional<T>` in Swift, etc.
+
+---
+class: middle
+
+Using `Maybe<T>` properly eliminates the use of `null` to indicate "not there", and thus, null checks and `NullPointerException`.  
+
+.tiny[
+```Java
+void find(Map<Int, String> map) {
+  this.add(map.get(0).trim());  // may crash with NullPointerException
+}
+```
+```Java
+void find(Map<Int, String> map) {
+  if (map.get(0) != null) {    // littered with null checks 
+    this.add(map.get(0).trim());
+  }
+}
+```
+]
+
+???
+
+Unfortunately without lambdas, it is less convincing to say Maybe<T> leads to more elegant code.
+
+---
+class: middle
+
+### Goals of Lab 5
+
+- Create `cs2030s.fp` with useful types
+- Implement `Maybe<T>`
+- See how `Maybe<T>` can be used to eliminate `null`s
+
+.tiny[
+(`Maybe<T>` is an important component for Lab 6 and 7)
+]
+
+???
+
+Stress that they need to complete their Lab 5 so that they can reuse it in Lab 6 and 7.
+
+---
+class: middle
+
+### Lab 5
+
+- Please accept Lab 5 (LumiNUS &gt; Module Overview &gt; Week 8 &gt; Lab)
+- Run `~cs2030s/get-lab5` on PE hosts.
+- Solve and submit before Tuesday night
+
+---
+class: bottom
+
+.tiny[
+Version: v1.0
+
+Last Updated: Tue Mar  8 09:18:03 +08 2022
+]
+</textarea>
+
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
+<script src="javascripts/counter.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
+<script>
+remark.macros.scale = function (percentage) {
+	var url = this;
+	return '<img src="' + url + '" style="width: ' + percentage + '" />';
+};
+// ![:scale 50%](image.jpg)
+
+var slideshow = remark.create({
+    navigation: {
+	    scroll: false
+	},
+	ratio: '16:9',
+	highlightStyle: 'ir-black',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+});
+ // Setup MathJax
+  MathJax.Hub.Config({
+	  tex2jax: {
+		inlineMath: [['$', '$']],
+		// inlineMath: [['$', '$'], ['\\(', '\\)']],
+		displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+		skipTags: ['script', 'noscript', 'style', 'pre']
+	  }
+  });
+
+  MathJax.Hub.Configured();
+</script>
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="stylesheets/dark.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/cs1010.css">
+
+<!-- CHANGE TITLE -->
+<title>CS2030S AY21/22 S2 Week 11 Practice PE2</title>
+<meta charset="utf-8">
+</head>
+<body>
+<textarea id="source">
+class: middle, center
+
+## Week 11
+
+### 31 March 2022
+---
+class: middle
+
+### Activity
+
+- 1st hour: Solve Q2 of PE2 2021S2
+- 2nd hour: Discuss solutions
+
+---
+class: middle
+
+- Accept via GitHub Classroom
+- Run `~cs2030s/get-pe2-2021s2`
+- Solve Q2 in the next 60 minutes
+
+---
+class: middle
+
+### Time's up
+
+---
+class: middle
+
+### `pointStream`
+
+`pointStream(p, f)` returns a `Stream<Point>` that contains the point `p`, followed by `f(p)`, and then `f(f(p))`, and so on.
+
+How did you solve this?
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+public static Stream<Point> pointStream(Point point, Function<Point, Point> f) {
+   return Stream.iterate(point, p -> f.apply(p));
+}
+```
+]
+
+---
+class: middle
+
+### `generateGrid`
+
+`generateGrid(p, n)` returns a finite `Stream<Point>` containing the n * n points that define a grid starting from the point `p` and then incrementing both x and y cordinates by one. 
+
+How did you solve this?
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+public static Stream<Point> generateGrid(Point point, int n) {
+  return pointStream(point, p -> new Point(p.getX() + 1, p.getY()))
+      .flatMap(p -> pointStream(p, x -> new Point(x.getX(), x.getY() + 1)).limit(n))
+	  .limit(n);
+}
+```
+]
+
+---
+class: middle
+
+### `concentricCircle`
+
+`concentricCircle(c, f)` return a `Stream<Circle>` that contains the first circle `c`, followed by the circle with a radius given by 
+`f(c.getRadius())`, and then `f(f(circle.getRadius())`, and so on.
+
+How did you solve this?
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+public static Stream<Circle> concentricCircles(Circle circle, 
+    Function<Double, Double> f) {
+  return Stream.iterate(circle, 
+      c -> new Circle(c.getCenter(), f.apply(c.getRadius()))
+	);
+}
+```
+]
+
+---
+class: middle
+
+### `pointStreamFromCircle`
+
+`pointStreamFromCircle(stream)` returns a `Stream<Point>` that contains the centers of all the circles in the stream. 
+
+How did you solve this?
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+public static Stream<Point> pointStreamFromCircle(Stream<Circle> circles) {
+  return circles.map(c -> c.getCenter());
+}
+```
+]
+
+---
+class: middle
+
+### `estimatePi`
+
+`estimatePi(c, randomSupplier, k)` returns an estimate of pi as a double, using the monte carlo method by generating k RandomPoints.
+
+How did you solve this?
+
+
+
+
+---
+class: middle,wide
+
+.tiny[
+```Java
+public static double estimatePi(Circle c, Supplier<RandomPoint> supplier, int k) {
+  return Stream
+      .generate(supplier)
+	  .limit(k)
+      .filter(x -> c.contains(x))
+	  .count() * 4.0 / k;
+}
+```
+]
+
+---
+class: middle
+
+### Stats from Last Year
+
+.tiny[
+|Question|Num of Correct Answers|
+|-----|-----|
+|pointStream|382|
+|generateGrid|135|
+|concentricCircle|279|
+|pointStreamFromCircle|290|
+|estimatePi|100|
+]
+
+---
+class: bottom
+
+
+
+.tiny[
+Version: v1.1
+
+Last Updated: Wed Mar 23 19:19:45 +08 2022
+]
+</textarea>
+
+<script src="https://remarkjs.com/downloads/remark-latest.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured" type="text/javascript"></script>
+<script src="javascripts/counter.js">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</script>
+<script>
+remark.macros.scale = function (percentage) {
+	var url = this;
+	return '<img src="' + url + '" style="width: ' + percentage + '" />';
+};
+// ![:scale 50%](image.jpg)
+
+var slideshow = remark.create({
+    navigation: {
+	    scroll: false
+	},
+	ratio: '16:9',
+	highlightStyle: 'ir-black',
+    slideNumberFormat: 'CS2030S AY21/22 S2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%current%',
+});
+ // Setup MathJax
+  MathJax.Hub.Config({
+	  tex2jax: {
+		inlineMath: [['$', '$']],
+		// inlineMath: [['$', '$'], ['\\(', '\\)']],
+		displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+		skipTags: ['script', 'noscript', 'style', 'pre']
+	  }
+  });
+
+  MathJax.Hub.Configured();
+</script>
+</script>
+</body>
+</html>
