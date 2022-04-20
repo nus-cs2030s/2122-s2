@@ -83,7 +83,7 @@ Note that these are simple `jshell` tests, in software engineering modules you w
 
 We can now rephrase our LSP in terms of testing. A _subclass_ should not break the expectations set by the _superclass_. If a class `B` is substitutable for a parent class `A` then it should be able to pass all test cases of the parent class `A`. If it does not, then it is not substitutable and the LSP is violated. 
 
-Lets now consider two subclasses of `Restaurant`, `LunchRestaurant` and `FastFoodRestaurant`. Our `LunchRestaurant` does not take reservations during peak hours (12 to 2 pm).
+Lets now consider two subclasses of `Restaurant`, `LunchRestaurant` and `DigitalReadyRestaurant`. Our `LunchRestaurant` does not take reservations during peak hours (12 to 2 pm).
 
 ```Java
 public class LunchRestaurant extends Restaurant {
@@ -126,12 +126,12 @@ public class DigitalReadyRestaurant extends Restaurant {
 Similarly, as `DigitalReadyRestaurant` $<:$ `Restaurant`, we can point our variable `r` to a new instance of `DigitalReadyRestaurant` and run the test cases of the parent class, as can be seen in the code below.
 
 ```Java
-Restaurant r = new FastFoodRestaurant();
+Restaurant r = new DigitalReadyRestaurant();
 r.canMakeReservation(1200) == true; // Is true, therefore test passes
 r.canMakeReservation(2200) == true; // Is true, therefore test passes
 ``` 
 
-Both test cases pass.  In fact, all test cases that pass for `Restaurant` would pass for `DigitalReadyRestaurant`.  Therefore `DigitalReadyRestaurant` is substitutable for `Restaurant`. Anywhere we can use an object of type `Restaurant`, we can use `FastFoodRestaurant` without breaking any previously written code.
+Both test cases pass.  In fact, all test cases that pass for `Restaurant` would pass for `DigitalReadyRestaurant`.  Therefore `DigitalReadyRestaurant` is substitutable for `Restaurant`. Anywhere we can use an object of type `Restaurant`, we can use `DigitalReadyRestaurant` without breaking any previously written code.
 
 ## Preventing Inheritance and Method Overriding
 
