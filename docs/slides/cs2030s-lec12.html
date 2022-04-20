@@ -133,7 +133,7 @@ class: middle,wide
 ```java
     int code;
     Address addr = user.getAddress();
-    if (addr == null) {
+    if (addr != null) {
       if (addr.getCountry().equals("Singapore")) {
         code = addr.getPostalCode();
       } else {
@@ -214,7 +214,7 @@ class: middle,wide
 ```Java
     int code;
     Address addr = user.getAddress();
-    if (addr == null) {
+    if (addr != null) {
       if (addr.getCountry().equals("Singapore")) {
         code = addr.getPostalCode();
       } else {
@@ -231,7 +231,7 @@ class: middle, wide
 ```Java
   public static <T,R> void get(T item, BooleanCondition<T> bc, Transformer<T,R> t,
       Producer<R> p) {
-    if (item == null) {
+    if (item != null) {
 	  if (bc.test(item)) {
 	 	return t.transform(item);
 	  } else {
